@@ -1,0 +1,2791 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "API for Red Hat Subscription Management",
+    "title": "RHSM-API",
+    "version": "1.109.1"
+  },
+  "host": "api.access.redhat.com",
+  "basePath": "/management/v1",
+  "paths": {
+    "/allocations": {
+      "get": {
+        "description": "The default and max number of results in a response are 100.",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "List all allocations for a user",
+        "operationId": "listAllocations",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListAllocations200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "description": "\nVersion 6.5 (most recent version of Satellite)\n\nThe default success response will be 200.",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Create Satellite by name",
+        "operationId": "createSatellite",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods",
+            "name": "Name",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CreateSatellite200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}": {
+      "get": {
+        "description": "System, RHUI, Hypervisor are unsupported allocation types",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Get an allocation by UUID",
+        "operationId": "showAllocation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\w+",
+            "maxItems": 1,
+            "enum": [
+              "entitlements"
+            ],
+            "type": "string",
+            "x-go-name": "Include",
+            "description": "Show more details about a allocation",
+            "name": "include",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ShowAllocation200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "description": "The default success response will be 204\n\nSystem, RHUI, Hypervisor are unsupported allocation types",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Remove allocation profile",
+        "operationId": "removeAllocation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "enum": [
+              "true"
+            ],
+            "type": "boolean",
+            "x-go-name": "Force",
+            "description": "Deleting a subscription allocation can have significant impacts on your hosts and activation keys.\nWe require a force parameter to make sure the delete operation is intentional.",
+            "name": "force",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/RemoveAllocation204"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          },
+          "504": {
+            "$ref": "#/responses/GatewayTimeout"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/entitlements": {
+      "post": {
+        "description": "The default success response will be 200.\n\nSystem, RHUI, Hypervisor are unsupported allocation types",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Attach entitlement to allocation",
+        "operationId": "attachEntitlementAllocation",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "x-go-name": "Pool",
+            "name": "pool",
+            "in": "query",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Quantity",
+            "description": "quantity you want to attach",
+            "name": "quantity",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AttachEntitlement200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/entitlements/{EntitlementUUID}": {
+      "put": {
+        "description": "The default success response will be 200.\n\nSystem, RHUI, Hypervisor are unsupported allocation types",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Update attached entitlement to allocation",
+        "operationId": "updateEntitlementAllocation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "EntitlementUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Quantity",
+            "description": "maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool\nminItem: 1",
+            "name": "quantity",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UpdateEntitlement200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/export": {
+      "get": {
+        "description": "Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.\n\nSystem, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5.7 or lower are unsupported.",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Trigger allocation manifest export",
+        "operationId": "exportAllocation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ExportAllocation200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/export/{ExportID}": {
+      "get": {
+        "description": "Success response contains a zip file. The link is one-time download and expires after one try. Trigger export job to get another download link.\n\nContent-Type: application/zip",
+        "produces": [
+          "application/zip"
+        ],
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Download allocation manifest",
+        "operationId": "getExportAllocation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "ExportID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetExportAllocation200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/exportJob/{ExportJobID}": {
+      "get": {
+        "description": "Returns export download link in response. When export job has not completed a 202 Accepted is returned, in which case the endpoint should be checked later.",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Check status of allocation manifest export",
+        "operationId": "exportJobAllocation",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "ExportJobID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ExportJobAllocation200"
+          },
+          "202": {
+            "$ref": "#/responses/Accepted"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/pools": {
+      "get": {
+        "description": "System, RHUI, Hypervisor are unsupported allocation types",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "List all pools for an allocation",
+        "operationId": "listAllocationPools",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "true"
+            ],
+            "type": "boolean",
+            "x-go-name": "Future",
+            "description": "include future dated pools for satellite 6.3 or higher",
+            "name": "future",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListAllocationPools200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/allocations/{AllocationUUID}/{EntitlementID}": {
+      "delete": {
+        "description": "The default success response will be 204.",
+        "tags": [
+          "allocation"
+        ],
+        "summary": "Remove entitlement from the allocation",
+        "operationId": "removeAllocationEntitlement",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "AllocationUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "description": "Remove an entitlement from an allocation",
+            "name": "EntitlementID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/RemoveAllocationEntitlement204"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/errata": {
+      "get": {
+        "description": "The default and max results in a response are 1000.",
+        "tags": [
+          "errata"
+        ],
+        "summary": "List all errata for a user's systems",
+        "operationId": "listErrata",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListErrata200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/errata/cset/{ContentSet}/arch/{Arch}": {
+      "get": {
+        "description": "Limit is the number of results in a response. The default limit is 50 and max limit is 100.",
+        "tags": [
+          "errata"
+        ],
+        "summary": "Get all the errata for the specified content set and arch",
+        "operationId": "listErrataByContentSetArch",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "ContentSet",
+            "in": "path",
+            "required": true
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "Arch",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListErrataByContentSetArch200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/errata/{AdvisoryID}": {
+      "get": {
+        "description": "This will get the details of an advisory specified by its advisoryID.",
+        "tags": [
+          "errata"
+        ],
+        "summary": "Get the details of an advisory",
+        "operationId": "showErratum",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "description": "unique identifier for a Red Hat advisory",
+            "name": "AdvisoryID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ShowErratum200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/errata/{AdvisoryID}/packages": {
+      "get": {
+        "description": "The default and max results in a response are 50.",
+        "tags": [
+          "errata"
+        ],
+        "summary": "List all packages for an advisory",
+        "operationId": "listErratumPackages",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "description": "unique identifier for a Red Hat advisory",
+            "name": "AdvisoryID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListErratumPackages200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/errata/{AdvisoryID}/systems": {
+      "get": {
+        "description": "The default and max results in a response are 1000.",
+        "tags": [
+          "errata"
+        ],
+        "summary": "List all systems for an advisory",
+        "operationId": "listErratumSystems",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "description": "unique identifier for a Red Hat advisory",
+            "name": "AdvisoryID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListErratumSystems200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/packages/cset/{ContentSet}/arch/{Arch}": {
+      "get": {
+        "description": "The default and max results in a response are 50 and 100 respectively.",
+        "tags": [
+          "packages"
+        ],
+        "summary": "Get all the packages for the specified content set and arch.",
+        "operationId": "listPackagesByContentSetArch",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "ContentSet",
+            "in": "path",
+            "required": true
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "Arch",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "pattern": "\\w+",
+              "enum": [
+                "latest"
+              ],
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "x-go-name": "Filter",
+            "name": "filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListPackagesByContentSetArch200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/packages/{Checksum}": {
+      "get": {
+        "description": "This will get the details of a package specified by its checksum.",
+        "tags": [
+          "packages"
+        ],
+        "summary": "Get the details of a package",
+        "operationId": "showPackage",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "Checksum",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ShowPackage200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "description": "The default and max results in a response are 50.",
+        "tags": [
+          "subscription"
+        ],
+        "summary": "List all subscriptions for a user",
+        "operationId": "listSubscriptions",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSubscriptions200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/subscriptions/{SubscriptionNumber}/contentSets": {
+      "get": {
+        "description": "The default and max results in a response are 1000.",
+        "tags": [
+          "subscription"
+        ],
+        "summary": "List all content sets for a subscription",
+        "operationId": "listSubContentSets",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SubscriptionNumber",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSubContentSets200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/subscriptions/{SubscriptionNumber}/systems": {
+      "get": {
+        "description": "The default and max results in a response are 100.",
+        "tags": [
+          "subscription"
+        ],
+        "summary": "List all systems consuming a subscription",
+        "operationId": "listSubSystems",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SubscriptionNumber",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSubSystems200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/systems": {
+      "get": {
+        "description": "The default and max number of results in a response are 100.",
+        "tags": [
+          "system"
+        ],
+        "summary": "List all systems for a user",
+        "operationId": "listSystems",
+        "parameters": [
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "x-go-name": "Name",
+            "description": "Filter Systems by System Name",
+            "name": "filter",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Name",
+            "description": "Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed",
+            "name": "username",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSystems200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/systems/{SystemUUID}": {
+      "get": {
+        "description": "Sam \u0026 Satellite systems are unsupported system types.",
+        "tags": [
+          "system"
+        ],
+        "summary": "Get a system specified by UUID.",
+        "operationId": "showSystem",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "maxItems": 3,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "pattern": "\\w+",
+              "enum": [
+                "facts",
+                "entitlements",
+                "installedProducts"
+              ],
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "x-go-name": "Include",
+            "description": "Show more details about a system",
+            "name": "include",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ShowSystem200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "description": "The default success response will be 204",
+        "tags": [
+          "system"
+        ],
+        "summary": "Remove system profile",
+        "operationId": "removeSystem",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/RemoveSystem204"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          },
+          "504": {
+            "$ref": "#/responses/GatewayTimeout"
+          }
+        }
+      }
+    },
+    "/systems/{SystemUUID}/entitlements": {
+      "post": {
+        "description": "The default success response will be 200.\n\nSam \u0026 Satellite systems are unsupported system types.",
+        "tags": [
+          "system"
+        ],
+        "summary": "Attach entitlement to system",
+        "operationId": "attachEntitlement",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "x-go-name": "Pool",
+            "name": "pool",
+            "in": "query",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Quantity",
+            "description": "quantity you want to attach",
+            "name": "quantity",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AttachedEntitlement200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/systems/{SystemUUID}/errata": {
+      "get": {
+        "description": "The default and max number of results in a response are 100.",
+        "tags": [
+          "system"
+        ],
+        "summary": "List all applicable errata for a system",
+        "operationId": "listSystemErrata",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSystemErrata200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/systems/{SystemUUID}/packages": {
+      "get": {
+        "description": "The default and max number of results in a response are 1000.",
+        "tags": [
+          "system"
+        ],
+        "summary": "List all packages for a system",
+        "operationId": "listSystemPackages",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "true",
+              "false"
+            ],
+            "type": "boolean",
+            "x-go-name": "ErrataDetail",
+            "description": "Show errata details for packages",
+            "name": "errata_detail",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "true",
+              " false"
+            ],
+            "type": "boolean",
+            "x-go-name": "Upgradeable",
+            "description": "Show upgradable packages only. Also accepts 'upgradable' as valid query.",
+            "name": "upgradeable",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Filter",
+            "description": "Filter packages",
+            "name": "filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSystemPackages200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/systems/{SystemUUID}/pools": {
+      "get": {
+        "description": "The default and max number of results in a response are 50.",
+        "tags": [
+          "system"
+        ],
+        "summary": "List all pools for a system",
+        "operationId": "listSystemPools",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "max number of results you want",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "pattern": "\\d+",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Offset",
+            "description": "index from which you want next items",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ListSystemPools200"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/systems/{SystemUUID}/{EntitlementID}": {
+      "delete": {
+        "description": "The default success response will be 204.",
+        "tags": [
+          "system"
+        ],
+        "summary": "Remove entitlement from the system",
+        "operationId": "removeSystemEntitlement",
+        "parameters": [
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "name": "SystemUUID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "string",
+            "description": "Remove an entitlement from a system",
+            "name": "EntitlementID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/RemoveSystemEntitlement204"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "APIPageParam": {
+      "description": "APIPageParam details the pagination parameters in APIResponse",
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Count"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Limit"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Offset"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/helpers"
+    },
+    "Allocation": {
+      "type": "object",
+      "title": "Allocation is an entity that consumes entitlements. Also referred as a Distributor.",
+      "properties": {
+        "entitlementQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "EntitlementQuantity"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "url": {
+          "type": "string",
+          "x-go-name": "URL"
+        },
+        "uuid": {
+          "type": "string",
+          "x-go-name": "UUID"
+        },
+        "version": {
+          "type": "string",
+          "x-go-name": "Version"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation"
+    },
+    "ContentSet": {
+      "type": "object",
+      "title": "ContentSet represent a contentset for the listContentSets API Response.",
+      "properties": {
+        "arch": {
+          "type": "string",
+          "x-go-name": "Arch"
+        },
+        "enabled": {
+          "type": "boolean",
+          "x-go-name": "Enabled"
+        },
+        "label": {
+          "type": "string",
+          "x-go-name": "Label"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription"
+    },
+    "Date": {
+      "description": "Date represents the date format used for API returns",
+      "type": "string",
+      "format": "date-time",
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1"
+    },
+    "DetailResponse": {
+      "type": "object",
+      "title": "DetailResponse is the user-friendly response from the service.",
+      "properties": {
+        "contractNumber": {
+          "type": "string",
+          "x-go-name": "ContractNumber"
+        },
+        "endDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          },
+          "x-go-name": "Pools"
+        },
+        "quantity": {
+          "type": "string",
+          "x-go-name": "Quantity"
+        },
+        "sku": {
+          "type": "string",
+          "x-go-name": "SKU"
+        },
+        "startDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "subscriptionName": {
+          "type": "string",
+          "x-go-name": "SubscriptionName"
+        },
+        "subscriptionNumber": {
+          "type": "string",
+          "x-go-name": "SubscriptionNumber"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription"
+    },
+    "EntitlementsAttachedResponse": {
+      "description": "EntitlementsAttachedResponse wraps data obtained for EntitlementsAttached and sends metadata about it using helpers.OptionalResult",
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "x-go-name": "Reason"
+        },
+        "valid": {
+          "type": "boolean",
+          "x-go-name": "Valid"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntitlementsAttachedResponseValue"
+          },
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/helpers/candlepin/consumer"
+    },
+    "EntitlementsAttachedResponseValue": {
+      "description": "EntitlementsAttachedResponseValue represents the Value field in the EntitlementsAttachedResponse",
+      "type": "object",
+      "properties": {
+        "contractNumber": {
+          "type": "string",
+          "x-go-name": "ContractNumber"
+        },
+        "entitlementQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "EntitlementQuantity"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "sku": {
+          "type": "string",
+          "x-go-name": "SKU"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/helpers/candlepin/consumer"
+    },
+    "ErrataCount": {
+      "description": "ErrataCount is the errata information for a System",
+      "type": "object",
+      "properties": {
+        "bugfixCount": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "BugfixCount"
+        },
+        "enhancementCount": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "EnhancementCount"
+        },
+        "securityCount": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "SecurityCount"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system"
+    },
+    "ErratumInContentSet": {
+      "description": "ErratumInContentSet contains information on an erratum listed in a content set",
+      "type": "object",
+      "properties": {
+        "advisoryId": {
+          "type": "string",
+          "x-go-name": "AdvisoryID"
+        },
+        "href": {
+          "type": "string",
+          "x-go-name": "DetailsURL"
+        },
+        "publishDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "severity": {
+          "type": "string",
+          "x-go-name": "Severity"
+        },
+        "synopsis": {
+          "type": "string",
+          "x-go-name": "Synopsis"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "ErrorDetails": {
+      "description": "ErrorDetails details the Error in ErrorResponse",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Code"
+        },
+        "message": {
+          "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/helpers"
+    },
+    "ListResponse": {
+      "description": "ListResponse is the actual collection of subscription details that gets\nrendered",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DetailResponse"
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription"
+    },
+    "MyErratum": {
+      "description": "MyErratum contains erratum information that affects at least one system",
+      "type": "object",
+      "properties": {
+        "advisoryId": {
+          "type": "string",
+          "x-go-name": "AdvisoryID"
+        },
+        "affectedSystemCount": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "AffectedSystems"
+        },
+        "details": {
+          "type": "string",
+          "x-go-name": "DetailsURL"
+        },
+        "publishDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "synopsis": {
+          "type": "string",
+          "x-go-name": "Synopsis"
+        },
+        "systems": {
+          "type": "string",
+          "x-go-name": "SystemsURL"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "PackageDetail": {
+      "description": "PackageDetail wraps an errata package and adds a RefURL",
+      "type": "object",
+      "properties": {
+        "arch": {
+          "type": "string",
+          "x-go-name": "Arch"
+        },
+        "checksum": {
+          "type": "string",
+          "x-go-name": "Checksum"
+        },
+        "contentSets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "ContentSets"
+        },
+        "details_url": {
+          "type": "string",
+          "x-go-name": "RefURL"
+        },
+        "epoch": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Epoch"
+        },
+        "filename": {
+          "type": "string",
+          "x-go-name": "Filename"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "release": {
+          "type": "string",
+          "x-go-name": "Release"
+        },
+        "repoTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "RepoTags"
+        },
+        "summary": {
+          "type": "string",
+          "x-go-name": "Summary"
+        },
+        "version": {
+          "type": "string",
+          "x-go-name": "Version"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "Pool": {
+      "description": "Pool represents pool information that matter for the detail list",
+      "type": "object",
+      "properties": {
+        "consumed": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ConsumedEntitlements"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalEntitlements"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/subscription"
+    },
+    "PoolDetail": {
+      "description": "PoolDetail is an entry in the system/allocation pools listing",
+      "type": "object",
+      "properties": {
+        "contractNumber": {
+          "type": "string",
+          "x-go-name": "ContractNumber"
+        },
+        "endDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "entitlementsAvailable": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "EntitlementsAvailable"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "serviceLevel": {
+          "type": "string",
+          "x-go-name": "ServiceLevel"
+        },
+        "sku": {
+          "type": "string",
+          "x-go-name": "SKU"
+        },
+        "startDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "subscriptionName": {
+          "type": "string",
+          "x-go-name": "SubscriptionName"
+        },
+        "subscriptionNumber": {
+          "type": "string",
+          "x-go-name": "SubscriptionNumber"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/helpers/candlepin/owner"
+    },
+    "Reference": {
+      "description": "Reference contains a reference to an external item",
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "x-go-name": "URL"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "title": {
+          "type": "string",
+          "x-go-name": "Title"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/errata"
+    },
+    "ShowResponse": {
+      "description": "ShowResponse contains response for allocation show API",
+      "type": "object",
+      "properties": {
+        "contentAccessMode": {
+          "type": "string",
+          "x-go-name": "ContentAccessMode"
+        },
+        "createdBy": {
+          "type": "string",
+          "x-go-name": "CreatedBy"
+        },
+        "createdDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "entitlementsAttached": {
+          "$ref": "#/definitions/EntitlementsAttachedResponse"
+        },
+        "entitlementsAttachedQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "EntitlementsAttachedQuantity"
+        },
+        "lastModified": {
+          "$ref": "#/definitions/Date"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "uuid": {
+          "type": "string",
+          "x-go-name": "UUID"
+        },
+        "version": {
+          "type": "string",
+          "x-go-name": "Version"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation"
+    },
+    "System": {
+      "type": "object",
+      "title": "System is an entity that consumes entitlements. Also referred as a Consumer.",
+      "properties": {
+        "entitlementCount": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Quantity"
+        },
+        "entitlementStatus": {
+          "type": "string",
+          "x-go-name": "EntitlementStatus"
+        },
+        "errataCounts": {
+          "$ref": "#/definitions/ErrataCount"
+        },
+        "hostname": {
+          "type": "string",
+          "x-go-name": "Hostname"
+        },
+        "href": {
+          "type": "string",
+          "x-go-name": "URL"
+        },
+        "lastCheckin": {
+          "$ref": "#/definitions/Date"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "username": {
+          "type": "string",
+          "x-go-name": "UserName"
+        },
+        "uuid": {
+          "type": "string",
+          "x-go-name": "UUID"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system"
+    },
+    "SystemList": {
+      "description": "SystemList is the result of the get system list API",
+      "type": "object",
+      "properties": {
+        "complianceStatus": {
+          "type": "string",
+          "x-go-name": "Compliance"
+        },
+        "details": {
+          "type": "string",
+          "x-go-name": "Details"
+        },
+        "entitlementQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "EntitlementQuantity"
+        },
+        "lastCheckin": {
+          "$ref": "#/definitions/Date"
+        },
+        "systemName": {
+          "type": "string",
+          "x-go-name": "SystemName"
+        },
+        "totalEntitlementQuantity": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalEntitlementQuantity"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "uuid": {
+          "type": "string",
+          "x-go-name": "UUID"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription"
+    },
+    "contentSetArchMock": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErratumInContentSet"
+          },
+          "x-go-name": "Body"
+        },
+        "pagination": {
+          "$ref": "#/definitions/APIPageParam"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "exportJobResponse": {
+      "type": "object",
+      "properties": {
+        "exportID": {
+          "type": "string",
+          "x-go-name": "ExportID"
+        },
+        "href": {
+          "type": "string",
+          "x-go-name": "URL"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation"
+    },
+    "exportResponse": {
+      "type": "object",
+      "properties": {
+        "exportJobID": {
+          "type": "string",
+          "x-go-name": "ExportJobID"
+        },
+        "href": {
+          "type": "string",
+          "x-go-name": "URL"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation"
+    },
+    "myErrataListMock": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MyErratum"
+          },
+          "x-go-name": "Body"
+        },
+        "pagination": {
+          "$ref": "#/definitions/APIPageParam"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "pkgDetails": {
+      "type": "object",
+      "properties": {
+        "arch": {
+          "type": "string",
+          "x-go-name": "Arch"
+        },
+        "buildDate": {
+          "$ref": "#/definitions/Date"
+        },
+        "buildHost": {
+          "type": "string",
+          "x-go-name": "BuildHost"
+        },
+        "checksum": {
+          "type": "string",
+          "x-go-name": "Checksum"
+        },
+        "contentSets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "ContentSets"
+        },
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "epoch": {
+          "type": "string",
+          "x-go-name": "Epoch"
+        },
+        "group": {
+          "type": "string",
+          "x-go-name": "Group"
+        },
+        "href": {
+          "type": "string",
+          "x-go-name": "DetailsURL"
+        },
+        "license": {
+          "type": "string",
+          "x-go-name": "License"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "release": {
+          "type": "string",
+          "x-go-name": "Release"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Size"
+        },
+        "summary": {
+          "type": "string",
+          "x-go-name": "Summary"
+        },
+        "version": {
+          "type": "string",
+          "x-go-name": "Version"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/packages"
+    },
+    "pkgListMock": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageDetail"
+          },
+          "x-go-name": "Body"
+        },
+        "pagination": {
+          "$ref": "#/definitions/APIPageParam"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "poolsListMock": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PoolDetail"
+          },
+          "x-go-name": "Body"
+        },
+        "pagination": {
+          "$ref": "#/definitions/APIPageParam"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation"
+    },
+    "showResponse": {
+      "type": "object",
+      "properties": {
+        "affectedProducts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "AffectedProducts"
+        },
+        "bugzillas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reference"
+          },
+          "x-go-name": "Bugzillas"
+        },
+        "copyrightYear": {
+          "type": "string",
+          "x-go-name": "Copyright"
+        },
+        "cves": {
+          "type": "string",
+          "x-go-name": "CVEs"
+        },
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "id": {
+          "type": "string",
+          "x-go-name": "ID"
+        },
+        "issued": {
+          "$ref": "#/definitions/Date"
+        },
+        "lastUpdated": {
+          "$ref": "#/definitions/Date"
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reference"
+          },
+          "x-go-name": "References"
+        },
+        "severity": {
+          "type": "string",
+          "x-go-name": "Severity"
+        },
+        "solution": {
+          "type": "string",
+          "x-go-name": "Solution"
+        },
+        "summary": {
+          "type": "string",
+          "x-go-name": "Topic"
+        },
+        "synopsis": {
+          "type": "string",
+          "x-go-name": "Synopsis"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "typeSeverity": {
+          "type": "string",
+          "x-go-name": "TypeSeverity"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    },
+    "systemList": {
+      "description": "systemList is a System Slice",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/System"
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system"
+    },
+    "systemListMock": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/System"
+          },
+          "x-go-name": "Body"
+        },
+        "pagination": {
+          "$ref": "#/definitions/APIPageParam"
+        }
+      },
+      "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata"
+    }
+  },
+  "responses": {
+    "Accepted": {
+      "description": "Accepted is the pending response"
+    },
+    "AttachEntitlement200": {
+      "description": "AttachEntitlement200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/ShowResponse"
+          }
+        }
+      }
+    },
+    "AttachedEntitlement200": {
+      "description": "AttachedEntitlement200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/System"
+          }
+        }
+      }
+    },
+    "BadRequest": {
+      "description": "BadRequest error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "CreateSatellite200": {
+      "description": "CreateSatellite200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/ShowResponse"
+          }
+        }
+      }
+    },
+    "ExportAllocation200": {
+      "description": "ExportAllocation200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/exportResponse"
+          }
+        }
+      }
+    },
+    "ExportJobAllocation200": {
+      "description": "ExportJobAllocation200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/exportJobResponse"
+          }
+        }
+      }
+    },
+    "Forbidden": {
+      "description": "Forbidden error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "GatewayTimeout": {
+      "description": "GatewayTimeout error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "GetExportAllocation200": {
+      "description": "GetExportAllocation200 is the success response",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "uint8"
+        }
+      }
+    },
+    "InternalServerError": {
+      "description": "InternalServerError error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "ListAllocationPools200": {
+      "description": "ListAllocationPools200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/poolsListMock"
+      }
+    },
+    "ListAllocations200": {
+      "description": "ListAllocations200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Allocation"
+            },
+            "x-go-name": "Body"
+          },
+          "pagination": {
+            "$ref": "#/definitions/APIPageParam"
+          }
+        }
+      }
+    },
+    "ListErrata200": {
+      "description": "ListErrata200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/myErrataListMock"
+      }
+    },
+    "ListErrataByContentSetArch200": {
+      "description": "ListErrataByContentSetArch200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/contentSetArchMock"
+      }
+    },
+    "ListErratumPackages200": {
+      "description": "ListErratumPackages200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/pkgListMock"
+      }
+    },
+    "ListErratumSystems200": {
+      "description": "ListErratumSystems200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/systemListMock"
+      }
+    },
+    "ListPackagesByContentSetArch200": {
+      "description": "ListPackagesByContentSetArch200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/pkgDetails"
+            },
+            "x-go-name": "Body"
+          },
+          "pagination": {
+            "$ref": "#/definitions/APIPageParam"
+          }
+        }
+      }
+    },
+    "ListSubContentSets200": {
+      "description": "ListSubContentSets200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ContentSet"
+            },
+            "x-go-name": "Body"
+          },
+          "pagination": {
+            "$ref": "#/definitions/APIPageParam"
+          }
+        }
+      }
+    },
+    "ListSubSystems200": {
+      "description": "ListSubSystems200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SystemList"
+            },
+            "x-go-name": "Body"
+          },
+          "pagination": {
+            "$ref": "#/definitions/APIPageParam"
+          }
+        }
+      }
+    },
+    "ListSubscriptions200": {
+      "description": "ListSubscriptions200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/ListResponse"
+          },
+          "pagination": {
+            "$ref": "#/definitions/APIPageParam"
+          }
+        }
+      }
+    },
+    "ListSystemErrata200": {
+      "description": "ListSystemErrata200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/poolsListMock"
+      }
+    },
+    "ListSystemPackages200": {
+      "description": "ListSystemPackages200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/poolsListMock"
+      }
+    },
+    "ListSystemPools200": {
+      "description": "ListSystemPools200 is the success response",
+      "schema": {
+        "$ref": "#/definitions/poolsListMock"
+      }
+    },
+    "ListSystems200": {
+      "description": "ListSystems200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/systemList"
+          },
+          "pagination": {
+            "$ref": "#/definitions/APIPageParam"
+          }
+        }
+      }
+    },
+    "NotFound": {
+      "description": "NotFound error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "RemoveAllocation204": {
+      "description": "RemoveAllocation204 is the success response"
+    },
+    "RemoveAllocationEntitlement204": {
+      "description": "RemoveAllocationEntitlement204 is the success response"
+    },
+    "RemoveSystem204": {
+      "description": "RemoveSystem204 is the success response"
+    },
+    "RemoveSystemEntitlement204": {
+      "description": "RemoveSystemEntitlement204 is the success response"
+    },
+    "ShowAllocation200": {
+      "description": "ShowAllocation200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/ShowResponse"
+          }
+        }
+      }
+    },
+    "ShowErratum200": {
+      "description": "ShowErratum200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/showResponse"
+          }
+        }
+      }
+    },
+    "ShowPackage200": {
+      "description": "ShowPackage200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/pkgDetails"
+          }
+        }
+      }
+    },
+    "ShowSystem200": {
+      "description": "ShowSystem200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/System"
+          }
+        }
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized error",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "UpdateEntitlement200": {
+      "description": "UpdateEntitlement200 is the success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/definitions/ShowResponse"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "description": "Bearer token for authorized user",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
