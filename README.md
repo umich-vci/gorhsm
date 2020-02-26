@@ -73,6 +73,7 @@ Class | Method | HTTP request | Description
  - [EntitlementsAttachedResponse](docs/EntitlementsAttachedResponse.md)
  - [EntitlementsAttachedResponseValue](docs/EntitlementsAttachedResponseValue.md)
  - [ErrataCount](docs/ErrataCount.md)
+ - [ErrataResponse](docs/ErrataResponse.md)
  - [ErratumInContentSet](docs/ErratumInContentSet.md)
  - [ErrorDetails](docs/ErrorDetails.md)
  - [ExportJobResponse](docs/ExportJobResponse.md)

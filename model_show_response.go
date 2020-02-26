@@ -12,23 +12,18 @@ package gorhsm
 import (
 	"time"
 )
-// ShowResponse struct for ShowResponse
+// ShowResponse ShowResponse contains response for allocation show API
 type ShowResponse struct {
-	AffectedProducts []string `json:"affectedProducts,omitempty"`
-	Bugzillas []Reference `json:"bugzillas,omitempty"`
-	CopyrightYear string `json:"copyrightYear,omitempty"`
-	Cves string `json:"cves,omitempty"`
-	Description string `json:"description,omitempty"`
-	Id string `json:"id,omitempty"`
+	ContentAccessMode string `json:"contentAccessMode,omitempty"`
+	CreatedBy string `json:"createdBy,omitempty"`
 	// Date represents the date format used for API returns
-	Issued time.Time `json:"issued,omitempty"`
+	CreatedDate time.Time `json:"createdDate,omitempty"`
+	EntitlementsAttached EntitlementsAttachedResponse `json:"entitlementsAttached,omitempty"`
+	EntitlementsAttachedQuantity int64 `json:"entitlementsAttachedQuantity,omitempty"`
 	// Date represents the date format used for API returns
-	LastUpdated time.Time `json:"lastUpdated,omitempty"`
-	References []Reference `json:"references,omitempty"`
-	Severity string `json:"severity,omitempty"`
-	Solution string `json:"solution,omitempty"`
-	Summary string `json:"summary,omitempty"`
-	Synopsis string `json:"synopsis,omitempty"`
+	LastModified time.Time `json:"lastModified,omitempty"`
+	Name string `json:"name,omitempty"`
 	Type string `json:"type,omitempty"`
-	TypeSeverity string `json:"typeSeverity,omitempty"`
+	Uuid string `json:"uuid,omitempty"`
+	Version string `json:"version,omitempty"`
 }

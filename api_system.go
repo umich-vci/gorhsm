@@ -16,6 +16,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+
 	"github.com/antihax/optional"
 )
 
@@ -29,7 +30,7 @@ type SystemApiService service
 
 // AttachEntitlementOpts Optional parameters for the method 'AttachEntitlement'
 type AttachEntitlementOpts struct {
-    Quantity optional.Int64
+	Quantity optional.Int64
 }
 
 /*
@@ -54,7 +55,7 @@ func (a *SystemApiService) AttachEntitlement(ctx _context.Context, systemUUID st
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}/entitlements"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -190,8 +191,8 @@ func (a *SystemApiService) AttachEntitlement(ctx _context.Context, systemUUID st
 
 // ListSystemErrataOpts Optional parameters for the method 'ListSystemErrata'
 type ListSystemErrataOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -216,7 +217,7 @@ func (a *SystemApiService) ListSystemErrata(ctx _context.Context, systemUUID str
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}/errata"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -354,11 +355,11 @@ func (a *SystemApiService) ListSystemErrata(ctx _context.Context, systemUUID str
 
 // ListSystemPackagesOpts Optional parameters for the method 'ListSystemPackages'
 type ListSystemPackagesOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
-    ErrataDetail optional.Bool
-    Upgradeable optional.Bool
-    Filter optional.String
+	Limit        optional.Int64
+	Offset       optional.Int64
+	ErrataDetail optional.Bool
+	Upgradeable  optional.Bool
+	Filter       optional.String
 }
 
 /*
@@ -386,7 +387,7 @@ func (a *SystemApiService) ListSystemPackages(ctx _context.Context, systemUUID s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}/packages"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -533,8 +534,8 @@ func (a *SystemApiService) ListSystemPackages(ctx _context.Context, systemUUID s
 
 // ListSystemPoolsOpts Optional parameters for the method 'ListSystemPools'
 type ListSystemPoolsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -559,7 +560,7 @@ func (a *SystemApiService) ListSystemPools(ctx _context.Context, systemUUID stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}/pools"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -697,10 +698,10 @@ func (a *SystemApiService) ListSystemPools(ctx _context.Context, systemUUID stri
 
 // ListSystemsOpts Optional parameters for the method 'ListSystems'
 type ListSystemsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
-    Filter optional.String
-    Username optional.String
+	Limit    optional.Int64
+	Offset   optional.Int64
+	Filter   optional.String
+	Username optional.String
 }
 
 /*
@@ -883,7 +884,7 @@ func (a *SystemApiService) RemoveSystem(ctx _context.Context, systemUUID string)
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1022,9 +1023,9 @@ func (a *SystemApiService) RemoveSystemEntitlement(ctx _context.Context, systemU
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}/{EntitlementID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"EntitlementID"+"}", _neturl.QueryEscape(parameterToString(entitlementID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"EntitlementID"+"}", _neturl.QueryEscape(parameterToString(entitlementID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1137,7 +1138,7 @@ func (a *SystemApiService) RemoveSystemEntitlement(ctx _context.Context, systemU
 
 // ShowSystemOpts Optional parameters for the method 'ShowSystem'
 type ShowSystemOpts struct {
-    Include optional.Interface
+	Include optional.Interface
 }
 
 /*
@@ -1161,7 +1162,7 @@ func (a *SystemApiService) ShowSystem(ctx _context.Context, systemUUID string, l
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/systems/{SystemUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SystemUUID"+"}", _neturl.QueryEscape(parameterToString(systemUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

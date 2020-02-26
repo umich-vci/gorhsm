@@ -16,6 +16,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+
 	"github.com/antihax/optional"
 )
 
@@ -29,8 +30,8 @@ type ErrataApiService service
 
 // ListErrataOpts Optional parameters for the method 'ListErrata'
 type ListErrataOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -190,8 +191,8 @@ func (a *ErrataApiService) ListErrata(ctx _context.Context, localVarOptionals *L
 
 // ListErrataByContentSetArchOpts Optional parameters for the method 'ListErrataByContentSetArch'
 type ListErrataByContentSetArchOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -217,9 +218,9 @@ func (a *ErrataApiService) ListErrataByContentSetArch(ctx _context.Context, cont
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/errata/cset/{ContentSet}/arch/{Arch}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ContentSet"+"}", _neturl.QueryEscape(parameterToString(contentSet, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ContentSet"+"}", _neturl.QueryEscape(parameterToString(contentSet, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"Arch"+"}", _neturl.QueryEscape(parameterToString(arch, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Arch"+"}", _neturl.QueryEscape(parameterToString(arch, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -357,8 +358,8 @@ func (a *ErrataApiService) ListErrataByContentSetArch(ctx _context.Context, cont
 
 // ListErratumPackagesOpts Optional parameters for the method 'ListErratumPackages'
 type ListErratumPackagesOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -383,7 +384,7 @@ func (a *ErrataApiService) ListErratumPackages(ctx _context.Context, advisoryID 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/errata/{AdvisoryID}/packages"
-	localVarPath = strings.Replace(localVarPath, "{"+"AdvisoryID"+"}", _neturl.QueryEscape(parameterToString(advisoryID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AdvisoryID"+"}", _neturl.QueryEscape(parameterToString(advisoryID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -521,8 +522,8 @@ func (a *ErrataApiService) ListErratumPackages(ctx _context.Context, advisoryID 
 
 // ListErratumSystemsOpts Optional parameters for the method 'ListErratumSystems'
 type ListErratumSystemsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -547,7 +548,7 @@ func (a *ErrataApiService) ListErratumSystems(ctx _context.Context, advisoryID s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/errata/{AdvisoryID}/systems"
-	localVarPath = strings.Replace(localVarPath, "{"+"AdvisoryID"+"}", _neturl.QueryEscape(parameterToString(advisoryID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AdvisoryID"+"}", _neturl.QueryEscape(parameterToString(advisoryID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -702,7 +703,7 @@ func (a *ErrataApiService) ShowErratum(ctx _context.Context, advisoryID string) 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/errata/{AdvisoryID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AdvisoryID"+"}", _neturl.QueryEscape(parameterToString(advisoryID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AdvisoryID"+"}", _neturl.QueryEscape(parameterToString(advisoryID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

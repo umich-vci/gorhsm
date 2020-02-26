@@ -16,6 +16,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+
 	"github.com/antihax/optional"
 )
 
@@ -29,7 +30,7 @@ type AllocationApiService service
 
 // AttachEntitlementAllocationOpts Optional parameters for the method 'AttachEntitlementAllocation'
 type AttachEntitlementAllocationOpts struct {
-    Quantity optional.Int64
+	Quantity optional.Int64
 }
 
 /*
@@ -54,7 +55,7 @@ func (a *AllocationApiService) AttachEntitlementAllocation(ctx _context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/entitlements"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -355,7 +356,7 @@ func (a *AllocationApiService) ExportAllocation(ctx _context.Context, allocation
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/export"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -505,9 +506,9 @@ func (a *AllocationApiService) ExportJobAllocation(ctx _context.Context, allocat
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/exportJob/{ExportJobID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"ExportJobID"+"}", _neturl.QueryEscape(parameterToString(exportJobID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ExportJobID"+"}", _neturl.QueryEscape(parameterToString(exportJobID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -657,9 +658,9 @@ func (a *AllocationApiService) GetExportAllocation(ctx _context.Context, allocat
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/export/{ExportID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"ExportID"+"}", _neturl.QueryEscape(parameterToString(exportID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ExportID"+"}", _neturl.QueryEscape(parameterToString(exportID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -791,9 +792,9 @@ func (a *AllocationApiService) GetExportAllocation(ctx _context.Context, allocat
 
 // ListAllocationPoolsOpts Optional parameters for the method 'ListAllocationPools'
 type ListAllocationPoolsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
-    Future optional.Bool
+	Limit  optional.Int64
+	Offset optional.Int64
+	Future optional.Bool
 }
 
 /*
@@ -819,7 +820,7 @@ func (a *AllocationApiService) ListAllocationPools(ctx _context.Context, allocat
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/pools"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -960,8 +961,8 @@ func (a *AllocationApiService) ListAllocationPools(ctx _context.Context, allocat
 
 // ListAllocationsOpts Optional parameters for the method 'ListAllocations'
 type ListAllocationsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -1137,7 +1138,7 @@ func (a *AllocationApiService) RemoveAllocation(ctx _context.Context, allocation
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1277,9 +1278,9 @@ func (a *AllocationApiService) RemoveAllocationEntitlement(ctx _context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/{EntitlementID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"EntitlementID"+"}", _neturl.QueryEscape(parameterToString(entitlementID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"EntitlementID"+"}", _neturl.QueryEscape(parameterToString(entitlementID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1392,7 +1393,7 @@ func (a *AllocationApiService) RemoveAllocationEntitlement(ctx _context.Context,
 
 // ShowAllocationOpts Optional parameters for the method 'ShowAllocation'
 type ShowAllocationOpts struct {
-    Include optional.String
+	Include optional.String
 }
 
 /*
@@ -1416,7 +1417,7 @@ func (a *AllocationApiService) ShowAllocation(ctx _context.Context, allocationUU
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1551,7 +1552,7 @@ func (a *AllocationApiService) ShowAllocation(ctx _context.Context, allocationUU
 
 // UpdateEntitlementAllocationOpts Optional parameters for the method 'UpdateEntitlementAllocation'
 type UpdateEntitlementAllocationOpts struct {
-    Quantity optional.Int64
+	Quantity optional.Int64
 }
 
 /*
@@ -1576,9 +1577,9 @@ func (a *AllocationApiService) UpdateEntitlementAllocation(ctx _context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/allocations/{AllocationUUID}/entitlements/{EntitlementUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"AllocationUUID"+"}", _neturl.QueryEscape(parameterToString(allocationUUID, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"EntitlementUUID"+"}", _neturl.QueryEscape(parameterToString(entitlementUUID, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"EntitlementUUID"+"}", _neturl.QueryEscape(parameterToString(entitlementUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

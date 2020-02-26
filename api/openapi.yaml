@@ -2166,7 +2166,7 @@ components:
           schema:
             properties:
               body:
-                $ref: '#/components/schemas/showResponse'
+                $ref: '#/components/schemas/ErrataResponse'
             type: object
       description: ShowErratum200 is the success response
     ShowPackage200:
@@ -3057,7 +3057,7 @@ components:
           $ref: '#/components/schemas/APIPageParam'
       type: object
       x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation
-    showResponse:
+    ErrataResponse:
       example:
         severity: severity
         summary: summary
@@ -3311,7 +3311,7 @@ components:
           issued: 2000-01-23T04:56:07.000+00:00
       properties:
         body:
-          $ref: '#/components/schemas/showResponse'
+          $ref: '#/components/schemas/ErrataResponse'
     inline_response_200_5:
       example:
         pagination:

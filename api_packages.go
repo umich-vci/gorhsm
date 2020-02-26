@@ -16,6 +16,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+
 	"github.com/antihax/optional"
 )
 
@@ -29,9 +30,9 @@ type PackagesApiService service
 
 // ListPackagesByContentSetArchOpts Optional parameters for the method 'ListPackagesByContentSetArch'
 type ListPackagesByContentSetArchOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
-    Filter optional.Interface
+	Limit  optional.Int64
+	Offset optional.Int64
+	Filter optional.Interface
 }
 
 /*
@@ -43,7 +44,7 @@ The default and max results in a response are 50 and 100 respectively.
  * @param optional nil or *ListPackagesByContentSetArchOpts - Optional Parameters:
  * @param "Limit" (optional.Int64) -  max number of results you want
  * @param "Offset" (optional.Int64) -  index from which you want next items
- * @param "Filter" (optional.Interface of []string) - 
+ * @param "Filter" (optional.Interface of []string) -
 @return InlineResponse2005
 */
 func (a *PackagesApiService) ListPackagesByContentSetArch(ctx _context.Context, contentSet string, arch string, localVarOptionals *ListPackagesByContentSetArchOpts) (InlineResponse2005, *_nethttp.Response, error) {
@@ -58,9 +59,9 @@ func (a *PackagesApiService) ListPackagesByContentSetArch(ctx _context.Context, 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/packages/cset/{ContentSet}/arch/{Arch}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ContentSet"+"}", _neturl.QueryEscape(parameterToString(contentSet, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"ContentSet"+"}", _neturl.QueryEscape(parameterToString(contentSet, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"Arch"+"}", _neturl.QueryEscape(parameterToString(arch, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Arch"+"}", _neturl.QueryEscape(parameterToString(arch, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -218,7 +219,7 @@ func (a *PackagesApiService) ShowPackage(ctx _context.Context, checksum string) 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/packages/{Checksum}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Checksum"+"}", _neturl.QueryEscape(parameterToString(checksum, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Checksum"+"}", _neturl.QueryEscape(parameterToString(checksum, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

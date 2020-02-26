@@ -16,6 +16,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+
 	"github.com/antihax/optional"
 )
 
@@ -29,8 +30,8 @@ type SubscriptionApiService service
 
 // ListSubContentSetsOpts Optional parameters for the method 'ListSubContentSets'
 type ListSubContentSetsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -55,7 +56,7 @@ func (a *SubscriptionApiService) ListSubContentSets(ctx _context.Context, subscr
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subscriptions/{SubscriptionNumber}/contentSets"
-	localVarPath = strings.Replace(localVarPath, "{"+"SubscriptionNumber"+"}", _neturl.QueryEscape(parameterToString(subscriptionNumber, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SubscriptionNumber"+"}", _neturl.QueryEscape(parameterToString(subscriptionNumber, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -193,8 +194,8 @@ func (a *SubscriptionApiService) ListSubContentSets(ctx _context.Context, subscr
 
 // ListSubSystemsOpts Optional parameters for the method 'ListSubSystems'
 type ListSubSystemsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
@@ -219,7 +220,7 @@ func (a *SubscriptionApiService) ListSubSystems(ctx _context.Context, subscripti
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subscriptions/{SubscriptionNumber}/systems"
-	localVarPath = strings.Replace(localVarPath, "{"+"SubscriptionNumber"+"}", _neturl.QueryEscape(parameterToString(subscriptionNumber, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"SubscriptionNumber"+"}", _neturl.QueryEscape(parameterToString(subscriptionNumber, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -357,8 +358,8 @@ func (a *SubscriptionApiService) ListSubSystems(ctx _context.Context, subscripti
 
 // ListSubscriptionsOpts Optional parameters for the method 'ListSubscriptions'
 type ListSubscriptionsOpts struct {
-    Limit optional.Int64
-    Offset optional.Int64
+	Limit  optional.Int64
+	Offset optional.Int64
 }
 
 /*
