@@ -2326,7 +2326,7 @@
       },
       "x-go-package": "gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation"
     },
-    "showResponse": {
+    "ErrataResponse": {
       "type": "object",
       "properties": {
         "affectedProducts": {
@@ -2725,7 +2725,7 @@
         "type": "object",
         "properties": {
           "body": {
-            "$ref": "#/definitions/showResponse"
+            "$ref": "#/definitions/ErrataResponse"
           }
         }
       }
