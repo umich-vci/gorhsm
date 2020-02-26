@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"strings"
 )
 
 const rhsmTokenURL = "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token"
@@ -32,13 +34,15 @@ type tokenErrorResponse struct {
 
 // GenerateAccessToken generats a new API bearer token
 func GenerateAccessToken(refreshToken string) (*Token, error) {
-	req, err := http.NewRequest(http.MethodGet, rhsmTokenURL, nil)
+	form := url.Values{}
+	form.Add("grant_type", "refresh_token")
+	form.Add("client_id", "rhsm-api")
+	form.Add("refresh_token", refreshToken)
+
+	req, err := http.NewRequest(http.MethodPost, rhsmTokenURL, strings.NewReader(form.Encode()))
 	if err != nil {
 		return nil, err
 	}
-	req.Form.Add("grant_type", "refresh_token")
-	req.Form.Add("client_id", "rhsm-api")
-	req.Form.Add("refresh_token", refreshToken)
 
 	client := new(http.Client)
 
