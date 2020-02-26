@@ -43,6 +43,7 @@ func GenerateAccessToken(refreshToken string) (*Token, error) {
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	client := new(http.Client)
 
