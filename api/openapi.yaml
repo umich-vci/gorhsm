@@ -1,0 +1,3561 @@
+openapi: 3.0.1
+info:
+  description: API for Red Hat Subscription Management
+  title: RHSM-API
+  version: 1.109.1
+servers:
+- url: https://api.access.redhat.com/management/v1
+security:
+- Bearer: []
+paths:
+  /allocations:
+    get:
+      description: The default and max number of results in a response are 100.
+      operationId: listAllocations
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: ListAllocations200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all allocations for a user
+      tags:
+      - allocation
+    post:
+      description: |2-
+
+        Version 6.5 (most recent version of Satellite)
+
+        The default success response will be 200.
+      operationId: createSatellite
+      parameters:
+      - description: must be less than 100 characters and use only numbers, letters,
+          underscores, hyphens, and periods
+        in: query
+        name: Name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: CreateSatellite200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Create Satellite by name
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}:
+    delete:
+      description: |-
+        The default success response will be 204
+
+        System, RHUI, Hypervisor are unsupported allocation types
+      operationId: removeAllocation
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      - description: |-
+          Deleting a subscription allocation can have significant impacts on your hosts and activation keys.
+          We require a force parameter to make sure the delete operation is intentional.
+        in: query
+        name: force
+        required: true
+        schema:
+          enum:
+          - true
+          type: boolean
+          x-go-name: Force
+        x-go-name: Force
+      responses:
+        "204":
+          content: {}
+          description: RemoveAllocation204 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: GatewayTimeout error
+      summary: Remove allocation profile
+      tags:
+      - allocation
+    get:
+      description: System, RHUI, Hypervisor are unsupported allocation types
+      operationId: showAllocation
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      - description: Show more details about a allocation
+        in: query
+        name: include
+        schema:
+          enum:
+          - entitlements
+          pattern: \w+
+          type: string
+          x-go-name: Include
+        x-go-name: Include
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: ShowAllocation200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get an allocation by UUID
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/entitlements:
+    post:
+      description: |-
+        The default success response will be 200.
+
+        System, RHUI, Hypervisor are unsupported allocation types
+      operationId: attachEntitlementAllocation
+      parameters:
+      - in: query
+        name: pool
+        required: true
+        schema:
+          type: string
+          x-go-name: Pool
+        x-go-name: Pool
+      - description: quantity you want to attach
+        in: query
+        name: quantity
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Quantity
+        x-go-name: Quantity
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: AttachEntitlement200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Attach entitlement to allocation
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/entitlements/{EntitlementUUID}:
+    put:
+      description: |-
+        The default success response will be 200.
+
+        System, RHUI, Hypervisor are unsupported allocation types
+      operationId: updateEntitlementAllocation
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: EntitlementUUID
+        required: true
+        schema:
+          type: string
+      - description: |-
+          maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool
+          minItem: 1
+        in: query
+        name: quantity
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Quantity
+        x-go-name: Quantity
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: UpdateEntitlement200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Update attached entitlement to allocation
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/export:
+    get:
+      description: |-
+        Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.
+
+        System, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5.7 or lower are unsupported.
+      operationId: exportAllocation
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+          description: ExportAllocation200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Trigger allocation manifest export
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/export/{ExportID}:
+    get:
+      description: |-
+        Success response contains a zip file. The link is one-time download and expires after one try. Trigger export job to get another download link.
+
+        Content-Type: application/zip
+      operationId: getExportAllocation
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: ExportID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/zip:
+              schema:
+                items:
+                  format: uint8
+                  type: integer
+                type: array
+          description: GetExportAllocation200 is the success response
+        "400":
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Download allocation manifest
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/exportJob/{ExportJobID}:
+    get:
+      description: Returns export download link in response. When export job has not
+        completed a 202 Accepted is returned, in which case the endpoint should be
+        checked later.
+      operationId: exportJobAllocation
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: ExportJobID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+          description: ExportJobAllocation200 is the success response
+        "202":
+          content: {}
+          description: Accepted is the pending response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Check status of allocation manifest export
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/pools:
+    get:
+      description: System, RHUI, Hypervisor are unsupported allocation types
+      operationId: listAllocationPools
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      - description: include future dated pools for satellite 6.3 or higher
+        in: query
+        name: future
+        schema:
+          enum:
+          - true
+          type: boolean
+          x-go-name: Future
+        x-go-name: Future
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/poolsListMock'
+          description: ListAllocationPools200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all pools for an allocation
+      tags:
+      - allocation
+  /allocations/{AllocationUUID}/{EntitlementID}:
+    delete:
+      description: The default success response will be 204.
+      operationId: removeAllocationEntitlement
+      parameters:
+      - in: path
+        name: AllocationUUID
+        required: true
+        schema:
+          type: string
+      - description: Remove an entitlement from an allocation
+        in: path
+        name: EntitlementID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: RemoveAllocationEntitlement204 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Remove entitlement from the allocation
+      tags:
+      - allocation
+  /errata:
+    get:
+      description: The default and max results in a response are 1000.
+      operationId: listErrata
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/myErrataListMock'
+          description: ListErrata200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all errata for a user's systems
+      tags:
+      - errata
+  /errata/cset/{ContentSet}/arch/{Arch}:
+    get:
+      description: Limit is the number of results in a response. The default limit
+        is 50 and max limit is 100.
+      operationId: listErrataByContentSetArch
+      parameters:
+      - in: path
+        name: ContentSet
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: Arch
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentSetArchMock'
+          description: ListErrataByContentSetArch200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get all the errata for the specified content set and arch
+      tags:
+      - errata
+  /errata/{AdvisoryID}:
+    get:
+      description: This will get the details of an advisory specified by its advisoryID.
+      operationId: showErratum
+      parameters:
+      - description: unique identifier for a Red Hat advisory
+        in: path
+        name: AdvisoryID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+          description: ShowErratum200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get the details of an advisory
+      tags:
+      - errata
+  /errata/{AdvisoryID}/packages:
+    get:
+      description: The default and max results in a response are 50.
+      operationId: listErratumPackages
+      parameters:
+      - description: unique identifier for a Red Hat advisory
+        in: path
+        name: AdvisoryID
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pkgListMock'
+          description: ListErratumPackages200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all packages for an advisory
+      tags:
+      - errata
+  /errata/{AdvisoryID}/systems:
+    get:
+      description: The default and max results in a response are 1000.
+      operationId: listErratumSystems
+      parameters:
+      - description: unique identifier for a Red Hat advisory
+        in: path
+        name: AdvisoryID
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/systemListMock'
+          description: ListErratumSystems200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all systems for an advisory
+      tags:
+      - errata
+  /packages/cset/{ContentSet}/arch/{Arch}:
+    get:
+      description: The default and max results in a response are 50 and 100 respectively.
+      operationId: listPackagesByContentSetArch
+      parameters:
+      - in: path
+        name: ContentSet
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: Arch
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      - explode: false
+        in: query
+        name: filter
+        schema:
+          items:
+            enum:
+            - latest
+            pattern: \w+
+            type: string
+          minItems: 1
+          type: array
+          x-go-name: Filter
+        style: form
+        x-go-name: Filter
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+          description: ListPackagesByContentSetArch200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get all the packages for the specified content set and arch.
+      tags:
+      - packages
+  /packages/{Checksum}:
+    get:
+      description: This will get the details of a package specified by its checksum.
+      operationId: showPackage
+      parameters:
+      - in: path
+        name: Checksum
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_6'
+          description: ShowPackage200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get the details of a package
+      tags:
+      - packages
+  /subscriptions:
+    get:
+      description: The default and max results in a response are 50.
+      operationId: listSubscriptions
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_7'
+          description: ListSubscriptions200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all subscriptions for a user
+      tags:
+      - subscription
+  /subscriptions/{SubscriptionNumber}/contentSets:
+    get:
+      description: The default and max results in a response are 1000.
+      operationId: listSubContentSets
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      - in: path
+        name: SubscriptionNumber
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_8'
+          description: ListSubContentSets200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all content sets for a subscription
+      tags:
+      - subscription
+  /subscriptions/{SubscriptionNumber}/systems:
+    get:
+      description: The default and max results in a response are 100.
+      operationId: listSubSystems
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      - in: path
+        name: SubscriptionNumber
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_9'
+          description: ListSubSystems200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all systems consuming a subscription
+      tags:
+      - subscription
+  /systems:
+    get:
+      description: The default and max number of results in a response are 100.
+      operationId: listSystems
+      parameters:
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      - description: Filter Systems by System Name
+        in: query
+        name: filter
+        schema:
+          type: string
+          x-go-name: Name
+        x-go-name: Name
+      - description: Filter Systems by a valid User Name, where User Name is the system
+          owner and wildcard characters are not allowed
+        in: query
+        name: username
+        schema:
+          type: string
+          x-go-name: Name
+        x-go-name: Name
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_10'
+          description: ListSystems200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all systems for a user
+      tags:
+      - system
+  /systems/{SystemUUID}:
+    delete:
+      description: The default success response will be 204
+      operationId: removeSystem
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: RemoveSystem204 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: GatewayTimeout error
+      summary: Remove system profile
+      tags:
+      - system
+    get:
+      description: Sam & Satellite systems are unsupported system types.
+      operationId: showSystem
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      - description: Show more details about a system
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            enum:
+            - facts
+            - entitlements
+            - installedProducts
+            pattern: \w+
+            type: string
+          maxItems: 3
+          minItems: 1
+          type: array
+          x-go-name: Include
+        style: form
+        x-go-name: Include
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_11'
+          description: ShowSystem200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get a system specified by UUID.
+      tags:
+      - system
+  /systems/{SystemUUID}/entitlements:
+    post:
+      description: |-
+        The default success response will be 200.
+
+        Sam & Satellite systems are unsupported system types.
+      operationId: attachEntitlement
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: pool
+        required: true
+        schema:
+          type: string
+          x-go-name: Pool
+        x-go-name: Pool
+      - description: quantity you want to attach
+        in: query
+        name: quantity
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Quantity
+        x-go-name: Quantity
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_11'
+          description: AttachedEntitlement200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Attach entitlement to system
+      tags:
+      - system
+  /systems/{SystemUUID}/errata:
+    get:
+      description: The default and max number of results in a response are 100.
+      operationId: listSystemErrata
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/poolsListMock'
+          description: ListSystemErrata200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all applicable errata for a system
+      tags:
+      - system
+  /systems/{SystemUUID}/packages:
+    get:
+      description: The default and max number of results in a response are 1000.
+      operationId: listSystemPackages
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      - description: Show errata details for packages
+        in: query
+        name: errata_detail
+        schema:
+          enum:
+          - true
+          - false
+          type: boolean
+          x-go-name: ErrataDetail
+        x-go-name: ErrataDetail
+      - description: Show upgradable packages only. Also accepts 'upgradable' as valid
+          query.
+        in: query
+        name: upgradeable
+        schema:
+          enum:
+          - true
+          - false
+          type: boolean
+          x-go-name: Upgradeable
+        x-go-name: Upgradeable
+      - description: Filter packages
+        in: query
+        name: filter
+        schema:
+          type: string
+          x-go-name: Filter
+        x-go-name: Filter
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/poolsListMock'
+          description: ListSystemPackages200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all packages for a system
+      tags:
+      - system
+  /systems/{SystemUUID}/pools:
+    get:
+      description: The default and max number of results in a response are 50.
+      operationId: listSystemPools
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      - description: max number of results you want
+        in: query
+        name: limit
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Limit
+        x-go-name: Limit
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          format: int64
+          pattern: \d+
+          type: integer
+          x-go-name: Offset
+        x-go-name: Offset
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/poolsListMock'
+          description: ListSystemPools200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all pools for a system
+      tags:
+      - system
+  /systems/{SystemUUID}/{EntitlementID}:
+    delete:
+      description: The default success response will be 204.
+      operationId: removeSystemEntitlement
+      parameters:
+      - in: path
+        name: SystemUUID
+        required: true
+        schema:
+          type: string
+      - description: Remove an entitlement from a system
+        in: path
+        name: EntitlementID
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: RemoveSystemEntitlement204 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Remove entitlement from the system
+      tags:
+      - system
+components:
+  responses:
+    Accepted:
+      content: {}
+      description: Accepted is the pending response
+    AttachEntitlement200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/ShowResponse'
+            type: object
+      description: AttachEntitlement200 is the success response
+    AttachedEntitlement200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/System'
+            type: object
+      description: AttachedEntitlement200 is the success response
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: BadRequest error
+    CreateSatellite200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/ShowResponse'
+            type: object
+      description: CreateSatellite200 is the success response
+    ExportAllocation200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/exportResponse'
+            type: object
+      description: ExportAllocation200 is the success response
+    ExportJobAllocation200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/exportJobResponse'
+            type: object
+      description: ExportJobAllocation200 is the success response
+    Forbidden:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: Forbidden error
+    GatewayTimeout:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: GatewayTimeout error
+    GetExportAllocation200:
+      content:
+        application/json:
+          schema:
+            items:
+              format: uint8
+              type: integer
+            type: array
+      description: GetExportAllocation200 is the success response
+    InternalServerError:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: InternalServerError error
+    ListAllocationPools200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/poolsListMock'
+      description: ListAllocationPools200 is the success response
+    ListAllocations200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                items:
+                  $ref: '#/components/schemas/Allocation'
+                type: array
+                x-go-name: Body
+              pagination:
+                $ref: '#/components/schemas/APIPageParam'
+            type: object
+      description: ListAllocations200 is the success response
+    ListErrata200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/myErrataListMock'
+      description: ListErrata200 is the success response
+    ListErrataByContentSetArch200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/contentSetArchMock'
+      description: ListErrataByContentSetArch200 is the success response
+    ListErratumPackages200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/pkgListMock'
+      description: ListErratumPackages200 is the success response
+    ListErratumSystems200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/systemListMock'
+      description: ListErratumSystems200 is the success response
+    ListPackagesByContentSetArch200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                items:
+                  $ref: '#/components/schemas/pkgDetails'
+                type: array
+                x-go-name: Body
+              pagination:
+                $ref: '#/components/schemas/APIPageParam'
+            type: object
+      description: ListPackagesByContentSetArch200 is the success response
+    ListSubContentSets200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                items:
+                  $ref: '#/components/schemas/ContentSet'
+                type: array
+                x-go-name: Body
+              pagination:
+                $ref: '#/components/schemas/APIPageParam'
+            type: object
+      description: ListSubContentSets200 is the success response
+    ListSubSystems200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                items:
+                  $ref: '#/components/schemas/SystemList'
+                type: array
+                x-go-name: Body
+              pagination:
+                $ref: '#/components/schemas/APIPageParam'
+            type: object
+      description: ListSubSystems200 is the success response
+    ListSubscriptions200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/ListResponse'
+              pagination:
+                $ref: '#/components/schemas/APIPageParam'
+            type: object
+      description: ListSubscriptions200 is the success response
+    ListSystemErrata200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/poolsListMock'
+      description: ListSystemErrata200 is the success response
+    ListSystemPackages200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/poolsListMock'
+      description: ListSystemPackages200 is the success response
+    ListSystemPools200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/poolsListMock'
+      description: ListSystemPools200 is the success response
+    ListSystems200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/systemList'
+              pagination:
+                $ref: '#/components/schemas/APIPageParam'
+            type: object
+      description: ListSystems200 is the success response
+    NotFound:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: NotFound error
+    RemoveAllocation204:
+      content: {}
+      description: RemoveAllocation204 is the success response
+    RemoveAllocationEntitlement204:
+      content: {}
+      description: RemoveAllocationEntitlement204 is the success response
+    RemoveSystem204:
+      content: {}
+      description: RemoveSystem204 is the success response
+    RemoveSystemEntitlement204:
+      content: {}
+      description: RemoveSystemEntitlement204 is the success response
+    ShowAllocation200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/ShowResponse'
+            type: object
+      description: ShowAllocation200 is the success response
+    ShowErratum200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/showResponse'
+            type: object
+      description: ShowErratum200 is the success response
+    ShowPackage200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/pkgDetails'
+            type: object
+      description: ShowPackage200 is the success response
+    ShowSystem200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/System'
+            type: object
+      description: ShowSystem200 is the success response
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: Unauthorized error
+    UpdateEntitlement200:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                $ref: '#/components/schemas/ShowResponse'
+            type: object
+      description: UpdateEntitlement200 is the success response
+  schemas:
+    APIPageParam:
+      description: APIPageParam details the pagination parameters in APIResponse
+      example:
+        offset: 5
+        count: 6
+        limit: 1
+      properties:
+        count:
+          format: int64
+          type: integer
+          x-go-name: Count
+        limit:
+          format: int64
+          type: integer
+          x-go-name: Limit
+        offset:
+          format: int64
+          type: integer
+          x-go-name: Offset
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/helpers
+    Allocation:
+      example:
+        name: name
+        entitlementQuantity: 0
+        type: type
+        uuid: uuid
+        version: version
+        url: url
+      properties:
+        entitlementQuantity:
+          format: int64
+          type: integer
+          x-go-name: EntitlementQuantity
+        name:
+          type: string
+          x-go-name: Name
+        type:
+          type: string
+          x-go-name: Type
+        url:
+          type: string
+          x-go-name: URL
+        uuid:
+          type: string
+          x-go-name: UUID
+        version:
+          type: string
+          x-go-name: Version
+      title: Allocation is an entity that consumes entitlements. Also referred as
+        a Distributor.
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation
+    ContentSet:
+      example:
+        name: name
+        arch: arch
+        label: label
+        type: type
+        enabled: true
+      properties:
+        arch:
+          type: string
+          x-go-name: Arch
+        enabled:
+          type: boolean
+          x-go-name: Enabled
+        label:
+          type: string
+          x-go-name: Label
+        name:
+          type: string
+          x-go-name: Name
+        type:
+          type: string
+          x-go-name: Type
+      title: ContentSet represent a contentset for the listContentSets API Response.
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription
+    Date:
+      description: Date represents the date format used for API returns
+      format: date-time
+      type: string
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+    DetailResponse:
+      example:
+        quantity: quantity
+        subscriptionNumber: subscriptionNumber
+        endDate: 2000-01-23T04:56:07.000+00:00
+        subscriptionName: subscriptionName
+        contractNumber: contractNumber
+        pools:
+        - consumed: 0
+          quantity: 6
+          id: id
+          type: type
+        - consumed: 0
+          quantity: 6
+          id: id
+          type: type
+        sku: sku
+        startDate: 2000-01-23T04:56:07.000+00:00
+        status: status
+      properties:
+        contractNumber:
+          type: string
+          x-go-name: ContractNumber
+        endDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        pools:
+          items:
+            $ref: '#/components/schemas/Pool'
+          type: array
+          x-go-name: Pools
+        quantity:
+          type: string
+          x-go-name: Quantity
+        sku:
+          type: string
+          x-go-name: SKU
+        startDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        status:
+          type: string
+          x-go-name: Status
+        subscriptionName:
+          type: string
+          x-go-name: SubscriptionName
+        subscriptionNumber:
+          type: string
+          x-go-name: SubscriptionNumber
+      title: DetailResponse is the user-friendly response from the service.
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription
+    EntitlementsAttachedResponse:
+      description: EntitlementsAttachedResponse wraps data obtained for EntitlementsAttached
+        and sends metadata about it using helpers.OptionalResult
+      example:
+        valid: true
+        reason: reason
+        value:
+        - contractNumber: contractNumber
+          id: id
+          entitlementQuantity: 0
+          sku: sku
+        - contractNumber: contractNumber
+          id: id
+          entitlementQuantity: 0
+          sku: sku
+      properties:
+        reason:
+          type: string
+          x-go-name: Reason
+        valid:
+          type: boolean
+          x-go-name: Valid
+        value:
+          items:
+            $ref: '#/components/schemas/EntitlementsAttachedResponseValue'
+          type: array
+          x-go-name: Value
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/helpers/candlepin/consumer
+    EntitlementsAttachedResponseValue:
+      description: EntitlementsAttachedResponseValue represents the Value field in
+        the EntitlementsAttachedResponse
+      example:
+        contractNumber: contractNumber
+        id: id
+        entitlementQuantity: 0
+        sku: sku
+      properties:
+        contractNumber:
+          type: string
+          x-go-name: ContractNumber
+        entitlementQuantity:
+          format: int64
+          type: integer
+          x-go-name: EntitlementQuantity
+        id:
+          type: string
+          x-go-name: ID
+        sku:
+          type: string
+          x-go-name: SKU
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/helpers/candlepin/consumer
+    ErrataCount:
+      description: ErrataCount is the errata information for a System
+      example:
+        enhancementCount: 1
+        securityCount: 5
+        bugfixCount: 6
+      properties:
+        bugfixCount:
+          format: int64
+          type: integer
+          x-go-name: BugfixCount
+        enhancementCount:
+          format: int64
+          type: integer
+          x-go-name: EnhancementCount
+        securityCount:
+          format: int64
+          type: integer
+          x-go-name: SecurityCount
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system
+    ErratumInContentSet:
+      description: ErratumInContentSet contains information on an erratum listed in
+        a content set
+      example:
+        severity: severity
+        advisoryId: advisoryId
+        publishDate: 2000-01-23T04:56:07.000+00:00
+        href: href
+        synopsis: synopsis
+        type: type
+      properties:
+        advisoryId:
+          type: string
+          x-go-name: AdvisoryID
+        href:
+          type: string
+          x-go-name: DetailsURL
+        publishDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        severity:
+          type: string
+          x-go-name: Severity
+        synopsis:
+          type: string
+          x-go-name: Synopsis
+        type:
+          type: string
+          x-go-name: Type
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    ErrorDetails:
+      description: ErrorDetails details the Error in ErrorResponse
+      properties:
+        code:
+          format: int64
+          type: integer
+          x-go-name: Code
+        message:
+          type: string
+          x-go-name: Message
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/helpers
+    ListResponse:
+      description: |-
+        ListResponse is the actual collection of subscription details that gets
+        rendered
+      items:
+        $ref: '#/components/schemas/DetailResponse'
+      type: array
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription
+    MyErratum:
+      description: MyErratum contains erratum information that affects at least one
+        system
+      example:
+        advisoryId: advisoryId
+        systems: systems
+        publishDate: 2000-01-23T04:56:07.000+00:00
+        affectedSystemCount: 0
+        details: details
+        synopsis: synopsis
+        type: type
+      properties:
+        advisoryId:
+          type: string
+          x-go-name: AdvisoryID
+        affectedSystemCount:
+          format: int64
+          type: integer
+          x-go-name: AffectedSystems
+        details:
+          type: string
+          x-go-name: DetailsURL
+        publishDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        synopsis:
+          type: string
+          x-go-name: Synopsis
+        systems:
+          type: string
+          x-go-name: SystemsURL
+        type:
+          type: string
+          x-go-name: Type
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    PackageDetail:
+      description: PackageDetail wraps an errata package and adds a RefURL
+      example:
+        summary: summary
+        filename: filename
+        release: release
+        repoTags:
+        - repoTags
+        - repoTags
+        contentSets:
+        - contentSets
+        - contentSets
+        checksum: checksum
+        name: name
+        epoch: 0
+        arch: arch
+        details_url: details_url
+        version: version
+      properties:
+        arch:
+          type: string
+          x-go-name: Arch
+        checksum:
+          type: string
+          x-go-name: Checksum
+        contentSets:
+          items:
+            type: string
+          type: array
+          x-go-name: ContentSets
+        details_url:
+          type: string
+          x-go-name: RefURL
+        epoch:
+          format: int64
+          type: integer
+          x-go-name: Epoch
+        filename:
+          type: string
+          x-go-name: Filename
+        name:
+          type: string
+          x-go-name: Name
+        release:
+          type: string
+          x-go-name: Release
+        repoTags:
+          items:
+            type: string
+          type: array
+          x-go-name: RepoTags
+        summary:
+          type: string
+          x-go-name: Summary
+        version:
+          type: string
+          x-go-name: Version
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    Pool:
+      description: Pool represents pool information that matter for the detail list
+      example:
+        consumed: 0
+        quantity: 6
+        id: id
+        type: type
+      properties:
+        consumed:
+          format: int64
+          type: integer
+          x-go-name: ConsumedEntitlements
+        id:
+          type: string
+          x-go-name: ID
+        quantity:
+          format: int64
+          type: integer
+          x-go-name: TotalEntitlements
+        type:
+          type: string
+          x-go-name: Type
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/subscription
+    PoolDetail:
+      description: PoolDetail is an entry in the system/allocation pools listing
+      example:
+        subscriptionNumber: subscriptionNumber
+        endDate: 2000-01-23T04:56:07.000+00:00
+        subscriptionName: subscriptionName
+        contractNumber: contractNumber
+        entitlementsAvailable: 0
+        id: id
+        serviceLevel: serviceLevel
+        sku: sku
+        startDate: 2000-01-23T04:56:07.000+00:00
+      properties:
+        contractNumber:
+          type: string
+          x-go-name: ContractNumber
+        endDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        entitlementsAvailable:
+          format: int64
+          type: integer
+          x-go-name: EntitlementsAvailable
+        id:
+          type: string
+          x-go-name: ID
+        serviceLevel:
+          type: string
+          x-go-name: ServiceLevel
+        sku:
+          type: string
+          x-go-name: SKU
+        startDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        subscriptionName:
+          type: string
+          x-go-name: SubscriptionName
+        subscriptionNumber:
+          type: string
+          x-go-name: SubscriptionNumber
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/helpers/candlepin/owner
+    Reference:
+      description: Reference contains a reference to an external item
+      example:
+        href: href
+        id: id
+        title: title
+        type: type
+      properties:
+        href:
+          type: string
+          x-go-name: URL
+        id:
+          type: string
+          x-go-name: ID
+        title:
+          type: string
+          x-go-name: Title
+        type:
+          type: string
+          x-go-name: Type
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/errata
+    ShowResponse:
+      description: ShowResponse contains response for allocation show API
+      example:
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        entitlementsAttachedQuantity: 6
+        createdBy: createdBy
+        name: name
+        entitlementsAttached:
+          valid: true
+          reason: reason
+          value:
+          - contractNumber: contractNumber
+            id: id
+            entitlementQuantity: 0
+            sku: sku
+          - contractNumber: contractNumber
+            id: id
+            entitlementQuantity: 0
+            sku: sku
+        contentAccessMode: contentAccessMode
+        lastModified: 2000-01-23T04:56:07.000+00:00
+        type: type
+        uuid: uuid
+        version: version
+      properties:
+        contentAccessMode:
+          type: string
+          x-go-name: ContentAccessMode
+        createdBy:
+          type: string
+          x-go-name: CreatedBy
+        createdDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        entitlementsAttached:
+          $ref: '#/components/schemas/EntitlementsAttachedResponse'
+        entitlementsAttachedQuantity:
+          format: int64
+          type: integer
+          x-go-name: EntitlementsAttachedQuantity
+        lastModified:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        name:
+          type: string
+          x-go-name: Name
+        type:
+          type: string
+          x-go-name: Type
+        uuid:
+          type: string
+          x-go-name: UUID
+        version:
+          type: string
+          x-go-name: Version
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation
+    System:
+      example:
+        entitlementCount: 0
+        errataCounts:
+          enhancementCount: 1
+          securityCount: 5
+          bugfixCount: 6
+        hostname: hostname
+        entitlementStatus: entitlementStatus
+        name: name
+        href: href
+        lastCheckin: 2000-01-23T04:56:07.000+00:00
+        type: type
+        uuid: uuid
+        username: username
+      properties:
+        entitlementCount:
+          format: int64
+          type: integer
+          x-go-name: Quantity
+        entitlementStatus:
+          type: string
+          x-go-name: EntitlementStatus
+        errataCounts:
+          $ref: '#/components/schemas/ErrataCount'
+        hostname:
+          type: string
+          x-go-name: Hostname
+        href:
+          type: string
+          x-go-name: URL
+        lastCheckin:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        name:
+          type: string
+          x-go-name: Name
+        type:
+          type: string
+          x-go-name: Type
+        username:
+          type: string
+          x-go-name: UserName
+        uuid:
+          type: string
+          x-go-name: UUID
+      title: System is an entity that consumes entitlements. Also referred as a Consumer.
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system
+    SystemList:
+      description: SystemList is the result of the get system list API
+      example:
+        systemName: systemName
+        totalEntitlementQuantity: 6
+        complianceStatus: complianceStatus
+        details: details
+        lastCheckin: 2000-01-23T04:56:07.000+00:00
+        entitlementQuantity: 0
+        type: type
+        uuid: uuid
+      properties:
+        complianceStatus:
+          type: string
+          x-go-name: Compliance
+        details:
+          type: string
+          x-go-name: Details
+        entitlementQuantity:
+          format: int64
+          type: integer
+          x-go-name: EntitlementQuantity
+        lastCheckin:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        systemName:
+          type: string
+          x-go-name: SystemName
+        totalEntitlementQuantity:
+          format: int64
+          type: integer
+          x-go-name: TotalEntitlementQuantity
+        type:
+          type: string
+          x-go-name: Type
+        uuid:
+          type: string
+          x-go-name: UUID
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription
+    contentSetArchMock:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - severity: severity
+          advisoryId: advisoryId
+          publishDate: 2000-01-23T04:56:07.000+00:00
+          href: href
+          synopsis: synopsis
+          type: type
+        - severity: severity
+          advisoryId: advisoryId
+          publishDate: 2000-01-23T04:56:07.000+00:00
+          href: href
+          synopsis: synopsis
+          type: type
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/ErratumInContentSet'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    exportJobResponse:
+      example:
+        href: href
+        exportID: exportID
+      properties:
+        exportID:
+          type: string
+          x-go-name: ExportID
+        href:
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation
+    exportResponse:
+      example:
+        href: href
+        exportJobID: exportJobID
+      properties:
+        exportJobID:
+          type: string
+          x-go-name: ExportJobID
+        href:
+          type: string
+          x-go-name: URL
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation
+    myErrataListMock:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - advisoryId: advisoryId
+          systems: systems
+          publishDate: 2000-01-23T04:56:07.000+00:00
+          affectedSystemCount: 0
+          details: details
+          synopsis: synopsis
+          type: type
+        - advisoryId: advisoryId
+          systems: systems
+          publishDate: 2000-01-23T04:56:07.000+00:00
+          affectedSystemCount: 0
+          details: details
+          synopsis: synopsis
+          type: type
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/MyErratum'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    pkgDetails:
+      example:
+        summary: summary
+        release: release
+        contentSets:
+        - contentSets
+        - contentSets
+        description: description
+        epoch: epoch
+        buildDate: 2000-01-23T04:56:07.000+00:00
+        version: version
+        buildHost: buildHost
+        license: license
+        size: 0
+        checksum: checksum
+        name: name
+        arch: arch
+        href: href
+        group: group
+      properties:
+        arch:
+          type: string
+          x-go-name: Arch
+        buildDate:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        buildHost:
+          type: string
+          x-go-name: BuildHost
+        checksum:
+          type: string
+          x-go-name: Checksum
+        contentSets:
+          items:
+            type: string
+          type: array
+          x-go-name: ContentSets
+        description:
+          type: string
+          x-go-name: Description
+        epoch:
+          type: string
+          x-go-name: Epoch
+        group:
+          type: string
+          x-go-name: Group
+        href:
+          type: string
+          x-go-name: DetailsURL
+        license:
+          type: string
+          x-go-name: License
+        name:
+          type: string
+          x-go-name: Name
+        release:
+          type: string
+          x-go-name: Release
+        size:
+          format: int64
+          type: integer
+          x-go-name: Size
+        summary:
+          type: string
+          x-go-name: Summary
+        version:
+          type: string
+          x-go-name: Version
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/packages
+    pkgListMock:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - summary: summary
+          filename: filename
+          release: release
+          repoTags:
+          - repoTags
+          - repoTags
+          contentSets:
+          - contentSets
+          - contentSets
+          checksum: checksum
+          name: name
+          epoch: 0
+          arch: arch
+          details_url: details_url
+          version: version
+        - summary: summary
+          filename: filename
+          release: release
+          repoTags:
+          - repoTags
+          - repoTags
+          contentSets:
+          - contentSets
+          - contentSets
+          checksum: checksum
+          name: name
+          epoch: 0
+          arch: arch
+          details_url: details_url
+          version: version
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/PackageDetail'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    poolsListMock:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - subscriptionNumber: subscriptionNumber
+          endDate: 2000-01-23T04:56:07.000+00:00
+          subscriptionName: subscriptionName
+          contractNumber: contractNumber
+          entitlementsAvailable: 0
+          id: id
+          serviceLevel: serviceLevel
+          sku: sku
+          startDate: 2000-01-23T04:56:07.000+00:00
+        - subscriptionNumber: subscriptionNumber
+          endDate: 2000-01-23T04:56:07.000+00:00
+          subscriptionName: subscriptionName
+          contractNumber: contractNumber
+          entitlementsAvailable: 0
+          id: id
+          serviceLevel: serviceLevel
+          sku: sku
+          startDate: 2000-01-23T04:56:07.000+00:00
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/PoolDetail'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/allocation
+    showResponse:
+      example:
+        severity: severity
+        summary: summary
+        references:
+        - href: href
+          id: id
+          title: title
+          type: type
+        - href: href
+          id: id
+          title: title
+          type: type
+        typeSeverity: typeSeverity
+        affectedProducts:
+        - affectedProducts
+        - affectedProducts
+        description: description
+        synopsis: synopsis
+        type: type
+        cves: cves
+        lastUpdated: 2000-01-23T04:56:07.000+00:00
+        bugzillas:
+        - href: href
+          id: id
+          title: title
+          type: type
+        - href: href
+          id: id
+          title: title
+          type: type
+        solution: solution
+        copyrightYear: copyrightYear
+        id: id
+        issued: 2000-01-23T04:56:07.000+00:00
+      properties:
+        affectedProducts:
+          items:
+            type: string
+          type: array
+          x-go-name: AffectedProducts
+        bugzillas:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+          x-go-name: Bugzillas
+        copyrightYear:
+          type: string
+          x-go-name: Copyright
+        cves:
+          type: string
+          x-go-name: CVEs
+        description:
+          type: string
+          x-go-name: Description
+        id:
+          type: string
+          x-go-name: ID
+        issued:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        lastUpdated:
+          description: Date represents the date format used for API returns
+          format: date-time
+          type: string
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1
+        references:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+          x-go-name: References
+        severity:
+          type: string
+          x-go-name: Severity
+        solution:
+          type: string
+          x-go-name: Solution
+        summary:
+          type: string
+          x-go-name: Topic
+        synopsis:
+          type: string
+          x-go-name: Synopsis
+        type:
+          type: string
+          x-go-name: Type
+        typeSeverity:
+          type: string
+          x-go-name: TypeSeverity
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    systemList:
+      description: systemList is a System Slice
+      items:
+        $ref: '#/components/schemas/System'
+      type: array
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system
+    systemListMock:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - entitlementCount: 0
+          errataCounts:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+          hostname: hostname
+          entitlementStatus: entitlementStatus
+          name: name
+          href: href
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          type: type
+          uuid: uuid
+          username: username
+        - entitlementCount: 0
+          errataCounts:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+          hostname: hostname
+          entitlementStatus: entitlementStatus
+          name: name
+          href: href
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          type: type
+          uuid: uuid
+          username: username
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/System'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+      type: object
+      x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/errata
+    inline_response_200:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - name: name
+          entitlementQuantity: 0
+          type: type
+          uuid: uuid
+          version: version
+          url: url
+        - name: name
+          entitlementQuantity: 0
+          type: type
+          uuid: uuid
+          version: version
+          url: url
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/Allocation'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+    inline_response_400:
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    inline_response_200_1:
+      example:
+        body:
+          createdDate: 2000-01-23T04:56:07.000+00:00
+          entitlementsAttachedQuantity: 6
+          createdBy: createdBy
+          name: name
+          entitlementsAttached:
+            valid: true
+            reason: reason
+            value:
+            - contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+            - contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+          contentAccessMode: contentAccessMode
+          lastModified: 2000-01-23T04:56:07.000+00:00
+          type: type
+          uuid: uuid
+          version: version
+      properties:
+        body:
+          $ref: '#/components/schemas/ShowResponse'
+    inline_response_200_2:
+      example:
+        body:
+          href: href
+          exportJobID: exportJobID
+      properties:
+        body:
+          $ref: '#/components/schemas/exportResponse'
+    inline_response_200_3:
+      example:
+        body:
+          href: href
+          exportID: exportID
+      properties:
+        body:
+          $ref: '#/components/schemas/exportJobResponse'
+    inline_response_200_4:
+      example:
+        body:
+          severity: severity
+          summary: summary
+          references:
+          - href: href
+            id: id
+            title: title
+            type: type
+          - href: href
+            id: id
+            title: title
+            type: type
+          typeSeverity: typeSeverity
+          affectedProducts:
+          - affectedProducts
+          - affectedProducts
+          description: description
+          synopsis: synopsis
+          type: type
+          cves: cves
+          lastUpdated: 2000-01-23T04:56:07.000+00:00
+          bugzillas:
+          - href: href
+            id: id
+            title: title
+            type: type
+          - href: href
+            id: id
+            title: title
+            type: type
+          solution: solution
+          copyrightYear: copyrightYear
+          id: id
+          issued: 2000-01-23T04:56:07.000+00:00
+      properties:
+        body:
+          $ref: '#/components/schemas/showResponse'
+    inline_response_200_5:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - summary: summary
+          release: release
+          contentSets:
+          - contentSets
+          - contentSets
+          description: description
+          epoch: epoch
+          buildDate: 2000-01-23T04:56:07.000+00:00
+          version: version
+          buildHost: buildHost
+          license: license
+          size: 0
+          checksum: checksum
+          name: name
+          arch: arch
+          href: href
+          group: group
+        - summary: summary
+          release: release
+          contentSets:
+          - contentSets
+          - contentSets
+          description: description
+          epoch: epoch
+          buildDate: 2000-01-23T04:56:07.000+00:00
+          version: version
+          buildHost: buildHost
+          license: license
+          size: 0
+          checksum: checksum
+          name: name
+          arch: arch
+          href: href
+          group: group
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/pkgDetails'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+    inline_response_200_6:
+      example:
+        body:
+          summary: summary
+          release: release
+          contentSets:
+          - contentSets
+          - contentSets
+          description: description
+          epoch: epoch
+          buildDate: 2000-01-23T04:56:07.000+00:00
+          version: version
+          buildHost: buildHost
+          license: license
+          size: 0
+          checksum: checksum
+          name: name
+          arch: arch
+          href: href
+          group: group
+      properties:
+        body:
+          $ref: '#/components/schemas/pkgDetails'
+    inline_response_200_7:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - quantity: quantity
+          subscriptionNumber: subscriptionNumber
+          endDate: 2000-01-23T04:56:07.000+00:00
+          subscriptionName: subscriptionName
+          contractNumber: contractNumber
+          pools:
+          - consumed: 0
+            quantity: 6
+            id: id
+            type: type
+          - consumed: 0
+            quantity: 6
+            id: id
+            type: type
+          sku: sku
+          startDate: 2000-01-23T04:56:07.000+00:00
+          status: status
+        - quantity: quantity
+          subscriptionNumber: subscriptionNumber
+          endDate: 2000-01-23T04:56:07.000+00:00
+          subscriptionName: subscriptionName
+          contractNumber: contractNumber
+          pools:
+          - consumed: 0
+            quantity: 6
+            id: id
+            type: type
+          - consumed: 0
+            quantity: 6
+            id: id
+            type: type
+          sku: sku
+          startDate: 2000-01-23T04:56:07.000+00:00
+          status: status
+      properties:
+        body:
+          description: |-
+            ListResponse is the actual collection of subscription details that gets
+            rendered
+          items:
+            $ref: '#/components/schemas/DetailResponse'
+          type: array
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/subscription
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+    inline_response_200_8:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - name: name
+          arch: arch
+          label: label
+          type: type
+          enabled: true
+        - name: name
+          arch: arch
+          label: label
+          type: type
+          enabled: true
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/ContentSet'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+    inline_response_200_9:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - systemName: systemName
+          totalEntitlementQuantity: 6
+          complianceStatus: complianceStatus
+          details: details
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          entitlementQuantity: 0
+          type: type
+          uuid: uuid
+        - systemName: systemName
+          totalEntitlementQuantity: 6
+          complianceStatus: complianceStatus
+          details: details
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          entitlementQuantity: 0
+          type: type
+          uuid: uuid
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/SystemList'
+          type: array
+          x-go-name: Body
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+    inline_response_200_10:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - entitlementCount: 0
+          errataCounts:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+          hostname: hostname
+          entitlementStatus: entitlementStatus
+          name: name
+          href: href
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          type: type
+          uuid: uuid
+          username: username
+        - entitlementCount: 0
+          errataCounts:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+          hostname: hostname
+          entitlementStatus: entitlementStatus
+          name: name
+          href: href
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          type: type
+          uuid: uuid
+          username: username
+      properties:
+        body:
+          description: systemList is a System Slice
+          items:
+            $ref: '#/components/schemas/System'
+          type: array
+          x-go-package: gitlab.corp.redhat.com/it-pnt/rhsm/rhsm-api/pkg/rest/v1/system
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
+    inline_response_200_11:
+      example:
+        body:
+          entitlementCount: 0
+          errataCounts:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+          hostname: hostname
+          entitlementStatus: entitlementStatus
+          name: name
+          href: href
+          lastCheckin: 2000-01-23T04:56:07.000+00:00
+          type: type
+          uuid: uuid
+          username: username
+      properties:
+        body:
+          $ref: '#/components/schemas/System'
+  securitySchemes:
+    Bearer:
+      description: Bearer token for authorized user
+      in: header
+      name: Authorization
+      type: apiKey

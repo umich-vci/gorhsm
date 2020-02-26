@@ -1,0 +1,93 @@
+# \PackagesApi
+
+All URIs are relative to *https://api.access.redhat.com/management/v1*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**ListPackagesByContentSetArch**](PackagesApi.md#ListPackagesByContentSetArch) | **Get** /packages/cset/{ContentSet}/arch/{Arch} | Get all the packages for the specified content set and arch.
+[**ShowPackage**](PackagesApi.md#ShowPackage) | **Get** /packages/{Checksum} | Get the details of a package
+
+
+
+## ListPackagesByContentSetArch
+
+> InlineResponse2005 ListPackagesByContentSetArch(ctx, contentSet, arch, optional)
+
+Get all the packages for the specified content set and arch.
+
+The default and max results in a response are 50 and 100 respectively.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**contentSet** | **string**|  | 
+**arch** | **string**|  | 
+ **optional** | ***ListPackagesByContentSetArchOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListPackagesByContentSetArchOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **limit** | **optional.Int64**| max number of results you want | 
+ **offset** | **optional.Int64**| index from which you want next items | 
+ **filter** | [**optional.Interface of []string**](string.md)|  | 
+
+### Return type
+
+[**InlineResponse2005**](inline_response_200_5.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ShowPackage
+
+> InlineResponse2006 ShowPackage(ctx, checksum)
+
+Get the details of a package
+
+This will get the details of a package specified by its checksum.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**checksum** | **string**|  | 
+
+### Return type
+
+[**InlineResponse2006**](inline_response_200_6.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
