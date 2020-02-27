@@ -77,7 +77,7 @@
           {
             "type": "string",
             "description": "must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods",
-            "name": "Name",
+            "name": "name",
             "in": "query",
             "required": true
           }

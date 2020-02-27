@@ -212,7 +212,7 @@ func (a *AllocationApiService) CreateSatellite(ctx _context.Context, name string
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	localVarQueryParams.Add("Name", parameterToString(name, ""))
+	localVarQueryParams.Add("name", parameterToString(name, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
