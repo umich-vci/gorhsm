@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComplianceStatus** | **string** |  | [optional] 
 **Details** | **string** |  | [optional] 
-**EntitlementQuantity** | **int64** |  | [optional] 
-**LastCheckin** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**EntitlementQuantity** | **int32** |  | [optional] 
+**LastCheckin** | **string** | Date represents the date format used for API returns | [optional] 
 **SystemName** | **string** |  | [optional] 
-**TotalEntitlementQuantity** | **int64** |  | [optional] 
+**TotalEntitlementQuantity** | **int32** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **Uuid** | **string** |  | [optional] 
 

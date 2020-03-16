@@ -36,8 +36,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
  **filter** | [**optional.Interface of []string**](string.md)|  | 
 
 ### Return type

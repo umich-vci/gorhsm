@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContractNumber** | **string** |  | [optional] 
-**EndDate** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
-**EntitlementsAvailable** | **int64** |  | [optional] 
+**EndDate** | **string** | Date represents the date format used for API returns | [optional] 
+**EntitlementsAvailable** | **int32** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **ServiceLevel** | **string** |  | [optional] 
 **Sku** | **string** |  | [optional] 
-**StartDate** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**StartDate** | **string** | Date represents the date format used for API returns | [optional] 
 **SubscriptionName** | **string** |  | [optional] 
 **SubscriptionNumber** | **string** |  | [optional] 
 

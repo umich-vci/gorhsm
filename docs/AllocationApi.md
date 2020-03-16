@@ -45,7 +45,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **quantity** | **optional.Int64**| quantity you want to attach | 
+ **quantity** | **optional.Int32**| quantity you want to attach | 
 
 ### Return type
 
@@ -228,8 +228,8 @@ Optional parameters are passed through a pointer to a ListAllocationPoolsOpts st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
  **future** | **optional.Bool**| include future dated pools for satellite 6.3 or higher | 
 
 ### Return type
@@ -273,8 +273,8 @@ Optional parameters are passed through a pointer to a ListAllocationsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 
@@ -436,7 +436,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **quantity** | **optional.Int64**| maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool minItem: 1 | 
+ **quantity** | **optional.Int32**| maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool minItem: 1 | 
 
 ### Return type
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Checksum** | **string** |  | [optional] 
 **ContentSets** | **[]string** |  | [optional] 
 **DetailsUrl** | **string** |  | [optional] 
-**Epoch** | **int64** |  | [optional] 
+**Epoch** | **int32** |  | [optional] 
 **Filename** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Release** | **string** |  | [optional] 

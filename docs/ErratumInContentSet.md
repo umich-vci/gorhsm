@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdvisoryId** | **string** |  | [optional] 
 **Href** | **string** |  | [optional] 
-**PublishDate** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**PublishDate** | **string** | Date represents the date format used for API returns | [optional] 
 **Severity** | **string** |  | [optional] 
 **Synopsis** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 

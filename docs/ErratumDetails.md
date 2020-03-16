@@ -1,4 +1,4 @@
-# ErrataResponse
+# ErratumDetails
 
 ## Properties
 
@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Cves** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
-**Issued** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
-**LastUpdated** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**Issued** | **string** | Date represents the date format used for API returns | [optional] 
+**LastUpdated** | **string** | Date represents the date format used for API returns | [optional] 
 **References** | [**[]Reference**](Reference.md) |  | [optional] 
 **Severity** | **string** |  | [optional] 
 **Solution** | **string** |  | [optional] 

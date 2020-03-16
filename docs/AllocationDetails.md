@@ -1,4 +1,4 @@
-# ShowResponse
+# AllocationDetails
 
 ## Properties
 
@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContentAccessMode** | **string** |  | [optional] 
 **CreatedBy** | **string** |  | [optional] 
-**CreatedDate** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**CreatedDate** | **string** | Date represents the date format used for API returns | [optional] 
 **EntitlementsAttached** | [**EntitlementsAttachedResponse**](EntitlementsAttachedResponse.md) |  | [optional] 
-**EntitlementsAttachedQuantity** | **int64** |  | [optional] 
-**LastModified** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**EntitlementsAttachedQuantity** | **int32** |  | [optional] 
+**LastModified** | **string** | Date represents the date format used for API returns | [optional] 
 **Name** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **Uuid** | **string** |  | [optional] 

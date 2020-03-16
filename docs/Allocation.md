@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EntitlementQuantity** | **int64** |  | [optional] 
+**EntitlementQuantity** | **int32** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 

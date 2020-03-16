@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContractNumber** | **string** |  | [optional] 
-**EntitlementQuantity** | **int64** |  | [optional] 
+**EntitlementQuantity** | **int32** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **Sku** | **string** |  | [optional] 
 

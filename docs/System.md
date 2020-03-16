@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EntitlementCount** | **int64** |  | [optional] 
+**EntitlementCount** | **int32** |  | [optional] 
 **EntitlementStatus** | **string** |  | [optional] 
 **ErrataCounts** | [**ErrataCount**](ErrataCount.md) |  | [optional] 
 **Hostname** | **string** |  | [optional] 
 **Href** | **string** |  | [optional] 
-**LastCheckin** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**LastCheckin** | **string** | Date represents the date format used for API returns | [optional] 
 **Name** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **Username** | **string** |  | [optional] 

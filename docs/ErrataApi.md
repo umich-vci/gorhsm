@@ -35,8 +35,8 @@ Optional parameters are passed through a pointer to a ListErrataOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 
@@ -83,8 +83,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 
@@ -129,8 +129,8 @@ Optional parameters are passed through a pointer to a ListErratumPackagesOpts st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 
@@ -175,8 +175,8 @@ Optional parameters are passed through a pointer to a ListErratumSystemsOpts str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 

@@ -42,7 +42,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **quantity** | **optional.Int64**| quantity you want to attach | 
+ **quantity** | **optional.Int32**| quantity you want to attach | 
 
 ### Return type
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemErrata
 
-> PoolsListMock ListSystemErrata(ctx, systemUUID, optional)
+> InlineResponse20012 ListSystemErrata(ctx, systemUUID, optional)
 
 List all applicable errata for a system
 
@@ -87,12 +87,12 @@ Optional parameters are passed through a pointer to a ListSystemErrataOpts struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 
-[**PoolsListMock**](poolsListMock.md)
+[**InlineResponse20012**](inline_response_200_12.md)
 
 ### Authorization
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemPackages
 
-> PoolsListMock ListSystemPackages(ctx, systemUUID, optional)
+> InlineResponse20013 ListSystemPackages(ctx, systemUUID, optional)
 
 List all packages for a system
 
@@ -133,15 +133,15 @@ Optional parameters are passed through a pointer to a ListSystemPackagesOpts str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
  **errataDetail** | **optional.Bool**| Show errata details for packages | 
  **upgradeable** | **optional.Bool**| Show upgradable packages only. Also accepts &#39;upgradable&#39; as valid query. | 
  **filter** | **optional.String**| Filter packages | 
 
 ### Return type
 
-[**PoolsListMock**](poolsListMock.md)
+[**InlineResponse20013**](inline_response_200_13.md)
 
 ### Authorization
 
@@ -182,8 +182,8 @@ Optional parameters are passed through a pointer to a ListSystemPoolsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
 
 ### Return type
 
@@ -226,8 +226,8 @@ Optional parameters are passed through a pointer to a ListSystemsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int64**| max number of results you want | 
- **offset** | **optional.Int64**| index from which you want next items | 
+ **limit** | **optional.Int32**| max number of results you want | 
+ **offset** | **optional.Int32**| index from which you want next items | 
  **filter** | **optional.String**| Filter Systems by System Name | 
  **username** | **optional.String**| Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed | 
 

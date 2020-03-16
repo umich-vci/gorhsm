@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Arch** | **string** |  | [optional] 
-**BuildDate** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**BuildDate** | **string** | Date represents the date format used for API returns | [optional] 
 **BuildHost** | **string** |  | [optional] 
 **Checksum** | **string** |  | [optional] 
 **ContentSets** | **[]string** |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **License** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Release** | **string** |  | [optional] 
-**Size** | **int64** |  | [optional] 
+**Size** | **int32** |  | [optional] 
 **Summary** | **string** |  | [optional] 
 **Version** | **string** |  | [optional] 
 

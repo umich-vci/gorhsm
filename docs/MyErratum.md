@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdvisoryId** | **string** |  | [optional] 
-**AffectedSystemCount** | **int64** |  | [optional] 
+**AffectedSystemCount** | **int32** |  | [optional] 
 **Details** | **string** |  | [optional] 
-**PublishDate** | [**time.Time**](time.Time.md) | Date represents the date format used for API returns | [optional] 
+**PublishDate** | **string** | Date represents the date format used for API returns | [optional] 
 **Synopsis** | **string** |  | [optional] 
 **Systems** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
