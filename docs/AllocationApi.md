@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 
 Trigger allocation manifest export
 
-Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.  System, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5.7 or lower are unsupported.
+Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.  System, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5 versions are unsupported.
 
 ### Required Parameters
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 Check status of allocation manifest export
 
-Returns export download link in response. When export job has not completed a 202 Accepted is returned, in which case the endpoint should be checked later.
+Returns export download link in response.
 
 ### Required Parameters
 

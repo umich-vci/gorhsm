@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## AttachEntitlement
 
-> InlineResponse20011 AttachEntitlement(ctx, systemUUID, pool, optional)
+> InlineResponse20013 AttachEntitlement(ctx, systemUUID, pool, optional)
 
 Attach entitlement to system
 
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](inline_response_200_11.md)
+[**InlineResponse20013**](inline_response_200_13.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemErrata
 
-> InlineResponse20012 ListSystemErrata(ctx, systemUUID, optional)
+> InlineResponse20014 ListSystemErrata(ctx, systemUUID, optional)
 
 List all applicable errata for a system
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](inline_response_200_12.md)
+[**InlineResponse20014**](inline_response_200_14.md)
 
 ### Authorization
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemPackages
 
-> InlineResponse20013 ListSystemPackages(ctx, systemUUID, optional)
+> InlineResponse20015 ListSystemPackages(ctx, systemUUID, optional)
 
 List all packages for a system
 
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](inline_response_200_13.md)
+[**InlineResponse20015**](inline_response_200_15.md)
 
 ### Authorization
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ## ListSystems
 
-> InlineResponse20010 ListSystems(ctx, optional)
+> InlineResponse20012 ListSystems(ctx, optional)
 
 List all systems for a user
 
@@ -233,7 +233,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](inline_response_200_10.md)
+[**InlineResponse20012**](inline_response_200_12.md)
 
 ### Authorization
 
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## ShowSystem
 
-> InlineResponse20011 ShowSystem(ctx, systemUUID, optional)
+> InlineResponse20013 ShowSystem(ctx, systemUUID, optional)
 
 Get a system specified by UUID.
 
@@ -347,7 +347,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](inline_response_200_11.md)
+[**InlineResponse20013**](inline_response_200_13.md)
 
 ### Authorization
 

@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 
 ## ShowErratum
 
-> InlineResponse2004 ShowErratum(ctx, advisoryID)
+> InlineResponse2005 ShowErratum(ctx, advisoryID)
 
 Get the details of an advisory
 
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](inline_response_200_4.md)
+[**InlineResponse2005**](inline_response_200_5.md)
 
 ### Authorization
 

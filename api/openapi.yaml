@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.113.0
+  version: 1.143.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
@@ -373,7 +373,7 @@ paths:
       description: |-
         Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.
 
-        System, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5.7 or lower are unsupported.
+        System, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5 versions are unsupported.
       operationId: exportAllocation
       parameters:
       - in: path
@@ -483,9 +483,7 @@ paths:
       - allocation
   /allocations/{AllocationUUID}/exportJob/{ExportJobID}:
     get:
-      description: Returns export download link in response. When export job has not
-        completed a 202 Accepted is returned, in which case the endpoint should be
-        checked later.
+      description: Returns export download link in response.
       operationId: exportJobAllocation
       parameters:
       - in: path
@@ -506,8 +504,12 @@ paths:
                 $ref: '#/components/schemas/inline_response_200_3'
           description: ExportJobAllocation200 is the success response
         "202":
-          content: {}
-          description: Job is still running and should be checked later
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_202'
+          description: AcceptedExportJob202 is a response for accepted and in progress
+            job
         "400":
           content:
             application/json:
@@ -532,6 +534,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_400'
           description: NotFound error
+        "406":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotAcceptable error
         "500":
           content:
             application/json:
@@ -661,6 +669,304 @@ paths:
       summary: Remove entitlement from the allocation
       tags:
       - allocation
+  /cloud_access_providers/enabled:
+    get:
+      description: |
+        Returns the full list of all enabled Red Hat products and Cloud Access provider accounts/subscriptions associated with the user’s Red Hat account.
+        - For Products that are expired `nextRenewal` field would be omitted and `totalQuantity` would be `0`.
+        - Product objects can have `totalQuantity` field as `-1` indicating `Unlimited` quantity available.
+        - The `nextRenewalDate` field of a Product has the format `YYYY-MM-DD`.
+        - The `goldImageStatus` field is available for an account when the Provider is a certified Gold Image Provider and the account has been requested for gold image access. It's value could be `"Requested"`, `"Granted"` or `"Failed"`.
+        - The `imageGroups` field is available for a product when the Provider is a certified Gold Image Provider, and the product has a gold image group available for it.
+      operationId: listEnabledCloudAccessProviders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+          description: A JSON response object listing cloud access providers and their
+            accounts and products.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List all enabled cloud access providers for a user
+      tags:
+      - cloudaccess
+  /cloud_access_providers/{ProviderShortName}/account:
+    put:
+      description: |
+        Updates the account ID and/or nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
+      operationId: UpdateProviderAccount
+      parameters:
+      - in: path
+        name: ProviderShortName
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+                newID:
+                  type: string
+                newNickname:
+                  type: string
+              type: object
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Update provider account
+      tags:
+      - cloudaccess
+      x-codegen-request-body-name: account
+  /cloud_access_providers/{ProviderShortName}/accounts:
+    delete:
+      description: |
+        Removes a currently-enabled provider account, including removing access to Gold Images, where applicable. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
+      operationId: RemoveProviderAccount
+      parameters:
+      - in: path
+        name: ProviderShortName
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+              type: object
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Remove a provider account
+      tags:
+      - cloudaccess
+      x-codegen-request-body-name: account
+    post:
+      description: |
+        Add up to `100` new provider accounts, with optional nicknames, to a currently-enabled provider for Red Hat Cloud Access. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
+      operationId: AddProviderAccounts
+      parameters:
+      - in: path
+        name: ProviderShortName
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AddProviderAccount'
+              type: array
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Add accounts for a provider
+      tags:
+      - cloudaccess
+      x-codegen-request-body-name: account
+  /cloud_access_providers/{ProviderShortName}/goldimage:
+    post:
+      description: |
+        Requests access to Red Hat Gold Images, where available, for currently-enabled products and provider accounts. Customers can request Red Hat Gold Images for account IDs and product image groups listed in the `/v1/cloud_access_providers/enabled` endpoint using the provider short name listed in the same response. After the request has been accepted for processing, gold image status for accounts can be checked in the `/v1/cloud_access_providers/enabled` endpoint response.
+      operationId: EnableGoldImages
+      parameters:
+      - in: path
+        name: ProviderShortName
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          application/json:
+            schema:
+              properties:
+                accounts:
+                  items:
+                    type: string
+                  type: array
+                images:
+                  items:
+                    type: string
+                  type: array
+              required:
+              - accounts
+              - images
+              type: object
+        required: false
+      responses:
+        "202":
+          content: {}
+          description: 'Accepted: The request has been accepted for processing, but
+            the processing has not been completed.'
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Enable Gold image access
+      tags:
+      - cloudaccess
+      x-codegen-request-body-name: goldImages
   /errata:
     get:
       description: The default and max results in a response are 1000.
@@ -798,7 +1104,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/inline_response_200_5'
           description: ShowErratum200 is the success response
         "400":
           content:
@@ -955,6 +1261,69 @@ paths:
       summary: List all systems for an advisory
       tags:
       - errata
+  /images/cset/{ContentSet}:
+    get:
+      description: |
+        List all the available images in a given content set. The content set parameter is expected to be
+         properly formatted (for example rhel-8-for-x86_64-baseos-isos). And the user requesting the endpoint
+        is expected to have Download permission (UGC). If the user is entitled to an image, a "downloadHref" attribute is added in the image response object which links to image download API. The list is paginated by default to 25 results in a response and goes to maximum 100 results in a response. Use pagination by setting offset and limit url parameters (valid integer values).
+      operationId: listImagesByContentSet
+      parameters:
+      - in: path
+        name: ContentSet
+        required: true
+        schema:
+          type: string
+      - description: maximum number of list items in a page
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: index from which you want next items
+        in: query
+        name: offset
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_6'
+          description: A JSON response object containing image listing.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List available images in a content set
+      tags:
+      - images
   /images/{checksum}/download:
     get:
       description: |
@@ -1053,7 +1422,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_5'
+                $ref: '#/components/schemas/inline_response_200_7'
           description: ListPackagesByContentSetArch200 is the success response
         "400":
           content:
@@ -1103,7 +1472,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_6'
+                $ref: '#/components/schemas/inline_response_200_8'
           description: ShowPackage200 is the success response
         "400":
           content:
@@ -1138,6 +1507,63 @@ paths:
       summary: Get the details of a package
       tags:
       - packages
+  /packages/{checksum}/download:
+    get:
+      description: |
+        Find a package by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time a package is downloaded and to not store the link for more than several minutes. If the user has "Download Software and Updates" permissions and a valid subscription for the package, they will receive an HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body.
+      operationId: downloadPackage
+      parameters:
+      - in: path
+        name: checksum
+        required: true
+        schema:
+          pattern: ^[a-f0-9]{64}$
+          type: string
+      responses:
+        "307":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_307'
+          description: redirect to download package on the Red Hat CDN
+          headers:
+            Location:
+              description: URL to obtain the package
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Download a package by its SHA256 checksum
+      tags:
+      - packages
   /subscriptions:
     get:
       description: The default and max results in a response are 50.
@@ -1158,7 +1584,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_7'
+                $ref: '#/components/schemas/inline_response_200_9'
           description: ListSubscriptions200 is the success response
         "400":
           content:
@@ -1218,7 +1644,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_8'
+                $ref: '#/components/schemas/inline_response_200_10'
           description: ListSubContentSets200 is the success response
         "400":
           content:
@@ -1278,7 +1704,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/inline_response_200_11'
           description: ListSubSystems200 is the success response
         "400":
           content:
@@ -1344,7 +1770,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
+                $ref: '#/components/schemas/inline_response_200_12'
           description: ListSystems200 is the success response
         "400":
           content:
@@ -1461,7 +1887,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_200_13'
           description: ShowSystem200 is the success response
         "400":
           content:
@@ -1524,7 +1950,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_200_13'
           description: AttachedEntitlement200 is the success response
         "400":
           content:
@@ -1584,7 +2010,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/inline_response_200_14'
           description: list of advisories
         "400":
           content:
@@ -1666,7 +2092,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_15'
           description: list of packages
         "400":
           content:
@@ -1815,7 +2241,30 @@ paths:
       tags:
       - system
 components:
+  requestBodies:
+    inline_object_1:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+      required: false
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: false
+    inline_object_2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
+      required: false
   responses:
+    Accepted:
+      content: {}
+      description: 'Accepted: The request has been accepted for processing, but the
+        processing has not been completed.'
     BadRequest:
       content:
         application/json:
@@ -1852,6 +2301,18 @@ components:
                 $ref: '#/components/schemas/ErrorDetails'
             type: object
       description: InternalServerError error
+    NoContent:
+      content: {}
+      description: No Content
+    NotAcceptable:
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                $ref: '#/components/schemas/ErrorDetails'
+            type: object
+      description: NotAcceptable error
     NotFound:
       content:
         application/json:
@@ -1885,6 +2346,17 @@ components:
         offset:
           type: integer
       type: object
+    AddProviderAccount:
+      description: An account to be added
+      example:
+        nickname: nickname
+        id: id
+      properties:
+        id:
+          type: string
+        nickname:
+          type: string
+      type: object
     Allocation:
       example:
         name: name
@@ -1912,7 +2384,7 @@ components:
     AllocationDetails:
       description: details of a subscription allocation
       example:
-        createdDate: createdDate
+        createdDate: 2006-01-02T15:04:05.000Z
         entitlementsAttachedQuantity: 6
         createdBy: createdBy
         name: name
@@ -1929,7 +2401,7 @@ components:
             entitlementQuantity: 0
             sku: sku
         contentAccessMode: contentAccessMode
-        lastModified: lastModified
+        lastModified: 2006-01-02T15:04:05.000Z
         type: type
         uuid: uuid
         version: version
@@ -1940,6 +2412,7 @@ components:
           type: string
         createdDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         entitlementsAttached:
           $ref: '#/components/schemas/EntitlementsAttachedResponse'
@@ -1947,6 +2420,7 @@ components:
           type: integer
         lastModified:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         name:
           type: string
@@ -1979,12 +2453,13 @@ components:
       type: object
     Date:
       description: Date represents the date format used for API returns
+      example: 2006-01-02T15:04:05.000Z
       type: string
     DetailResponse:
       example:
         quantity: quantity
         subscriptionNumber: subscriptionNumber
-        endDate: endDate
+        endDate: 2006-01-02T15:04:05.000Z
         subscriptionName: subscriptionName
         contractNumber: contractNumber
         pools:
@@ -1997,13 +2472,14 @@ components:
           id: id
           type: type
         sku: sku
-        startDate: startDate
+        startDate: 2006-01-02T15:04:05.000Z
         status: status
       properties:
         contractNumber:
           type: string
         endDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         pools:
           items:
@@ -2015,6 +2491,7 @@ components:
           type: string
         startDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         status:
           type: string
@@ -2030,9 +2507,108 @@ components:
           description: time at which the download link expires (in UTC)
           example: 2006-01-02T15:04:05.000Z
           type: string
+        filename:
+          description: filename of the file on the download link
+          example: filename-1.2.3-1.x86_64.rpm
+          type: string
         href:
           description: URL to obtain the image
           example: https://access.cdn.redhat.com/content/origin/files/sha256/64/643e706cf7db9e93e706637af92d80eb58377dd0c64ac1e9ce6a72700aa04c2a/rhel-8.1-x86_64-boot.iso?_auth_=1582920605_7e8153e1bdc2f46636653e2efb17bc65
+          type: string
+      type: object
+    EnabledCloudAccessProvider:
+      description: Enabled Cloud Access Provider details including products and accounts.
+      example:
+        name: name
+        accounts:
+        - goldImageStatus: Granted
+          nickname: nickname
+          id: id
+          dateAdded: 2006-01-02T15:04:05.000Z
+        - goldImageStatus: Granted
+          nickname: nickname
+          id: id
+          dateAdded: 2006-01-02T15:04:05.000Z
+        shortName: shortName
+        products:
+        - totalQuantity: 6
+          nextRenewal: 2006-01-02
+          name: name
+          enabledQuantity: 0
+          sku: sku
+          imageGroups:
+          - imageGroups
+          - imageGroups
+        - totalQuantity: 6
+          nextRenewal: 2006-01-02
+          name: name
+          enabledQuantity: 0
+          sku: sku
+          imageGroups:
+          - imageGroups
+          - imageGroups
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/EnabledProviderAccount'
+          type: array
+        name:
+          type: string
+        products:
+          items:
+            $ref: '#/components/schemas/EnabledProduct'
+          type: array
+        shortName:
+          type: string
+      type: object
+    EnabledProduct:
+      description: Enabled Product represents a cloud access provider product
+      example:
+        totalQuantity: 6
+        nextRenewal: 2006-01-02
+        name: name
+        enabledQuantity: 0
+        sku: sku
+        imageGroups:
+        - imageGroups
+        - imageGroups
+      properties:
+        enabledQuantity:
+          type: integer
+        imageGroups:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        nextRenewal:
+          description: ShortDate represents the short date format used for API returns
+            where time precision is not needed
+          example: 2006-01-02
+          type: string
+        sku:
+          type: string
+        totalQuantity:
+          type: integer
+      type: object
+    EnabledProviderAccount:
+      description: Enabled Provider Account represents a cloud access provider account
+      example:
+        goldImageStatus: Granted
+        nickname: nickname
+        id: id
+        dateAdded: 2006-01-02T15:04:05.000Z
+      properties:
+        dateAdded:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        goldImageStatus:
+          example: Granted
+          type: string
+        id:
+          type: string
+        nickname:
           type: string
       type: object
     EntitlementsAttachedResponse:
@@ -2113,7 +2689,7 @@ components:
         synopsis: synopsis
         type: type
         cves: cves
-        lastUpdated: lastUpdated
+        lastUpdated: 2006-01-02T15:04:05.000Z
         bugzillas:
         - href: href
           id: id
@@ -2126,7 +2702,7 @@ components:
         solution: solution
         copyrightYear: copyrightYear
         id: id
-        issued: issued
+        issued: 2006-01-02T15:04:05.000Z
       properties:
         affectedProducts:
           items:
@@ -2146,9 +2722,11 @@ components:
           type: string
         issued:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         lastUpdated:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         references:
           items:
@@ -2173,7 +2751,7 @@ components:
         severity: severity
         href: href
         id: id
-        published: published
+        published: 2006-01-02T15:04:05.000Z
         synopsis: synopsis
         type: type
       properties:
@@ -2183,6 +2761,7 @@ components:
           type: string
         published:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         severity:
           type: string
@@ -2197,7 +2776,7 @@ components:
       example:
         severity: severity
         advisoryId: advisoryId
-        publishDate: publishDate
+        publishDate: 2006-01-02T15:04:05.000Z
         href: href
         synopsis: synopsis
         type: type
@@ -2208,6 +2787,7 @@ components:
           type: string
         publishDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         severity:
           type: string
@@ -2224,6 +2804,31 @@ components:
         message:
           type: string
       type: object
+    ImageInContentSet:
+      description: Image Details in a content set image listing.
+      example:
+        datePublished: 2006-01-02T15:04:05.000Z
+        filename: filename
+        imageName: imageName
+        downloadHref: downloadHref
+        checksum: checksum
+        arch: arch
+      properties:
+        arch:
+          type: string
+        checksum:
+          type: string
+        datePublished:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        downloadHref:
+          type: string
+        filename:
+          type: string
+        imageName:
+          type: string
+      type: object
     ListResponse:
       description: |-
         ListResponse is the actual collection of subscription details that gets
@@ -2237,7 +2842,7 @@ components:
       example:
         advisoryId: advisoryId
         systems: systems
-        publishDate: publishDate
+        publishDate: 2006-01-02T15:04:05.000Z
         affectedSystemCount: 0
         details: details
         synopsis: synopsis
@@ -2251,6 +2856,7 @@ components:
           type: string
         publishDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         synopsis:
           type: string
@@ -2358,19 +2964,20 @@ components:
       description: PoolDetail is an entry in the system/allocation pools listing
       example:
         subscriptionNumber: subscriptionNumber
-        endDate: endDate
+        endDate: 2006-01-02T15:04:05.000Z
         subscriptionName: subscriptionName
         contractNumber: contractNumber
         entitlementsAvailable: 0
         id: id
         serviceLevel: serviceLevel
         sku: sku
-        startDate: startDate
+        startDate: 2006-01-02T15:04:05.000Z
       properties:
         contractNumber:
           type: string
         endDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         entitlementsAvailable:
           type: integer
@@ -2382,6 +2989,7 @@ components:
           type: string
         startDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         subscriptionName:
           type: string
@@ -2405,6 +3013,11 @@ components:
         type:
           type: string
       type: object
+    ShortDate:
+      description: ShortDate represents the short date format used for API returns
+        where time precision is not needed
+      example: 2006-01-02
+      type: string
     System:
       example:
         entitlementCount: 0
@@ -2416,7 +3029,7 @@ components:
         entitlementStatus: entitlementStatus
         name: name
         href: href
-        lastCheckin: lastCheckin
+        lastCheckin: 2006-01-02T15:04:05.000Z
         type: type
         uuid: uuid
         username: username
@@ -2433,6 +3046,7 @@ components:
           type: string
         lastCheckin:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         name:
           type: string
@@ -2451,7 +3065,7 @@ components:
         totalEntitlementQuantity: 6
         complianceStatus: complianceStatus
         details: details
-        lastCheckin: lastCheckin
+        lastCheckin: 2006-01-02T15:04:05.000Z
         entitlementQuantity: 0
         type: type
         uuid: uuid
@@ -2464,6 +3078,7 @@ components:
           type: integer
         lastCheckin:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         systemName:
           type: string
@@ -2483,13 +3098,13 @@ components:
         body:
         - severity: severity
           advisoryId: advisoryId
-          publishDate: publishDate
+          publishDate: 2006-01-02T15:04:05.000Z
           href: href
           synopsis: synopsis
           type: type
         - severity: severity
           advisoryId: advisoryId
-          publishDate: publishDate
+          publishDate: 2006-01-02T15:04:05.000Z
           href: href
           synopsis: synopsis
           type: type
@@ -2530,14 +3145,14 @@ components:
         body:
         - advisoryId: advisoryId
           systems: systems
-          publishDate: publishDate
+          publishDate: 2006-01-02T15:04:05.000Z
           affectedSystemCount: 0
           details: details
           synopsis: synopsis
           type: type
         - advisoryId: advisoryId
           systems: systems
-          publishDate: publishDate
+          publishDate: 2006-01-02T15:04:05.000Z
           affectedSystemCount: 0
           details: details
           synopsis: synopsis
@@ -2550,16 +3165,22 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    pkgDetails:
+    ongoingExportJobResponse:
+      properties:
+        message:
+          type: string
+      type: object
+    pkgContentSetArch:
       example:
         summary: summary
+        downloadHref: downloadHref
         release: release
         contentSets:
         - contentSets
         - contentSets
         description: description
         epoch: epoch
-        buildDate: buildDate
+        buildDate: 2006-01-02T15:04:05.000Z
         version: version
         buildHost: buildHost
         license: license
@@ -2574,6 +3195,64 @@ components:
           type: string
         buildDate:
           description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        buildHost:
+          type: string
+        checksum:
+          type: string
+        contentSets:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        downloadHref:
+          type: string
+        epoch:
+          type: string
+        group:
+          type: string
+        href:
+          type: string
+        license:
+          type: string
+        name:
+          type: string
+        release:
+          type: string
+        size:
+          type: integer
+        summary:
+          type: string
+        version:
+          type: string
+      type: object
+    pkgDetails:
+      example:
+        summary: summary
+        release: release
+        contentSets:
+        - contentSets
+        - contentSets
+        description: description
+        epoch: epoch
+        buildDate: 2006-01-02T15:04:05.000Z
+        version: version
+        buildHost: buildHost
+        license: license
+        size: 0
+        checksum: checksum
+        name: name
+        arch: arch
+        href: href
+        group: group
+      properties:
+        arch:
+          type: string
+        buildDate:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         buildHost:
           type: string
@@ -2657,23 +3336,23 @@ components:
           limit: 1
         body:
         - subscriptionNumber: subscriptionNumber
-          endDate: endDate
+          endDate: 2006-01-02T15:04:05.000Z
           subscriptionName: subscriptionName
           contractNumber: contractNumber
           entitlementsAvailable: 0
           id: id
           serviceLevel: serviceLevel
           sku: sku
-          startDate: startDate
+          startDate: 2006-01-02T15:04:05.000Z
         - subscriptionNumber: subscriptionNumber
-          endDate: endDate
+          endDate: 2006-01-02T15:04:05.000Z
           subscriptionName: subscriptionName
           contractNumber: contractNumber
           entitlementsAvailable: 0
           id: id
           serviceLevel: serviceLevel
           sku: sku
-          startDate: startDate
+          startDate: 2006-01-02T15:04:05.000Z
       properties:
         body:
           items:
@@ -2703,7 +3382,7 @@ components:
           entitlementStatus: entitlementStatus
           name: name
           href: href
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           type: type
           uuid: uuid
           username: username
@@ -2716,7 +3395,7 @@ components:
           entitlementStatus: entitlementStatus
           name: name
           href: href
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           type: type
           uuid: uuid
           username: username
@@ -2761,7 +3440,7 @@ components:
     inline_response_200_1:
       example:
         body:
-          createdDate: createdDate
+          createdDate: 2006-01-02T15:04:05.000Z
           entitlementsAttachedQuantity: 6
           createdBy: createdBy
           name: name
@@ -2778,7 +3457,7 @@ components:
               entitlementQuantity: 0
               sku: sku
           contentAccessMode: contentAccessMode
-          lastModified: lastModified
+          lastModified: 2006-01-02T15:04:05.000Z
           type: type
           uuid: uuid
           version: version
@@ -2801,7 +3480,103 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/exportJobResponse'
+    inline_response_202:
+      properties:
+        body:
+          $ref: '#/components/schemas/ongoingExportJobResponse'
     inline_response_200_4:
+      example:
+        body:
+        - name: name
+          accounts:
+          - goldImageStatus: Granted
+            nickname: nickname
+            id: id
+            dateAdded: 2006-01-02T15:04:05.000Z
+          - goldImageStatus: Granted
+            nickname: nickname
+            id: id
+            dateAdded: 2006-01-02T15:04:05.000Z
+          shortName: shortName
+          products:
+          - totalQuantity: 6
+            nextRenewal: 2006-01-02
+            name: name
+            enabledQuantity: 0
+            sku: sku
+            imageGroups:
+            - imageGroups
+            - imageGroups
+          - totalQuantity: 6
+            nextRenewal: 2006-01-02
+            name: name
+            enabledQuantity: 0
+            sku: sku
+            imageGroups:
+            - imageGroups
+            - imageGroups
+        - name: name
+          accounts:
+          - goldImageStatus: Granted
+            nickname: nickname
+            id: id
+            dateAdded: 2006-01-02T15:04:05.000Z
+          - goldImageStatus: Granted
+            nickname: nickname
+            id: id
+            dateAdded: 2006-01-02T15:04:05.000Z
+          shortName: shortName
+          products:
+          - totalQuantity: 6
+            nextRenewal: 2006-01-02
+            name: name
+            enabledQuantity: 0
+            sku: sku
+            imageGroups:
+            - imageGroups
+            - imageGroups
+          - totalQuantity: 6
+            nextRenewal: 2006-01-02
+            name: name
+            enabledQuantity: 0
+            sku: sku
+            imageGroups:
+            - imageGroups
+            - imageGroups
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/EnabledCloudAccessProvider'
+          type: array
+    inline_object:
+      properties:
+        id:
+          type: string
+        newID:
+          type: string
+        newNickname:
+          type: string
+      type: object
+    inline_object_1:
+      properties:
+        id:
+          type: string
+      type: object
+    inline_object_2:
+      properties:
+        accounts:
+          items:
+            type: string
+          type: array
+        images:
+          items:
+            type: string
+          type: array
+      required:
+      - accounts
+      - images
+      type: object
+    inline_response_200_5:
       example:
         body:
           severity: severity
@@ -2823,7 +3598,7 @@ components:
           synopsis: synopsis
           type: type
           cves: cves
-          lastUpdated: lastUpdated
+          lastUpdated: 2006-01-02T15:04:05.000Z
           bugzillas:
           - href: href
             id: id
@@ -2836,15 +3611,41 @@ components:
           solution: solution
           copyrightYear: copyrightYear
           id: id
-          issued: issued
+          issued: 2006-01-02T15:04:05.000Z
       properties:
         body:
           $ref: '#/components/schemas/ErratumDetails'
+    inline_response_200_6:
+      example:
+        pagination:
+          offset: 5
+          count: 6
+          limit: 1
+        body:
+        - datePublished: 2006-01-02T15:04:05.000Z
+          filename: filename
+          imageName: imageName
+          downloadHref: downloadHref
+          checksum: checksum
+          arch: arch
+        - datePublished: 2006-01-02T15:04:05.000Z
+          filename: filename
+          imageName: imageName
+          downloadHref: downloadHref
+          checksum: checksum
+          arch: arch
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/ImageInContentSet'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/APIPageParam'
     inline_response_307:
       properties:
         body:
           $ref: '#/components/schemas/DownloadLink'
-    inline_response_200_5:
+    inline_response_200_7:
       example:
         pagination:
           offset: 5
@@ -2852,13 +3653,14 @@ components:
           limit: 1
         body:
         - summary: summary
+          downloadHref: downloadHref
           release: release
           contentSets:
           - contentSets
           - contentSets
           description: description
           epoch: epoch
-          buildDate: buildDate
+          buildDate: 2006-01-02T15:04:05.000Z
           version: version
           buildHost: buildHost
           license: license
@@ -2869,13 +3671,14 @@ components:
           href: href
           group: group
         - summary: summary
+          downloadHref: downloadHref
           release: release
           contentSets:
           - contentSets
           - contentSets
           description: description
           epoch: epoch
-          buildDate: buildDate
+          buildDate: 2006-01-02T15:04:05.000Z
           version: version
           buildHost: buildHost
           license: license
@@ -2888,11 +3691,11 @@ components:
       properties:
         body:
           items:
-            $ref: '#/components/schemas/pkgDetails'
+            $ref: '#/components/schemas/pkgContentSetArch'
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_6:
+    inline_response_200_8:
       example:
         body:
           summary: summary
@@ -2902,7 +3705,7 @@ components:
           - contentSets
           description: description
           epoch: epoch
-          buildDate: buildDate
+          buildDate: 2006-01-02T15:04:05.000Z
           version: version
           buildHost: buildHost
           license: license
@@ -2915,7 +3718,7 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/pkgDetails'
-    inline_response_200_7:
+    inline_response_200_9:
       example:
         pagination:
           offset: 5
@@ -2924,7 +3727,7 @@ components:
         body:
         - quantity: quantity
           subscriptionNumber: subscriptionNumber
-          endDate: endDate
+          endDate: 2006-01-02T15:04:05.000Z
           subscriptionName: subscriptionName
           contractNumber: contractNumber
           pools:
@@ -2937,11 +3740,11 @@ components:
             id: id
             type: type
           sku: sku
-          startDate: startDate
+          startDate: 2006-01-02T15:04:05.000Z
           status: status
         - quantity: quantity
           subscriptionNumber: subscriptionNumber
-          endDate: endDate
+          endDate: 2006-01-02T15:04:05.000Z
           subscriptionName: subscriptionName
           contractNumber: contractNumber
           pools:
@@ -2954,7 +3757,7 @@ components:
             id: id
             type: type
           sku: sku
-          startDate: startDate
+          startDate: 2006-01-02T15:04:05.000Z
           status: status
       properties:
         body:
@@ -2966,7 +3769,7 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_8:
+    inline_response_200_10:
       example:
         pagination:
           offset: 5
@@ -2990,7 +3793,7 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_9:
+    inline_response_200_11:
       example:
         pagination:
           offset: 5
@@ -3001,7 +3804,7 @@ components:
           totalEntitlementQuantity: 6
           complianceStatus: complianceStatus
           details: details
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           entitlementQuantity: 0
           type: type
           uuid: uuid
@@ -3009,7 +3812,7 @@ components:
           totalEntitlementQuantity: 6
           complianceStatus: complianceStatus
           details: details
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           entitlementQuantity: 0
           type: type
           uuid: uuid
@@ -3020,7 +3823,7 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_10:
+    inline_response_200_12:
       example:
         pagination:
           offset: 5
@@ -3036,7 +3839,7 @@ components:
           entitlementStatus: entitlementStatus
           name: name
           href: href
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           type: type
           uuid: uuid
           username: username
@@ -3049,7 +3852,7 @@ components:
           entitlementStatus: entitlementStatus
           name: name
           href: href
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           type: type
           uuid: uuid
           username: username
@@ -3061,7 +3864,7 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_11:
+    inline_response_200_13:
       example:
         body:
           entitlementCount: 0
@@ -3073,14 +3876,14 @@ components:
           entitlementStatus: entitlementStatus
           name: name
           href: href
-          lastCheckin: lastCheckin
+          lastCheckin: 2006-01-02T15:04:05.000Z
           type: type
           uuid: uuid
           username: username
       properties:
         body:
           $ref: '#/components/schemas/System'
-    inline_response_200_12:
+    inline_response_200_14:
       example:
         pagination:
           offset: 5
@@ -3090,13 +3893,13 @@ components:
         - severity: severity
           href: href
           id: id
-          published: published
+          published: 2006-01-02T15:04:05.000Z
           synopsis: synopsis
           type: type
         - severity: severity
           href: href
           id: id
-          published: published
+          published: 2006-01-02T15:04:05.000Z
           synopsis: synopsis
           type: type
       properties:
@@ -3106,7 +3909,7 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_13:
+    inline_response_200_15:
       example:
         pagination:
           offset: 5

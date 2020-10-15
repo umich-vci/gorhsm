@@ -4,14 +4,49 @@ All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**DownloadPackage**](PackagesApi.md#DownloadPackage) | **Get** /packages/{checksum}/download | Download a package by its SHA256 checksum
 [**ListPackagesByContentSetArch**](PackagesApi.md#ListPackagesByContentSetArch) | **Get** /packages/cset/{ContentSet}/arch/{Arch} | Get all the packages for the specified content set and arch.
 [**ShowPackage**](PackagesApi.md#ShowPackage) | **Get** /packages/{Checksum} | Get the details of a package
 
 
 
+## DownloadPackage
+
+> DownloadPackage(ctx, checksum)
+
+Download a package by its SHA256 checksum
+
+Find a package by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time a package is downloaded and to not store the link for more than several minutes. If the user has \"Download Software and Updates\" permissions and a valid subscription for the package, they will receive an HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body. 
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**checksum** | **string**|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListPackagesByContentSetArch
 
-> InlineResponse2005 ListPackagesByContentSetArch(ctx, contentSet, arch, optional)
+> InlineResponse2007 ListPackagesByContentSetArch(ctx, contentSet, arch, optional)
 
 Get all the packages for the specified content set and arch.
 
@@ -42,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](inline_response_200_5.md)
+[**InlineResponse2007**](inline_response_200_7.md)
 
 ### Authorization
 
@@ -60,7 +95,7 @@ Name | Type | Description  | Notes
 
 ## ShowPackage
 
-> InlineResponse2006 ShowPackage(ctx, checksum)
+> InlineResponse2008 ShowPackage(ctx, checksum)
 
 Get the details of a package
 
@@ -76,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](inline_response_200_6.md)
+[**InlineResponse2008**](inline_response_200_8.md)
 
 ### Authorization
 

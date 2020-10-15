@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## ListSubContentSets
 
-> InlineResponse2008 ListSubContentSets(ctx, subscriptionNumber, optional)
+> InlineResponse20010 ListSubContentSets(ctx, subscriptionNumber, optional)
 
 List all content sets for a subscription
 
@@ -40,7 +40,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](inline_response_200_8.md)
+[**InlineResponse20010**](inline_response_200_10.md)
 
 ### Authorization
 
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ## ListSubSystems
 
-> InlineResponse2009 ListSubSystems(ctx, subscriptionNumber, optional)
+> InlineResponse20011 ListSubSystems(ctx, subscriptionNumber, optional)
 
 List all systems consuming a subscription
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](inline_response_200_9.md)
+[**InlineResponse20011**](inline_response_200_11.md)
 
 ### Authorization
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 ## ListSubscriptions
 
-> InlineResponse2007 ListSubscriptions(ctx, optional)
+> InlineResponse2009 ListSubscriptions(ctx, optional)
 
 List all subscriptions for a user
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](inline_response_200_7.md)
+[**InlineResponse2009**](inline_response_200_9.md)
 
 ### Authorization
 
