@@ -1,12 +1,22 @@
 openapi: 3.0.1
 info:
+  contact:
+    url: https://access.redhat.com/support/cases/
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.143.0
+  version: 1.177.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
 - Bearer: []
+tags:
+- name: allocation
+- name: cloudaccess
+- name: errata
+- name: images
+- name: packages
+- name: subscription
+- name: system
 paths:
   /allocations:
     get:
@@ -23,6 +33,13 @@ paths:
         name: offset
         schema:
           type: integer
+      - in: query
+        name: type
+        schema:
+          enum:
+          - SAM
+          - Satellite
+          type: string
       responses:
         "200":
           content:
@@ -64,11 +81,10 @@ paths:
       tags:
       - allocation
     post:
-      description: |2-
-
-        Version 6.5 (most recent version of Satellite)
-
-        The default success response will be 200.
+      description: |-
+        Create Satellite by name and version(optional).
+        Customers can use any version listed in the `/v1/allocations/versions` endpoint (use attribute `value`).
+        If no version is specified, it will take the latest available version for Satellite.
       operationId: createSatellite
       parameters:
       - description: must be less than 100 characters and use only numbers, letters,
@@ -78,13 +94,17 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: version
+        schema:
+          type: string
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_1'
-          description: CreateSatellite200 is the success response
+          description: Success
         "400":
           content:
             application/json:
@@ -115,7 +135,51 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_400'
           description: InternalServerError error
-      summary: Create Satellite by name
+      summary: Create Satellite
+      tags:
+      - allocation
+  /allocations/versions:
+    get:
+      description: Returns list of Satellite version 6.0 and above
+      operationId: listVersionsAllocation
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+          description: list of Satellite version
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: List Satellite versions
       tags:
       - allocation
   /allocations/{AllocationUUID}:
@@ -205,7 +269,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/inline_response_200_3'
           description: ShowAllocation200 is the success response
         "400":
           content:
@@ -268,7 +332,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/inline_response_200_3'
           description: AttachEntitlement200 is the success response
         "400":
           content:
@@ -333,7 +397,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/inline_response_200_3'
           description: UpdateEntitlement200 is the success response
         "400":
           content:
@@ -386,7 +450,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/inline_response_200_4'
           description: ExportAllocation200 is the success response
         "400":
           content:
@@ -501,7 +565,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/inline_response_200_5'
           description: ExportJobAllocation200 is the success response
         "202":
           content:
@@ -676,7 +740,7 @@ paths:
         - For Products that are expired `nextRenewal` field would be omitted and `totalQuantity` would be `0`.
         - Product objects can have `totalQuantity` field as `-1` indicating `Unlimited` quantity available.
         - The `nextRenewalDate` field of a Product has the format `YYYY-MM-DD`.
-        - The `goldImageStatus` field is available for an account when the Provider is a certified Gold Image Provider and the account has been requested for gold image access. It's value could be `"Requested"`, `"Granted"` or `"Failed"`.
+        - The `goldImageStatus` details are available for an account when the Provider is a certified Gold Image Provider and the account has been requested for gold image access. The `status` field of a goldImageStatus object could be `"Requested"`, `"Granted"` or `"Failed"`.
         - The `imageGroups` field is available for a product when the Provider is a certified Gold Image Provider, and the product has a gold image group available for it.
       operationId: listEnabledCloudAccessProviders
       responses:
@@ -684,7 +748,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/inline_response_200_6'
           description: A JSON response object listing cloud access providers and their
             accounts and products.
         "400":
@@ -722,9 +786,10 @@ paths:
       - cloudaccess
   /cloud_access_providers/{ProviderShortName}/account:
     put:
+      deprecated: true
       description: |
-        Updates the account ID and/or nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
-      operationId: UpdateProviderAccount
+        Updates the account nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
+      operationId: UpdateProviderAccountDeprecated
       parameters:
       - in: path
         name: ProviderShortName
@@ -739,10 +804,10 @@ paths:
               properties:
                 id:
                   type: string
-                newID:
-                  type: string
                 newNickname:
                   type: string
+              required:
+              - id
               type: object
         required: false
       responses:
@@ -802,6 +867,8 @@ paths:
               properties:
                 id:
                   type: string
+              required:
+              - id
               type: object
         required: false
       responses:
@@ -898,6 +965,159 @@ paths:
       tags:
       - cloudaccess
       x-codegen-request-body-name: account
+  /cloud_access_providers/{ProviderShortName}/accounts/{AccountID}:
+    put:
+      description: |
+        Updates the nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
+      operationId: UpdateProviderAccount
+      parameters:
+      - in: path
+        name: ProviderShortName
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: AccountID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          application/json:
+            schema:
+              properties:
+                nickname:
+                  type: string
+              required:
+              - nickname
+              type: object
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Update provider account
+      tags:
+      - cloudaccess
+      x-codegen-request-body-name: account
+  /cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification:
+    put:
+      description: |
+        Verifies a cloud provider account for use with RHSM Auto Registration, which allows for cloud instances to automatically register with RHSM upon provisioning.
+
+        Auto Registration is currently only available for the following cloud providers:
+          - AWS
+          - AWS GovCloud
+          - ACS China
+
+
+        This endpoint accepts a cloud instance identity document and signature from the cloud provider's metadata service, such as the [EC2 Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html) int the case of AWS.
+
+        An HTTP 400 response will be returned if the cloud provider does not support automatic registration, the signature of the document cannot be verified, the cloud provider account has already been verified for a different Red Hat account, or if the account in the instance metadata does not match the provided account ID.
+
+        An HTTP 204 response will be returned if the account has been successfully verified. Attempts to verify an account that is already verified will return an HTTP 204 response with no changes being made.
+      operationId: VerifyProviderAccount
+      parameters:
+      - in: path
+        name: ProviderShortName
+        required: true
+        schema:
+          enum:
+          - AWS
+          - AGOV
+          - ACN
+          type: string
+      - in: path
+        name: AccountID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
+        content:
+          application/json:
+            schema:
+              properties:
+                identity:
+                  description: base64-encoded cloud instance metadata
+                  type: string
+                signature:
+                  description: base64-encoded cloud instance metadata signature
+                  type: string
+              required:
+              - identity
+              - signature
+              type: object
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Verify a provider account
+      tags:
+      - cloudaccess
+      x-codegen-request-body-name: account
   /cloud_access_providers/{ProviderShortName}/goldimage:
     post:
       description: |
@@ -910,7 +1130,7 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_2'
+        $ref: '#/components/requestBodies/inline_object_4'
         content:
           application/json:
             schema:
@@ -1104,7 +1324,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_5'
+                $ref: '#/components/schemas/inline_response_200_7'
           description: ShowErratum200 is the success response
         "400":
           content:
@@ -1289,7 +1509,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_6'
+                $ref: '#/components/schemas/inline_response_200_8'
           description: A JSON response object containing image listing.
         "400":
           content:
@@ -1422,7 +1642,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_7'
+                $ref: '#/components/schemas/inline_response_200_9'
           description: ListPackagesByContentSetArch200 is the success response
         "400":
           content:
@@ -1472,7 +1692,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_8'
+                $ref: '#/components/schemas/inline_response_200_10'
           description: ShowPackage200 is the success response
         "400":
           content:
@@ -1584,7 +1804,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/inline_response_200_11'
           description: ListSubscriptions200 is the success response
         "400":
           content:
@@ -1644,7 +1864,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
+                $ref: '#/components/schemas/inline_response_200_12'
           description: ListSubContentSets200 is the success response
         "400":
           content:
@@ -1704,7 +1924,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_200_13'
           description: ListSubSystems200 is the success response
         "400":
           content:
@@ -1770,7 +1990,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/inline_response_200_14'
           description: ListSystems200 is the success response
         "400":
           content:
@@ -1887,7 +2107,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_15'
           description: ShowSystem200 is the success response
         "400":
           content:
@@ -1950,7 +2170,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_16'
           description: AttachedEntitlement200 is the success response
         "400":
           content:
@@ -2010,7 +2230,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
+                $ref: '#/components/schemas/inline_response_200_17'
           description: list of advisories
         "400":
           content:
@@ -2092,7 +2312,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
+                $ref: '#/components/schemas/inline_response_200_18'
           description: list of packages
         "400":
           content:
@@ -2254,6 +2474,18 @@ components:
           schema:
             $ref: '#/components/schemas/inline_object'
       required: false
+    inline_object_4:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_4'
+      required: false
+    inline_object_3:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+      required: false
     inline_object_2:
       content:
         application/json:
@@ -2360,6 +2592,7 @@ components:
     Allocation:
       example:
         name: name
+        simpleContentAccess: simpleContentAccess
         entitlementQuantity: 0
         type: type
         uuid: uuid
@@ -2369,6 +2602,8 @@ components:
         entitlementQuantity:
           type: integer
         name:
+          type: string
+        simpleContentAccess:
           type: string
         type:
           type: string
@@ -2388,26 +2623,30 @@ components:
         entitlementsAttachedQuantity: 6
         createdBy: createdBy
         name: name
+        simpleContentAccess: simpleContentAccess
         entitlementsAttached:
           valid: true
           reason: reason
           value:
-          - contractNumber: contractNumber
+          - endDate: 2006-01-02T15:04:05.000Z
+            subscriptionName: subscriptionName
+            contractNumber: contractNumber
             id: id
             entitlementQuantity: 0
             sku: sku
-          - contractNumber: contractNumber
+            startDate: 2006-01-02T15:04:05.000Z
+          - endDate: 2006-01-02T15:04:05.000Z
+            subscriptionName: subscriptionName
+            contractNumber: contractNumber
             id: id
             entitlementQuantity: 0
             sku: sku
-        contentAccessMode: contentAccessMode
+            startDate: 2006-01-02T15:04:05.000Z
         lastModified: 2006-01-02T15:04:05.000Z
         type: type
         uuid: uuid
         version: version
       properties:
-        contentAccessMode:
-          type: string
         createdBy:
           type: string
         createdDate:
@@ -2424,12 +2663,141 @@ components:
           type: string
         name:
           type: string
+        simpleContentAccess:
+          type: string
         type:
           type: string
         uuid:
           type: string
         version:
           type: string
+      type: object
+    AllocationSummary:
+      description: details of a subscription allocation
+      example:
+        createdDate: 2006-01-02T15:04:05.000Z
+        entitlementsAttachedQuantity: 0
+        createdBy: createdBy
+        name: name
+        contentAccessMode: contentAccessMode
+        lastModified: 2006-01-02T15:04:05.000Z
+        type: type
+        uuid: uuid
+        version: version
+      properties:
+        contentAccessMode:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        entitlementsAttachedQuantity:
+          type: integer
+        lastModified:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        uuid:
+          type: string
+        version:
+          type: string
+      type: object
+    AllocationVersion:
+      description: List of satellite version
+      example:
+        description: description
+        value: value
+      properties:
+        description:
+          type: string
+        value:
+          type: string
+      type: object
+    AttachEntitlement:
+      example:
+        autoAttachSetting: true
+        serviceLevelPreference: serviceLevelPreference
+        complianceStatus: complianceStatus
+        entitlementsAttached:
+          valid: true
+          reason: reason
+          value:
+          - endDate: 2006-01-02T15:04:05.000Z
+            subscriptionName: subscriptionName
+            contractNumber: contractNumber
+            id: id
+            entitlementQuantity: 0
+            sku: sku
+            startDate: 2006-01-02T15:04:05.000Z
+          - endDate: 2006-01-02T15:04:05.000Z
+            subscriptionName: subscriptionName
+            contractNumber: contractNumber
+            id: id
+            entitlementQuantity: 0
+            sku: sku
+            startDate: 2006-01-02T15:04:05.000Z
+        type: type
+        uuid: uuid
+        installedProductsCount: 1
+        factsCount: 6
+        hostname: hostname
+        createdDate: 2006-01-02T15:04:05.000Z
+        entitlementStatus: entitlementStatus
+        createdBy: createdBy
+        name: name
+        entitlementsAttachedCount: 0
+        errataApplicabilityCounts:
+          valid: true
+          reason: reason
+          value:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+        lastCheckin: 2006-01-02T15:04:05.000Z
+      properties:
+        autoAttachSetting:
+          type: boolean
+        complianceStatus:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        entitlementStatus:
+          type: string
+        entitlementsAttached:
+          $ref: '#/components/schemas/EntitlementsAttachedResponse'
+        entitlementsAttachedCount:
+          type: integer
+        errataApplicabilityCounts:
+          $ref: '#/components/schemas/ErrataApplicabilityCounts'
+        factsCount:
+          type: integer
+        hostname:
+          type: string
+        installedProductsCount:
+          type: integer
+        lastCheckin:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        name:
+          type: string
+        serviceLevelPreference:
+          type: string
+        type:
+          type: string
+        uuid:
+          type: string
+      title: System is an entity that consumes entitlements. Also referred as a Consumer.
       type: object
     ContentSet:
       example:
@@ -2521,12 +2889,28 @@ components:
       example:
         name: name
         accounts:
-        - goldImageStatus: Granted
+        - sourceId: sourceId
+          goldImageStatus:
+          - name: RHEL
+            description: Red Hat Enterprise Linux
+            status: Requested
+          - name: RHEL
+            description: Red Hat Enterprise Linux
+            status: Requested
           nickname: nickname
+          verified: true
           id: id
           dateAdded: 2006-01-02T15:04:05.000Z
-        - goldImageStatus: Granted
+        - sourceId: sourceId
+          goldImageStatus:
+          - name: RHEL
+            description: Red Hat Enterprise Linux
+            status: Requested
+          - name: RHEL
+            description: Red Hat Enterprise Linux
+            status: Requested
           nickname: nickname
+          verified: true
           id: id
           dateAdded: 2006-01-02T15:04:05.000Z
         shortName: shortName
@@ -2594,8 +2978,16 @@ components:
     EnabledProviderAccount:
       description: Enabled Provider Account represents a cloud access provider account
       example:
-        goldImageStatus: Granted
+        sourceId: sourceId
+        goldImageStatus:
+        - name: RHEL
+          description: Red Hat Enterprise Linux
+          status: Requested
+        - name: RHEL
+          description: Red Hat Enterprise Linux
+          status: Requested
         nickname: nickname
+        verified: true
         id: id
         dateAdded: 2006-01-02T15:04:05.000Z
       properties:
@@ -2604,12 +2996,25 @@ components:
           example: 2006-01-02T15:04:05.000Z
           type: string
         goldImageStatus:
-          example: Granted
-          type: string
+          items:
+            $ref: '#/components/schemas/GoldImageStatus'
+          type: array
         id:
           type: string
         nickname:
           type: string
+        sourceId:
+          description: Source ID of linked account (only for accounts created via
+            Sources on cloud.redhat.com)
+          type: string
+        verified:
+          description: verification status for RHSM Auto Registration (only displayed
+            for supported cloud providers)
+          type: boolean
+      required:
+      - dateAdded
+      - id
+      - nickname
       type: object
     EntitlementsAttachedResponse:
       description: EntitlementsAttachedResponse wraps data obtained for EntitlementsAttached
@@ -2618,14 +3023,20 @@ components:
         valid: true
         reason: reason
         value:
-        - contractNumber: contractNumber
+        - endDate: 2006-01-02T15:04:05.000Z
+          subscriptionName: subscriptionName
+          contractNumber: contractNumber
           id: id
           entitlementQuantity: 0
           sku: sku
-        - contractNumber: contractNumber
+          startDate: 2006-01-02T15:04:05.000Z
+        - endDate: 2006-01-02T15:04:05.000Z
+          subscriptionName: subscriptionName
+          contractNumber: contractNumber
           id: id
           entitlementQuantity: 0
           sku: sku
+          startDate: 2006-01-02T15:04:05.000Z
       properties:
         reason:
           type: string
@@ -2640,12 +3051,19 @@ components:
       description: EntitlementsAttachedResponseValue represents the Value field in
         the EntitlementsAttachedResponse
       example:
+        endDate: 2006-01-02T15:04:05.000Z
+        subscriptionName: subscriptionName
         contractNumber: contractNumber
         id: id
         entitlementQuantity: 0
         sku: sku
+        startDate: 2006-01-02T15:04:05.000Z
       properties:
         contractNumber:
+          type: string
+        endDate:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
           type: string
         entitlementQuantity:
           type: integer
@@ -2653,6 +3071,29 @@ components:
           type: string
         sku:
           type: string
+        startDate:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        subscriptionName:
+          type: string
+      type: object
+    ErrataApplicabilityCounts:
+      description: Applicable errata details
+      example:
+        valid: true
+        reason: reason
+        value:
+          enhancementCount: 1
+          securityCount: 5
+          bugfixCount: 6
+      properties:
+        reason:
+          type: string
+        valid:
+          type: boolean
+        value:
+          $ref: '#/components/schemas/ErrataCount'
       type: object
     ErrataCount:
       description: ErrataCount is the errata information for a System
@@ -2804,6 +3245,38 @@ components:
         message:
           type: string
       type: object
+    Facts:
+      description: facts give additional details about the system
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    GoldImageStatus:
+      description: Gold Image Status Details of a cloud access provider account for
+        an image provider.
+      example:
+        name: RHEL
+        description: Red Hat Enterprise Linux
+        status: Requested
+      properties:
+        description:
+          description: Description of the provider image group
+          example: Red Hat Enterprise Linux
+          type: string
+        name:
+          description: Name of the requested provider image group
+          example: RHEL
+          type: string
+        status:
+          description: Status of Gold Image Request
+          example: Requested
+          type: string
+      type: object
     ImageInContentSet:
       description: Image Details in a content set image listing.
       example:
@@ -2827,6 +3300,26 @@ components:
         filename:
           type: string
         imageName:
+          type: string
+      type: object
+    InstalledProducts:
+      description: details of installed products on the system
+      example:
+        productID: productID
+        arch: arch
+        version: version
+        productName: productName
+        status: status
+      properties:
+        arch:
+          type: string
+        productID:
+          type: string
+        productName:
+          type: string
+        status:
+          type: string
+        version:
           type: string
       type: object
     ListResponse:
@@ -3018,6 +3511,99 @@ components:
         where time precision is not needed
       example: 2006-01-02
       type: string
+    ShowSystem:
+      example:
+        autoAttachSetting: true
+        serviceLevelPreference: serviceLevelPreference
+        complianceStatus: complianceStatus
+        installedProducts:
+          productID: productID
+          arch: arch
+          version: version
+          productName: productName
+          status: status
+        entitlementsAttached:
+          valid: true
+          reason: reason
+          value:
+          - endDate: 2006-01-02T15:04:05.000Z
+            subscriptionName: subscriptionName
+            contractNumber: contractNumber
+            id: id
+            entitlementQuantity: 0
+            sku: sku
+            startDate: 2006-01-02T15:04:05.000Z
+          - endDate: 2006-01-02T15:04:05.000Z
+            subscriptionName: subscriptionName
+            contractNumber: contractNumber
+            id: id
+            entitlementQuantity: 0
+            sku: sku
+            startDate: 2006-01-02T15:04:05.000Z
+        type: type
+        facts:
+          value: value
+          key: key
+        uuid: uuid
+        installedProductsCount: 1
+        factsCount: 6
+        hostname: hostname
+        createdDate: 2006-01-02T15:04:05.000Z
+        entitlementStatus: entitlementStatus
+        createdBy: createdBy
+        name: name
+        entitlementsAttachedCount: 0
+        errataApplicabilityCounts:
+          valid: true
+          reason: reason
+          value:
+            enhancementCount: 1
+            securityCount: 5
+            bugfixCount: 6
+        lastCheckin: 2006-01-02T15:04:05.000Z
+      properties:
+        autoAttachSetting:
+          type: boolean
+        complianceStatus:
+          type: string
+        createdBy:
+          type: string
+        createdDate:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        entitlementStatus:
+          type: string
+        entitlementsAttached:
+          $ref: '#/components/schemas/EntitlementsAttachedResponse'
+        entitlementsAttachedCount:
+          type: integer
+        errataApplicabilityCounts:
+          $ref: '#/components/schemas/ErrataApplicabilityCounts'
+        facts:
+          $ref: '#/components/schemas/Facts'
+        factsCount:
+          type: integer
+        hostname:
+          type: string
+        installedProducts:
+          $ref: '#/components/schemas/InstalledProducts'
+        installedProductsCount:
+          type: integer
+        lastCheckin:
+          description: Date represents the date format used for API returns
+          example: 2006-01-02T15:04:05.000Z
+          type: string
+        name:
+          type: string
+        serviceLevelPreference:
+          type: string
+        type:
+          type: string
+        uuid:
+          type: string
+      title: System is an entity that consumes entitlements. Also referred as a Consumer.
+      type: object
     System:
       example:
         entitlementCount: 0
@@ -3415,12 +4001,14 @@ components:
           limit: 1
         body:
         - name: name
+          simpleContentAccess: simpleContentAccess
           entitlementQuantity: 0
           type: type
           uuid: uuid
           version: version
           url: url
         - name: name
+          simpleContentAccess: simpleContentAccess
           entitlementQuantity: 0
           type: type
           uuid: uuid
@@ -3433,29 +4021,19 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
+      type: object
     inline_response_400:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
+      type: object
     inline_response_200_1:
       example:
         body:
           createdDate: 2006-01-02T15:04:05.000Z
-          entitlementsAttachedQuantity: 6
+          entitlementsAttachedQuantity: 0
           createdBy: createdBy
           name: name
-          entitlementsAttached:
-            valid: true
-            reason: reason
-            value:
-            - contractNumber: contractNumber
-              id: id
-              entitlementQuantity: 0
-              sku: sku
-            - contractNumber: contractNumber
-              id: id
-              entitlementQuantity: 0
-              sku: sku
           contentAccessMode: contentAccessMode
           lastModified: 2006-01-02T15:04:05.000Z
           type: type
@@ -3463,8 +4041,56 @@ components:
           version: version
       properties:
         body:
-          $ref: '#/components/schemas/AllocationDetails'
+          $ref: '#/components/schemas/AllocationSummary'
+      type: object
     inline_response_200_2:
+      example:
+        body:
+        - description: description
+          value: value
+        - description: description
+          value: value
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/AllocationVersion'
+          type: array
+      type: object
+    inline_response_200_3:
+      example:
+        body:
+          createdDate: 2006-01-02T15:04:05.000Z
+          entitlementsAttachedQuantity: 6
+          createdBy: createdBy
+          name: name
+          simpleContentAccess: simpleContentAccess
+          entitlementsAttached:
+            valid: true
+            reason: reason
+            value:
+            - endDate: 2006-01-02T15:04:05.000Z
+              subscriptionName: subscriptionName
+              contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+              startDate: 2006-01-02T15:04:05.000Z
+            - endDate: 2006-01-02T15:04:05.000Z
+              subscriptionName: subscriptionName
+              contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+              startDate: 2006-01-02T15:04:05.000Z
+          lastModified: 2006-01-02T15:04:05.000Z
+          type: type
+          uuid: uuid
+          version: version
+      properties:
+        body:
+          $ref: '#/components/schemas/AllocationDetails'
+      type: object
+    inline_response_200_4:
       example:
         body:
           href: href
@@ -3472,7 +4098,8 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/exportResponse'
-    inline_response_200_3:
+      type: object
+    inline_response_200_5:
       example:
         body:
           href: href
@@ -3480,21 +4107,39 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/exportJobResponse'
+      type: object
     inline_response_202:
       properties:
         body:
           $ref: '#/components/schemas/ongoingExportJobResponse'
-    inline_response_200_4:
+      type: object
+    inline_response_200_6:
       example:
         body:
         - name: name
           accounts:
-          - goldImageStatus: Granted
+          - sourceId: sourceId
+            goldImageStatus:
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
             nickname: nickname
+            verified: true
             id: id
             dateAdded: 2006-01-02T15:04:05.000Z
-          - goldImageStatus: Granted
+          - sourceId: sourceId
+            goldImageStatus:
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
             nickname: nickname
+            verified: true
             id: id
             dateAdded: 2006-01-02T15:04:05.000Z
           shortName: shortName
@@ -3517,12 +4162,28 @@ components:
             - imageGroups
         - name: name
           accounts:
-          - goldImageStatus: Granted
+          - sourceId: sourceId
+            goldImageStatus:
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
             nickname: nickname
+            verified: true
             id: id
             dateAdded: 2006-01-02T15:04:05.000Z
-          - goldImageStatus: Granted
+          - sourceId: sourceId
+            goldImageStatus:
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
+            - name: RHEL
+              description: Red Hat Enterprise Linux
+              status: Requested
             nickname: nickname
+            verified: true
             id: id
             dateAdded: 2006-01-02T15:04:05.000Z
           shortName: shortName
@@ -3548,21 +4209,43 @@ components:
           items:
             $ref: '#/components/schemas/EnabledCloudAccessProvider'
           type: array
+      type: object
     inline_object:
       properties:
         id:
           type: string
-        newID:
-          type: string
         newNickname:
           type: string
+      required:
+      - id
       type: object
     inline_object_1:
       properties:
         id:
           type: string
+      required:
+      - id
       type: object
     inline_object_2:
+      properties:
+        nickname:
+          type: string
+      required:
+      - nickname
+      type: object
+    inline_object_3:
+      properties:
+        identity:
+          description: base64-encoded cloud instance metadata
+          type: string
+        signature:
+          description: base64-encoded cloud instance metadata signature
+          type: string
+      required:
+      - identity
+      - signature
+      type: object
+    inline_object_4:
       properties:
         accounts:
           items:
@@ -3576,7 +4259,7 @@ components:
       - accounts
       - images
       type: object
-    inline_response_200_5:
+    inline_response_200_7:
       example:
         body:
           severity: severity
@@ -3615,7 +4298,8 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/ErratumDetails'
-    inline_response_200_6:
+      type: object
+    inline_response_200_8:
       example:
         pagination:
           offset: 5
@@ -3641,11 +4325,13 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
+      type: object
     inline_response_307:
       properties:
         body:
           $ref: '#/components/schemas/DownloadLink'
-    inline_response_200_7:
+      type: object
+    inline_response_200_9:
       example:
         pagination:
           offset: 5
@@ -3695,7 +4381,8 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_8:
+      type: object
+    inline_response_200_10:
       example:
         body:
           summary: summary
@@ -3718,7 +4405,8 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/pkgDetails'
-    inline_response_200_9:
+      type: object
+    inline_response_200_11:
       example:
         pagination:
           offset: 5
@@ -3769,7 +4457,8 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_10:
+      type: object
+    inline_response_200_12:
       example:
         pagination:
           offset: 5
@@ -3793,7 +4482,8 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_11:
+      type: object
+    inline_response_200_13:
       example:
         pagination:
           offset: 5
@@ -3823,7 +4513,8 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_12:
+      type: object
+    inline_response_200_14:
       example:
         pagination:
           offset: 5
@@ -3864,26 +4555,109 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_13:
+      type: object
+    inline_response_200_15:
       example:
         body:
-          entitlementCount: 0
-          errataCounts:
-            enhancementCount: 1
-            securityCount: 5
-            bugfixCount: 6
-          hostname: hostname
-          entitlementStatus: entitlementStatus
-          name: name
-          href: href
-          lastCheckin: 2006-01-02T15:04:05.000Z
+          autoAttachSetting: true
+          serviceLevelPreference: serviceLevelPreference
+          complianceStatus: complianceStatus
+          installedProducts:
+            productID: productID
+            arch: arch
+            version: version
+            productName: productName
+            status: status
+          entitlementsAttached:
+            valid: true
+            reason: reason
+            value:
+            - endDate: 2006-01-02T15:04:05.000Z
+              subscriptionName: subscriptionName
+              contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+              startDate: 2006-01-02T15:04:05.000Z
+            - endDate: 2006-01-02T15:04:05.000Z
+              subscriptionName: subscriptionName
+              contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+              startDate: 2006-01-02T15:04:05.000Z
           type: type
+          facts:
+            value: value
+            key: key
           uuid: uuid
-          username: username
+          installedProductsCount: 1
+          factsCount: 6
+          hostname: hostname
+          createdDate: 2006-01-02T15:04:05.000Z
+          entitlementStatus: entitlementStatus
+          createdBy: createdBy
+          name: name
+          entitlementsAttachedCount: 0
+          errataApplicabilityCounts:
+            valid: true
+            reason: reason
+            value:
+              enhancementCount: 1
+              securityCount: 5
+              bugfixCount: 6
+          lastCheckin: 2006-01-02T15:04:05.000Z
       properties:
         body:
-          $ref: '#/components/schemas/System'
-    inline_response_200_14:
+          $ref: '#/components/schemas/ShowSystem'
+      type: object
+    inline_response_200_16:
+      example:
+        body:
+          autoAttachSetting: true
+          serviceLevelPreference: serviceLevelPreference
+          complianceStatus: complianceStatus
+          entitlementsAttached:
+            valid: true
+            reason: reason
+            value:
+            - endDate: 2006-01-02T15:04:05.000Z
+              subscriptionName: subscriptionName
+              contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+              startDate: 2006-01-02T15:04:05.000Z
+            - endDate: 2006-01-02T15:04:05.000Z
+              subscriptionName: subscriptionName
+              contractNumber: contractNumber
+              id: id
+              entitlementQuantity: 0
+              sku: sku
+              startDate: 2006-01-02T15:04:05.000Z
+          type: type
+          uuid: uuid
+          installedProductsCount: 1
+          factsCount: 6
+          hostname: hostname
+          createdDate: 2006-01-02T15:04:05.000Z
+          entitlementStatus: entitlementStatus
+          createdBy: createdBy
+          name: name
+          entitlementsAttachedCount: 0
+          errataApplicabilityCounts:
+            valid: true
+            reason: reason
+            value:
+              enhancementCount: 1
+              securityCount: 5
+              bugfixCount: 6
+          lastCheckin: 2006-01-02T15:04:05.000Z
+      properties:
+        body:
+          $ref: '#/components/schemas/AttachEntitlement'
+      type: object
+    inline_response_200_17:
       example:
         pagination:
           offset: 5
@@ -3909,7 +4683,8 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
-    inline_response_200_15:
+      type: object
+    inline_response_200_18:
       example:
         pagination:
           offset: 5
@@ -3945,6 +4720,7 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/APIPageParam'
+      type: object
     PackageForSystem_advisories:
       example:
         advisory: advisory
@@ -3954,9 +4730,11 @@ components:
           type: string
         url:
           type: string
+      type: object
   securitySchemes:
     Bearer:
       description: Bearer token for authorized user
       in: header
       name: Authorization
       type: apiKey
+x-original-swagger-version: "2.0"

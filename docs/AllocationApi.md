@@ -5,12 +5,13 @@ All URIs are relative to *https://api.access.redhat.com/management/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AttachEntitlementAllocation**](AllocationApi.md#AttachEntitlementAllocation) | **Post** /allocations/{AllocationUUID}/entitlements | Attach entitlement to allocation
-[**CreateSatellite**](AllocationApi.md#CreateSatellite) | **Post** /allocations | Create Satellite by name
+[**CreateSatellite**](AllocationApi.md#CreateSatellite) | **Post** /allocations | Create Satellite
 [**ExportAllocation**](AllocationApi.md#ExportAllocation) | **Get** /allocations/{AllocationUUID}/export | Trigger allocation manifest export
 [**ExportJobAllocation**](AllocationApi.md#ExportJobAllocation) | **Get** /allocations/{AllocationUUID}/exportJob/{ExportJobID} | Check status of allocation manifest export
 [**GetExportAllocation**](AllocationApi.md#GetExportAllocation) | **Get** /allocations/{AllocationUUID}/export/{ExportID} | Download allocation manifest
 [**ListAllocationPools**](AllocationApi.md#ListAllocationPools) | **Get** /allocations/{AllocationUUID}/pools | List all pools for an allocation
 [**ListAllocations**](AllocationApi.md#ListAllocations) | **Get** /allocations | List all allocations for a user
+[**ListVersionsAllocation**](AllocationApi.md#ListVersionsAllocation) | **Get** /allocations/versions | List Satellite versions
 [**RemoveAllocation**](AllocationApi.md#RemoveAllocation) | **Delete** /allocations/{AllocationUUID} | Remove allocation profile
 [**RemoveAllocationEntitlement**](AllocationApi.md#RemoveAllocationEntitlement) | **Delete** /allocations/{AllocationUUID}/{EntitlementID} | Remove entitlement from the allocation
 [**ShowAllocation**](AllocationApi.md#ShowAllocation) | **Get** /allocations/{AllocationUUID} | Get an allocation by UUID
@@ -20,36 +21,63 @@ Method | HTTP request | Description
 
 ## AttachEntitlementAllocation
 
-> InlineResponse2001 AttachEntitlementAllocation(ctx, pool, allocationUUID, optional)
+> InlineResponse2003 AttachEntitlementAllocation(ctx, allocationUUID).Pool(pool).Quantity(quantity).Execute()
 
 Attach entitlement to allocation
 
-The default success response will be 200.  System, RHUI, Hypervisor are unsupported allocation types
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    pool := "pool_example" // string | 
+    allocationUUID := "allocationUUID_example" // string | 
+    quantity := int32(56) // int32 | quantity you want to attach (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.AttachEntitlementAllocation(context.Background(), allocationUUID).Pool(pool).Quantity(quantity).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.AttachEntitlementAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AttachEntitlementAllocation`: InlineResponse2003
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.AttachEntitlementAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**pool** | **string**|  | 
-**allocationUUID** | **string**|  | 
- **optional** | ***AttachEntitlementAllocationOpts** | optional parameters | nil if no parameters
+**allocationUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a AttachEntitlementAllocationOpts struct
+Other parameters are passed through a pointer to a apiAttachEntitlementAllocationRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **pool** | **string** |  | 
 
-
- **quantity** | **optional.Int32**| quantity you want to attach | 
+ **quantity** | **int32** | quantity you want to attach | 
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -67,23 +95,57 @@ Name | Type | Description  | Notes
 
 ## CreateSatellite
 
-> InlineResponse2001 CreateSatellite(ctx, name)
+> InlineResponse2001 CreateSatellite(ctx).Name(name).Version(version).Execute()
 
-Create Satellite by name
+Create Satellite
 
- Version 6.5 (most recent version of Satellite)  The default success response will be 200.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    name := "name_example" // string | must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods
+    version := "version_example" // string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.CreateSatellite(context.Background()).Name(name).Version(version).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.CreateSatellite``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateSatellite`: InlineResponse2001
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.CreateSatellite`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateSatelliteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**name** | **string**| must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods | 
+ **name** | **string** | must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods | 
+ **version** | **string** |  | 
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -101,23 +163,59 @@ Name | Type | Description  | Notes
 
 ## ExportAllocation
 
-> InlineResponse2002 ExportAllocation(ctx, allocationUUID)
+> InlineResponse2004 ExportAllocation(ctx, allocationUUID).Execute()
 
 Trigger allocation manifest export
 
-Starts job to generate export for an allocation. To check the status of the export job visit the href in the response.  System, RHUI, Hypervisor are unsupported allocation types. SAM 1.2 or lower, and Satellite 5 versions are unsupported.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.ExportAllocation(context.Background(), allocationUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ExportAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ExportAllocation`: InlineResponse2004
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ExportAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
+**allocationUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExportAllocationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
-[**InlineResponse2002**](inline_response_200_2.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -135,24 +233,62 @@ Name | Type | Description  | Notes
 
 ## ExportJobAllocation
 
-> InlineResponse2003 ExportJobAllocation(ctx, allocationUUID, exportJobID)
+> InlineResponse2005 ExportJobAllocation(ctx, allocationUUID, exportJobID).Execute()
 
 Check status of allocation manifest export
 
-Returns export download link in response.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    exportJobID := "exportJobID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.ExportJobAllocation(context.Background(), allocationUUID, exportJobID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ExportJobAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ExportJobAllocation`: InlineResponse2005
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ExportJobAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
-**exportJobID** | **string**|  | 
+**allocationUUID** | **string** |  | 
+**exportJobID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExportJobAllocationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
-[**InlineResponse2003**](inline_response_200_3.md)
+[**InlineResponse2005**](InlineResponse2005.md)
 
 ### Authorization
 
@@ -170,20 +306,58 @@ Name | Type | Description  | Notes
 
 ## GetExportAllocation
 
-> []int32 GetExportAllocation(ctx, allocationUUID, exportID)
+> []int32 GetExportAllocation(ctx, allocationUUID, exportID).Execute()
 
 Download allocation manifest
 
-Success response contains a zip file. The link is one-time download and expires after one try. Trigger export job to get another download link.  Content-Type: application/zip
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    exportID := "exportID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.GetExportAllocation(context.Background(), allocationUUID, exportID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.GetExportAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetExportAllocation`: []int32
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.GetExportAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
-**exportID** | **string**|  | 
+**allocationUUID** | **string** |  | 
+**exportID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetExportAllocationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -205,36 +379,65 @@ Name | Type | Description  | Notes
 
 ## ListAllocationPools
 
-> PoolsListMock ListAllocationPools(ctx, allocationUUID, optional)
+> PoolsListMock ListAllocationPools(ctx, allocationUUID).Limit(limit).Offset(offset).Future(future).Execute()
 
 List all pools for an allocation
 
-System, RHUI, Hypervisor are unsupported allocation types
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+    future := true // bool | include future dated pools for satellite 6.3 or higher (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.ListAllocationPools(context.Background(), allocationUUID).Limit(limit).Offset(offset).Future(future).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListAllocationPools``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListAllocationPools`: PoolsListMock
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ListAllocationPools`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
- **optional** | ***ListAllocationPoolsOpts** | optional parameters | nil if no parameters
+**allocationUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListAllocationPoolsOpts struct
+Other parameters are passed through a pointer to a apiListAllocationPoolsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
- **future** | **optional.Bool**| include future dated pools for satellite 6.3 or higher | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
+ **future** | **bool** | include future dated pools for satellite 6.3 or higher | 
 
 ### Return type
 
-[**PoolsListMock**](poolsListMock.md)
+[**PoolsListMock**](PoolsListMock.md)
 
 ### Authorization
 
@@ -252,33 +455,120 @@ Name | Type | Description  | Notes
 
 ## ListAllocations
 
-> InlineResponse200 ListAllocations(ctx, optional)
+> InlineResponse200 ListAllocations(ctx).Limit(limit).Offset(offset).Type_(type_).Execute()
 
 List all allocations for a user
 
-The default and max number of results in a response are 100.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+    type_ := "type__example" // string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.ListAllocations(context.Background()).Limit(limit).Offset(offset).Type_(type_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListAllocations``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListAllocations`: InlineResponse200
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ListAllocations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAllocationsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListAllocationsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ListAllocationsOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
+ **type_** | **string** |  | 
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
+[**InlineResponse200**](InlineResponse200.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListVersionsAllocation
+
+> InlineResponse2002 ListVersionsAllocation(ctx).Execute()
+
+List Satellite versions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.ListVersionsAllocation(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListVersionsAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListVersionsAllocation`: InlineResponse2002
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ListVersionsAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListVersionsAllocationRequest struct via the builder pattern
+
+
+### Return type
+
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -296,20 +586,55 @@ Name | Type | Description  | Notes
 
 ## RemoveAllocation
 
-> RemoveAllocation(ctx, allocationUUID, force)
+> RemoveAllocation(ctx, allocationUUID).Force(force).Execute()
 
 Remove allocation profile
 
-The default success response will be 204  System, RHUI, Hypervisor are unsupported allocation types
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    force := true // bool | Deleting a subscription allocation can have significant impacts on your hosts and activation keys. We require a force parameter to make sure the delete operation is intentional.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.RemoveAllocation(context.Background(), allocationUUID).Force(force).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
-**force** | **bool**| Deleting a subscription allocation can have significant impacts on your hosts and activation keys. We require a force parameter to make sure the delete operation is intentional. | 
+**allocationUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveAllocationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **force** | **bool** | Deleting a subscription allocation can have significant impacts on your hosts and activation keys. We require a force parameter to make sure the delete operation is intentional. | 
 
 ### Return type
 
@@ -331,20 +656,56 @@ Name | Type | Description  | Notes
 
 ## RemoveAllocationEntitlement
 
-> RemoveAllocationEntitlement(ctx, allocationUUID, entitlementID)
+> RemoveAllocationEntitlement(ctx, allocationUUID, entitlementID).Execute()
 
 Remove entitlement from the allocation
 
-The default success response will be 204.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    entitlementID := "entitlementID_example" // string | Remove an entitlement from an allocation
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.RemoveAllocationEntitlement(context.Background(), allocationUUID, entitlementID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocationEntitlement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
-**entitlementID** | **string**| Remove an entitlement from an allocation | 
+**allocationUUID** | **string** |  | 
+**entitlementID** | **string** | Remove an entitlement from an allocation | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveAllocationEntitlementRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -366,34 +727,61 @@ Name | Type | Description  | Notes
 
 ## ShowAllocation
 
-> InlineResponse2001 ShowAllocation(ctx, allocationUUID, optional)
+> InlineResponse2003 ShowAllocation(ctx, allocationUUID).Include(include).Execute()
 
 Get an allocation by UUID
 
-System, RHUI, Hypervisor are unsupported allocation types
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    include := "include_example" // string | Show more details about a allocation (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.ShowAllocation(context.Background(), allocationUUID).Include(include).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ShowAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ShowAllocation`: InlineResponse2003
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ShowAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
- **optional** | ***ShowAllocationOpts** | optional parameters | nil if no parameters
+**allocationUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ShowAllocationOpts struct
+Other parameters are passed through a pointer to a apiShowAllocationRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **include** | **optional.String**| Show more details about a allocation | 
+ **include** | **string** | Show more details about a allocation | 
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -411,36 +799,64 @@ Name | Type | Description  | Notes
 
 ## UpdateEntitlementAllocation
 
-> InlineResponse2001 UpdateEntitlementAllocation(ctx, allocationUUID, entitlementUUID, optional)
+> InlineResponse2003 UpdateEntitlementAllocation(ctx, allocationUUID, entitlementUUID).Quantity(quantity).Execute()
 
 Update attached entitlement to allocation
 
-The default success response will be 200.  System, RHUI, Hypervisor are unsupported allocation types
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    allocationUUID := "allocationUUID_example" // string | 
+    entitlementUUID := "entitlementUUID_example" // string | 
+    quantity := int32(56) // int32 | maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool minItem: 1 (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AllocationApi.UpdateEntitlementAllocation(context.Background(), allocationUUID, entitlementUUID).Quantity(quantity).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.UpdateEntitlementAllocation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateEntitlementAllocation`: InlineResponse2003
+    fmt.Fprintf(os.Stdout, "Response from `AllocationApi.UpdateEntitlementAllocation`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string**|  | 
-**entitlementUUID** | **string**|  | 
- **optional** | ***UpdateEntitlementAllocationOpts** | optional parameters | nil if no parameters
+**allocationUUID** | **string** |  | 
+**entitlementUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a UpdateEntitlementAllocationOpts struct
+Other parameters are passed through a pointer to a apiUpdateEntitlementAllocationRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **quantity** | **optional.Int32**| maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool minItem: 1 | 
+ **quantity** | **int32** | maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool minItem: 1 | 
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
