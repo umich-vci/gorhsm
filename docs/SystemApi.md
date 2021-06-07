@@ -17,36 +17,63 @@ Method | HTTP request | Description
 
 ## AttachEntitlement
 
-> InlineResponse20013 AttachEntitlement(ctx, systemUUID, pool, optional)
+> InlineResponse20016 AttachEntitlement(ctx, systemUUID).Pool(pool).Quantity(quantity).Execute()
 
 Attach entitlement to system
 
-The default success response will be 200.  Sam & Satellite systems are unsupported system types.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+    pool := "pool_example" // string | 
+    quantity := int32(56) // int32 | quantity you want to attach (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.AttachEntitlement(context.Background(), systemUUID).Pool(pool).Quantity(quantity).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.AttachEntitlement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AttachEntitlement`: InlineResponse20016
+    fmt.Fprintf(os.Stdout, "Response from `SystemApi.AttachEntitlement`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
-**pool** | **string**|  | 
- **optional** | ***AttachEntitlementOpts** | optional parameters | nil if no parameters
+**systemUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a AttachEntitlementOpts struct
+Other parameters are passed through a pointer to a apiAttachEntitlementRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
- **quantity** | **optional.Int32**| quantity you want to attach | 
+ **pool** | **string** |  | 
+ **quantity** | **int32** | quantity you want to attach | 
 
 ### Return type
 
-[**InlineResponse20013**](inline_response_200_13.md)
+[**InlineResponse20016**](InlineResponse20016.md)
 
 ### Authorization
 
@@ -64,35 +91,63 @@ Name | Type | Description  | Notes
 
 ## ListSystemErrata
 
-> InlineResponse20014 ListSystemErrata(ctx, systemUUID, optional)
+> InlineResponse20017 ListSystemErrata(ctx, systemUUID).Limit(limit).Offset(offset).Execute()
 
 List all applicable errata for a system
 
-The default and max number of results in a response are 100.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.ListSystemErrata(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemErrata``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSystemErrata`: InlineResponse20017
+    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemErrata`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
- **optional** | ***ListSystemErrataOpts** | optional parameters | nil if no parameters
+**systemUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListSystemErrataOpts struct
+Other parameters are passed through a pointer to a apiListSystemErrataRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**InlineResponse20014**](inline_response_200_14.md)
+[**InlineResponse20017**](InlineResponse20017.md)
 
 ### Authorization
 
@@ -110,38 +165,69 @@ Name | Type | Description  | Notes
 
 ## ListSystemPackages
 
-> InlineResponse20015 ListSystemPackages(ctx, systemUUID, optional)
+> InlineResponse20018 ListSystemPackages(ctx, systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
 
 List all packages for a system
 
-The default and max number of results in a response are 1000.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+    errataDetail := true // bool | Show errata details for packages (optional)
+    upgradeable := true // bool | Show upgradable packages only. Also accepts 'upgradable' as valid query. (optional)
+    filter := "filter_example" // string | Filter packages (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.ListSystemPackages(context.Background(), systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPackages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSystemPackages`: InlineResponse20018
+    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemPackages`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
- **optional** | ***ListSystemPackagesOpts** | optional parameters | nil if no parameters
+**systemUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListSystemPackagesOpts struct
+Other parameters are passed through a pointer to a apiListSystemPackagesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
- **errataDetail** | **optional.Bool**| Show errata details for packages | 
- **upgradeable** | **optional.Bool**| Show upgradable packages only. Also accepts &#39;upgradable&#39; as valid query. | 
- **filter** | **optional.String**| Filter packages | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
+ **errataDetail** | **bool** | Show errata details for packages | 
+ **upgradeable** | **bool** | Show upgradable packages only. Also accepts &#39;upgradable&#39; as valid query. | 
+ **filter** | **string** | Filter packages | 
 
 ### Return type
 
-[**InlineResponse20015**](inline_response_200_15.md)
+[**InlineResponse20018**](InlineResponse20018.md)
 
 ### Authorization
 
@@ -159,35 +245,63 @@ Name | Type | Description  | Notes
 
 ## ListSystemPools
 
-> PoolsListMock ListSystemPools(ctx, systemUUID, optional)
+> PoolsListMock ListSystemPools(ctx, systemUUID).Limit(limit).Offset(offset).Execute()
 
 List all pools for a system
 
-The default and max number of results in a response are 50.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.ListSystemPools(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPools``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSystemPools`: PoolsListMock
+    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemPools`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
- **optional** | ***ListSystemPoolsOpts** | optional parameters | nil if no parameters
+**systemUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListSystemPoolsOpts struct
+Other parameters are passed through a pointer to a apiListSystemPoolsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**PoolsListMock**](poolsListMock.md)
+[**PoolsListMock**](PoolsListMock.md)
 
 ### Authorization
 
@@ -205,35 +319,61 @@ Name | Type | Description  | Notes
 
 ## ListSystems
 
-> InlineResponse20012 ListSystems(ctx, optional)
+> InlineResponse20014 ListSystems(ctx).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
 
 List all systems for a user
 
-The default and max number of results in a response are 100.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+    filter := "filter_example" // string | Filter Systems by System Name (optional)
+    username := "username_example" // string | Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.ListSystems(context.Background()).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystems``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSystems`: InlineResponse20014
+    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystems`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSystemsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListSystemsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ListSystemsOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
- **filter** | **optional.String**| Filter Systems by System Name | 
- **username** | **optional.String**| Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
+ **filter** | **string** | Filter Systems by System Name | 
+ **username** | **string** | Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed | 
 
 ### Return type
 
-[**InlineResponse20012**](inline_response_200_12.md)
+[**InlineResponse20014**](InlineResponse20014.md)
 
 ### Authorization
 
@@ -251,19 +391,53 @@ Name | Type | Description  | Notes
 
 ## RemoveSystem
 
-> RemoveSystem(ctx, systemUUID)
+> RemoveSystem(ctx, systemUUID).Execute()
 
 Remove system profile
 
-The default success response will be 204
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
+**systemUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveSystemRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -285,20 +459,56 @@ Name | Type | Description  | Notes
 
 ## RemoveSystemEntitlement
 
-> RemoveSystemEntitlement(ctx, systemUUID, entitlementID)
+> RemoveSystemEntitlement(ctx, systemUUID, entitlementID).Execute()
 
 Remove entitlement from the system
 
-The default success response will be 204.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+    entitlementID := "entitlementID_example" // string | Remove an entitlement from a system
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystemEntitlement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
-**entitlementID** | **string**| Remove an entitlement from a system | 
+**systemUUID** | **string** |  | 
+**entitlementID** | **string** | Remove an entitlement from a system | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveSystemEntitlementRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -320,34 +530,61 @@ Name | Type | Description  | Notes
 
 ## ShowSystem
 
-> InlineResponse20013 ShowSystem(ctx, systemUUID, optional)
+> InlineResponse20015 ShowSystem(ctx, systemUUID).Include(include).Execute()
 
 Get a system specified by UUID.
 
-Sam & Satellite systems are unsupported system types.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    systemUUID := "systemUUID_example" // string | 
+    include := []string{"Include_example"} // []string | Show more details about a system (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SystemApi.ShowSystem(context.Background(), systemUUID).Include(include).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ShowSystem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ShowSystem`: InlineResponse20015
+    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ShowSystem`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**systemUUID** | **string**|  | 
- **optional** | ***ShowSystemOpts** | optional parameters | nil if no parameters
+**systemUUID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ShowSystemOpts struct
+Other parameters are passed through a pointer to a apiShowSystemRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **include** | [**optional.Interface of []string**](string.md)| Show more details about a system | 
+ **include** | **[]string** | Show more details about a system | 
 
 ### Return type
 
-[**InlineResponse20013**](inline_response_200_13.md)
+[**InlineResponse20015**](InlineResponse20015.md)
 
 ### Authorization
 

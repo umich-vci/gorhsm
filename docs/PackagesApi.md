@@ -12,19 +12,53 @@ Method | HTTP request | Description
 
 ## DownloadPackage
 
-> DownloadPackage(ctx, checksum)
+> DownloadPackage(ctx, checksum).Execute()
 
 Download a package by its SHA256 checksum
 
-Find a package by its SHA256 checksum and generate a download link with a short-lived expiration. It is expected for users to obtain a new download link every time a package is downloaded and to not store the link for more than several minutes. If the user has \"Download Software and Updates\" permissions and a valid subscription for the package, they will receive an HTTP 307 redirect to the location on the Red Hat CDN. Clients can either follow the HTTP redirect or find the download URL in the response body. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    checksum := "checksum_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PackagesApi.DownloadPackage(context.Background(), checksum).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.DownloadPackage``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**checksum** | **string**|  | 
+**checksum** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDownloadPackageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -46,38 +80,68 @@ Name | Type | Description  | Notes
 
 ## ListPackagesByContentSetArch
 
-> InlineResponse2007 ListPackagesByContentSetArch(ctx, contentSet, arch, optional)
+> InlineResponse2009 ListPackagesByContentSetArch(ctx, contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
 
 Get all the packages for the specified content set and arch.
 
-The default and max results in a response are 50 and 100 respectively.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    contentSet := "contentSet_example" // string | 
+    arch := "arch_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+    filter := []string{"Filter_example"} // []string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PackagesApi.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ListPackagesByContentSetArch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListPackagesByContentSetArch`: InlineResponse2009
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ListPackagesByContentSetArch`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**contentSet** | **string**|  | 
-**arch** | **string**|  | 
- **optional** | ***ListPackagesByContentSetArchOpts** | optional parameters | nil if no parameters
+**contentSet** | **string** |  | 
+**arch** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListPackagesByContentSetArchOpts struct
+Other parameters are passed through a pointer to a apiListPackagesByContentSetArchRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
- **filter** | [**optional.Interface of []string**](string.md)|  | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
+ **filter** | **[]string** |  | 
 
 ### Return type
 
-[**InlineResponse2007**](inline_response_200_7.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -95,23 +159,59 @@ Name | Type | Description  | Notes
 
 ## ShowPackage
 
-> InlineResponse2008 ShowPackage(ctx, checksum)
+> InlineResponse20010 ShowPackage(ctx, checksum).Execute()
 
 Get the details of a package
 
-This will get the details of a package specified by its checksum.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    checksum := "checksum_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PackagesApi.ShowPackage(context.Background(), checksum).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ShowPackage``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ShowPackage`: InlineResponse20010
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ShowPackage`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**checksum** | **string**|  | 
+**checksum** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiShowPackageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
-[**InlineResponse2008**](inline_response_200_8.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 

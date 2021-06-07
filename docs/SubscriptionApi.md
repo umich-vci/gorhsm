@@ -12,35 +12,63 @@ Method | HTTP request | Description
 
 ## ListSubContentSets
 
-> InlineResponse20010 ListSubContentSets(ctx, subscriptionNumber, optional)
+> InlineResponse20012 ListSubContentSets(ctx, subscriptionNumber).Limit(limit).Offset(offset).Execute()
 
 List all content sets for a subscription
 
-The default and max results in a response are 1000.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    subscriptionNumber := "subscriptionNumber_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SubscriptionApi.ListSubContentSets(context.Background(), subscriptionNumber).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubContentSets``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSubContentSets`: InlineResponse20012
+    fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubContentSets`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**subscriptionNumber** | **string**|  | 
- **optional** | ***ListSubContentSetsOpts** | optional parameters | nil if no parameters
+**subscriptionNumber** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListSubContentSetsOpts struct
+Other parameters are passed through a pointer to a apiListSubContentSetsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**InlineResponse20010**](inline_response_200_10.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 
@@ -58,35 +86,63 @@ Name | Type | Description  | Notes
 
 ## ListSubSystems
 
-> InlineResponse20011 ListSubSystems(ctx, subscriptionNumber, optional)
+> InlineResponse20013 ListSubSystems(ctx, subscriptionNumber).Limit(limit).Offset(offset).Execute()
 
 List all systems consuming a subscription
 
-The default and max results in a response are 100.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    subscriptionNumber := "subscriptionNumber_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SubscriptionApi.ListSubSystems(context.Background(), subscriptionNumber).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubSystems``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSubSystems`: InlineResponse20013
+    fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubSystems`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**subscriptionNumber** | **string**|  | 
- **optional** | ***ListSubSystemsOpts** | optional parameters | nil if no parameters
+**subscriptionNumber** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListSubSystemsOpts struct
+Other parameters are passed through a pointer to a apiListSubSystemsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**InlineResponse20011**](inline_response_200_11.md)
+[**InlineResponse20013**](InlineResponse20013.md)
 
 ### Authorization
 
@@ -104,33 +160,57 @@ Name | Type | Description  | Notes
 
 ## ListSubscriptions
 
-> InlineResponse2009 ListSubscriptions(ctx, optional)
+> InlineResponse20011 ListSubscriptions(ctx).Limit(limit).Offset(offset).Execute()
 
 List all subscriptions for a user
 
-The default and max results in a response are 50.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SubscriptionApi.ListSubscriptions(context.Background()).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubscriptions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSubscriptions`: InlineResponse20011
+    fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubscriptions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSubscriptionsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListSubscriptionsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ListSubscriptionsOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**InlineResponse2009**](inline_response_200_9.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 

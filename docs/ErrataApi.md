@@ -14,33 +14,57 @@ Method | HTTP request | Description
 
 ## ListErrata
 
-> MyErrataListMock ListErrata(ctx, optional)
+> MyErrataListMock ListErrata(ctx).Limit(limit).Offset(offset).Execute()
 
 List all errata for a user's systems
 
-The default and max results in a response are 1000.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ErrataApi.ListErrata(context.Background()).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErrata``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListErrata`: MyErrataListMock
+    fmt.Fprintf(os.Stdout, "Response from `ErrataApi.ListErrata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListErrataRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListErrataOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ListErrataOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**MyErrataListMock**](myErrataListMock.md)
+[**MyErrataListMock**](MyErrataListMock.md)
 
 ### Authorization
 
@@ -58,37 +82,66 @@ Name | Type | Description  | Notes
 
 ## ListErrataByContentSetArch
 
-> ContentSetArchMock ListErrataByContentSetArch(ctx, contentSet, arch, optional)
+> ContentSetArchMock ListErrataByContentSetArch(ctx, contentSet, arch).Limit(limit).Offset(offset).Execute()
 
 Get all the errata for the specified content set and arch
 
-Limit is the number of results in a response. The default limit is 50 and max limit is 100.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    contentSet := "contentSet_example" // string | 
+    arch := "arch_example" // string | 
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ErrataApi.ListErrataByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErrataByContentSetArch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListErrataByContentSetArch`: ContentSetArchMock
+    fmt.Fprintf(os.Stdout, "Response from `ErrataApi.ListErrataByContentSetArch`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**contentSet** | **string**|  | 
-**arch** | **string**|  | 
- **optional** | ***ListErrataByContentSetArchOpts** | optional parameters | nil if no parameters
+**contentSet** | **string** |  | 
+**arch** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListErrataByContentSetArchOpts struct
+Other parameters are passed through a pointer to a apiListErrataByContentSetArchRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**ContentSetArchMock**](contentSetArchMock.md)
+[**ContentSetArchMock**](ContentSetArchMock.md)
 
 ### Authorization
 
@@ -106,35 +159,63 @@ Name | Type | Description  | Notes
 
 ## ListErratumPackages
 
-> PkgListMock ListErratumPackages(ctx, advisoryID, optional)
+> PkgListMock ListErratumPackages(ctx, advisoryID).Limit(limit).Offset(offset).Execute()
 
 List all packages for an advisory
 
-The default and max results in a response are 50.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    advisoryID := "advisoryID_example" // string | unique identifier for a Red Hat advisory
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ErrataApi.ListErratumPackages(context.Background(), advisoryID).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErratumPackages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListErratumPackages`: PkgListMock
+    fmt.Fprintf(os.Stdout, "Response from `ErrataApi.ListErratumPackages`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**advisoryID** | **string**| unique identifier for a Red Hat advisory | 
- **optional** | ***ListErratumPackagesOpts** | optional parameters | nil if no parameters
+**advisoryID** | **string** | unique identifier for a Red Hat advisory | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListErratumPackagesOpts struct
+Other parameters are passed through a pointer to a apiListErratumPackagesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**PkgListMock**](pkgListMock.md)
+[**PkgListMock**](PkgListMock.md)
 
 ### Authorization
 
@@ -152,35 +233,63 @@ Name | Type | Description  | Notes
 
 ## ListErratumSystems
 
-> SystemListMock ListErratumSystems(ctx, advisoryID, optional)
+> SystemListMock ListErratumSystems(ctx, advisoryID).Limit(limit).Offset(offset).Execute()
 
 List all systems for an advisory
 
-The default and max results in a response are 1000.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    advisoryID := "advisoryID_example" // string | unique identifier for a Red Hat advisory
+    limit := int32(56) // int32 | max number of results you want (optional)
+    offset := int32(56) // int32 | index from which you want next items (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ErrataApi.ListErratumSystems(context.Background(), advisoryID).Limit(limit).Offset(offset).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErratumSystems``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListErratumSystems`: SystemListMock
+    fmt.Fprintf(os.Stdout, "Response from `ErrataApi.ListErratumSystems`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**advisoryID** | **string**| unique identifier for a Red Hat advisory | 
- **optional** | ***ListErratumSystemsOpts** | optional parameters | nil if no parameters
+**advisoryID** | **string** | unique identifier for a Red Hat advisory | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ListErratumSystemsOpts struct
+Other parameters are passed through a pointer to a apiListErratumSystemsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| max number of results you want | 
- **offset** | **optional.Int32**| index from which you want next items | 
+ **limit** | **int32** | max number of results you want | 
+ **offset** | **int32** | index from which you want next items | 
 
 ### Return type
 
-[**SystemListMock**](systemListMock.md)
+[**SystemListMock**](SystemListMock.md)
 
 ### Authorization
 
@@ -198,23 +307,59 @@ Name | Type | Description  | Notes
 
 ## ShowErratum
 
-> InlineResponse2005 ShowErratum(ctx, advisoryID)
+> InlineResponse2007 ShowErratum(ctx, advisoryID).Execute()
 
 Get the details of an advisory
 
-This will get the details of an advisory specified by its advisoryID.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    advisoryID := "advisoryID_example" // string | unique identifier for a Red Hat advisory
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ErrataApi.ShowErratum(context.Background(), advisoryID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ShowErratum``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ShowErratum`: InlineResponse2007
+    fmt.Fprintf(os.Stdout, "Response from `ErrataApi.ShowErratum`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**advisoryID** | **string**| unique identifier for a Red Hat advisory | 
+**advisoryID** | **string** | unique identifier for a Red Hat advisory | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiShowErratumRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
-[**InlineResponse2005**](inline_response_200_5.md)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 

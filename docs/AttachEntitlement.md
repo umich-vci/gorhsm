@@ -1,0 +1,446 @@
+# AttachEntitlement
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**AutoAttachSetting** | Pointer to **bool** |  | [optional] 
+**ComplianceStatus** | Pointer to **string** |  | [optional] 
+**CreatedBy** | Pointer to **string** |  | [optional] 
+**CreatedDate** | Pointer to **string** | Date represents the date format used for API returns | [optional] 
+**EntitlementStatus** | Pointer to **string** |  | [optional] 
+**EntitlementsAttached** | Pointer to [**EntitlementsAttachedResponse**](EntitlementsAttachedResponse.md) |  | [optional] 
+**EntitlementsAttachedCount** | Pointer to **int32** |  | [optional] 
+**ErrataApplicabilityCounts** | Pointer to [**ErrataApplicabilityCounts**](ErrataApplicabilityCounts.md) |  | [optional] 
+**FactsCount** | Pointer to **int32** |  | [optional] 
+**Hostname** | Pointer to **string** |  | [optional] 
+**InstalledProductsCount** | Pointer to **int32** |  | [optional] 
+**LastCheckin** | Pointer to **string** | Date represents the date format used for API returns | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**ServiceLevelPreference** | Pointer to **string** |  | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
+**Uuid** | Pointer to **string** |  | [optional] 
+
+## Methods
+
+### NewAttachEntitlement
+
+`func NewAttachEntitlement() *AttachEntitlement`
+
+NewAttachEntitlement instantiates a new AttachEntitlement object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewAttachEntitlementWithDefaults
+
+`func NewAttachEntitlementWithDefaults() *AttachEntitlement`
+
+NewAttachEntitlementWithDefaults instantiates a new AttachEntitlement object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetAutoAttachSetting
+
+`func (o *AttachEntitlement) GetAutoAttachSetting() bool`
+
+GetAutoAttachSetting returns the AutoAttachSetting field if non-nil, zero value otherwise.
+
+### GetAutoAttachSettingOk
+
+`func (o *AttachEntitlement) GetAutoAttachSettingOk() (*bool, bool)`
+
+GetAutoAttachSettingOk returns a tuple with the AutoAttachSetting field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoAttachSetting
+
+`func (o *AttachEntitlement) SetAutoAttachSetting(v bool)`
+
+SetAutoAttachSetting sets AutoAttachSetting field to given value.
+
+### HasAutoAttachSetting
+
+`func (o *AttachEntitlement) HasAutoAttachSetting() bool`
+
+HasAutoAttachSetting returns a boolean if a field has been set.
+
+### GetComplianceStatus
+
+`func (o *AttachEntitlement) GetComplianceStatus() string`
+
+GetComplianceStatus returns the ComplianceStatus field if non-nil, zero value otherwise.
+
+### GetComplianceStatusOk
+
+`func (o *AttachEntitlement) GetComplianceStatusOk() (*string, bool)`
+
+GetComplianceStatusOk returns a tuple with the ComplianceStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComplianceStatus
+
+`func (o *AttachEntitlement) SetComplianceStatus(v string)`
+
+SetComplianceStatus sets ComplianceStatus field to given value.
+
+### HasComplianceStatus
+
+`func (o *AttachEntitlement) HasComplianceStatus() bool`
+
+HasComplianceStatus returns a boolean if a field has been set.
+
+### GetCreatedBy
+
+`func (o *AttachEntitlement) GetCreatedBy() string`
+
+GetCreatedBy returns the CreatedBy field if non-nil, zero value otherwise.
+
+### GetCreatedByOk
+
+`func (o *AttachEntitlement) GetCreatedByOk() (*string, bool)`
+
+GetCreatedByOk returns a tuple with the CreatedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedBy
+
+`func (o *AttachEntitlement) SetCreatedBy(v string)`
+
+SetCreatedBy sets CreatedBy field to given value.
+
+### HasCreatedBy
+
+`func (o *AttachEntitlement) HasCreatedBy() bool`
+
+HasCreatedBy returns a boolean if a field has been set.
+
+### GetCreatedDate
+
+`func (o *AttachEntitlement) GetCreatedDate() string`
+
+GetCreatedDate returns the CreatedDate field if non-nil, zero value otherwise.
+
+### GetCreatedDateOk
+
+`func (o *AttachEntitlement) GetCreatedDateOk() (*string, bool)`
+
+GetCreatedDateOk returns a tuple with the CreatedDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedDate
+
+`func (o *AttachEntitlement) SetCreatedDate(v string)`
+
+SetCreatedDate sets CreatedDate field to given value.
+
+### HasCreatedDate
+
+`func (o *AttachEntitlement) HasCreatedDate() bool`
+
+HasCreatedDate returns a boolean if a field has been set.
+
+### GetEntitlementStatus
+
+`func (o *AttachEntitlement) GetEntitlementStatus() string`
+
+GetEntitlementStatus returns the EntitlementStatus field if non-nil, zero value otherwise.
+
+### GetEntitlementStatusOk
+
+`func (o *AttachEntitlement) GetEntitlementStatusOk() (*string, bool)`
+
+GetEntitlementStatusOk returns a tuple with the EntitlementStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntitlementStatus
+
+`func (o *AttachEntitlement) SetEntitlementStatus(v string)`
+
+SetEntitlementStatus sets EntitlementStatus field to given value.
+
+### HasEntitlementStatus
+
+`func (o *AttachEntitlement) HasEntitlementStatus() bool`
+
+HasEntitlementStatus returns a boolean if a field has been set.
+
+### GetEntitlementsAttached
+
+`func (o *AttachEntitlement) GetEntitlementsAttached() EntitlementsAttachedResponse`
+
+GetEntitlementsAttached returns the EntitlementsAttached field if non-nil, zero value otherwise.
+
+### GetEntitlementsAttachedOk
+
+`func (o *AttachEntitlement) GetEntitlementsAttachedOk() (*EntitlementsAttachedResponse, bool)`
+
+GetEntitlementsAttachedOk returns a tuple with the EntitlementsAttached field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntitlementsAttached
+
+`func (o *AttachEntitlement) SetEntitlementsAttached(v EntitlementsAttachedResponse)`
+
+SetEntitlementsAttached sets EntitlementsAttached field to given value.
+
+### HasEntitlementsAttached
+
+`func (o *AttachEntitlement) HasEntitlementsAttached() bool`
+
+HasEntitlementsAttached returns a boolean if a field has been set.
+
+### GetEntitlementsAttachedCount
+
+`func (o *AttachEntitlement) GetEntitlementsAttachedCount() int32`
+
+GetEntitlementsAttachedCount returns the EntitlementsAttachedCount field if non-nil, zero value otherwise.
+
+### GetEntitlementsAttachedCountOk
+
+`func (o *AttachEntitlement) GetEntitlementsAttachedCountOk() (*int32, bool)`
+
+GetEntitlementsAttachedCountOk returns a tuple with the EntitlementsAttachedCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntitlementsAttachedCount
+
+`func (o *AttachEntitlement) SetEntitlementsAttachedCount(v int32)`
+
+SetEntitlementsAttachedCount sets EntitlementsAttachedCount field to given value.
+
+### HasEntitlementsAttachedCount
+
+`func (o *AttachEntitlement) HasEntitlementsAttachedCount() bool`
+
+HasEntitlementsAttachedCount returns a boolean if a field has been set.
+
+### GetErrataApplicabilityCounts
+
+`func (o *AttachEntitlement) GetErrataApplicabilityCounts() ErrataApplicabilityCounts`
+
+GetErrataApplicabilityCounts returns the ErrataApplicabilityCounts field if non-nil, zero value otherwise.
+
+### GetErrataApplicabilityCountsOk
+
+`func (o *AttachEntitlement) GetErrataApplicabilityCountsOk() (*ErrataApplicabilityCounts, bool)`
+
+GetErrataApplicabilityCountsOk returns a tuple with the ErrataApplicabilityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrataApplicabilityCounts
+
+`func (o *AttachEntitlement) SetErrataApplicabilityCounts(v ErrataApplicabilityCounts)`
+
+SetErrataApplicabilityCounts sets ErrataApplicabilityCounts field to given value.
+
+### HasErrataApplicabilityCounts
+
+`func (o *AttachEntitlement) HasErrataApplicabilityCounts() bool`
+
+HasErrataApplicabilityCounts returns a boolean if a field has been set.
+
+### GetFactsCount
+
+`func (o *AttachEntitlement) GetFactsCount() int32`
+
+GetFactsCount returns the FactsCount field if non-nil, zero value otherwise.
+
+### GetFactsCountOk
+
+`func (o *AttachEntitlement) GetFactsCountOk() (*int32, bool)`
+
+GetFactsCountOk returns a tuple with the FactsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFactsCount
+
+`func (o *AttachEntitlement) SetFactsCount(v int32)`
+
+SetFactsCount sets FactsCount field to given value.
+
+### HasFactsCount
+
+`func (o *AttachEntitlement) HasFactsCount() bool`
+
+HasFactsCount returns a boolean if a field has been set.
+
+### GetHostname
+
+`func (o *AttachEntitlement) GetHostname() string`
+
+GetHostname returns the Hostname field if non-nil, zero value otherwise.
+
+### GetHostnameOk
+
+`func (o *AttachEntitlement) GetHostnameOk() (*string, bool)`
+
+GetHostnameOk returns a tuple with the Hostname field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostname
+
+`func (o *AttachEntitlement) SetHostname(v string)`
+
+SetHostname sets Hostname field to given value.
+
+### HasHostname
+
+`func (o *AttachEntitlement) HasHostname() bool`
+
+HasHostname returns a boolean if a field has been set.
+
+### GetInstalledProductsCount
+
+`func (o *AttachEntitlement) GetInstalledProductsCount() int32`
+
+GetInstalledProductsCount returns the InstalledProductsCount field if non-nil, zero value otherwise.
+
+### GetInstalledProductsCountOk
+
+`func (o *AttachEntitlement) GetInstalledProductsCountOk() (*int32, bool)`
+
+GetInstalledProductsCountOk returns a tuple with the InstalledProductsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstalledProductsCount
+
+`func (o *AttachEntitlement) SetInstalledProductsCount(v int32)`
+
+SetInstalledProductsCount sets InstalledProductsCount field to given value.
+
+### HasInstalledProductsCount
+
+`func (o *AttachEntitlement) HasInstalledProductsCount() bool`
+
+HasInstalledProductsCount returns a boolean if a field has been set.
+
+### GetLastCheckin
+
+`func (o *AttachEntitlement) GetLastCheckin() string`
+
+GetLastCheckin returns the LastCheckin field if non-nil, zero value otherwise.
+
+### GetLastCheckinOk
+
+`func (o *AttachEntitlement) GetLastCheckinOk() (*string, bool)`
+
+GetLastCheckinOk returns a tuple with the LastCheckin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastCheckin
+
+`func (o *AttachEntitlement) SetLastCheckin(v string)`
+
+SetLastCheckin sets LastCheckin field to given value.
+
+### HasLastCheckin
+
+`func (o *AttachEntitlement) HasLastCheckin() bool`
+
+HasLastCheckin returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *AttachEntitlement) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *AttachEntitlement) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *AttachEntitlement) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *AttachEntitlement) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### GetServiceLevelPreference
+
+`func (o *AttachEntitlement) GetServiceLevelPreference() string`
+
+GetServiceLevelPreference returns the ServiceLevelPreference field if non-nil, zero value otherwise.
+
+### GetServiceLevelPreferenceOk
+
+`func (o *AttachEntitlement) GetServiceLevelPreferenceOk() (*string, bool)`
+
+GetServiceLevelPreferenceOk returns a tuple with the ServiceLevelPreference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceLevelPreference
+
+`func (o *AttachEntitlement) SetServiceLevelPreference(v string)`
+
+SetServiceLevelPreference sets ServiceLevelPreference field to given value.
+
+### HasServiceLevelPreference
+
+`func (o *AttachEntitlement) HasServiceLevelPreference() bool`
+
+HasServiceLevelPreference returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *AttachEntitlement) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *AttachEntitlement) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *AttachEntitlement) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *AttachEntitlement) HasType() bool`
+
+HasType returns a boolean if a field has been set.
+
+### GetUuid
+
+`func (o *AttachEntitlement) GetUuid() string`
+
+GetUuid returns the Uuid field if non-nil, zero value otherwise.
+
+### GetUuidOk
+
+`func (o *AttachEntitlement) GetUuidOk() (*string, bool)`
+
+GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUuid
+
+`func (o *AttachEntitlement) SetUuid(v string)`
+
+SetUuid sets Uuid field to given value.
+
+### HasUuid
+
+`func (o *AttachEntitlement) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
