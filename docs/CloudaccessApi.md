@@ -8,36 +8,63 @@ Method | HTTP request | Description
 [**EnableGoldImages**](CloudaccessApi.md#EnableGoldImages) | **Post** /cloud_access_providers/{ProviderShortName}/goldimage | Enable Gold image access
 [**ListEnabledCloudAccessProviders**](CloudaccessApi.md#ListEnabledCloudAccessProviders) | **Get** /cloud_access_providers/enabled | List all enabled cloud access providers for a user
 [**RemoveProviderAccount**](CloudaccessApi.md#RemoveProviderAccount) | **Delete** /cloud_access_providers/{ProviderShortName}/accounts | Remove a provider account
-[**UpdateProviderAccount**](CloudaccessApi.md#UpdateProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/account | Update provider account
+[**UpdateProviderAccount**](CloudaccessApi.md#UpdateProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID} | Update provider account
+[**UpdateProviderAccountDeprecated**](CloudaccessApi.md#UpdateProviderAccountDeprecated) | **Put** /cloud_access_providers/{ProviderShortName}/account | Update provider account
+[**VerifyProviderAccount**](CloudaccessApi.md#VerifyProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification | Verify a provider account
 
 
 
 ## AddProviderAccounts
 
-> AddProviderAccounts(ctx, providerShortName, optional)
+> AddProviderAccounts(ctx, providerShortName).Account(account).Execute()
 
 Add accounts for a provider
 
-Add up to `100` new provider accounts, with optional nicknames, to a currently-enabled provider for Red Hat Cloud Access. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    providerShortName := "providerShortName_example" // string | 
+    account := []openapiclient.AddProviderAccount{*openapiclient.NewAddProviderAccount()} // []AddProviderAccount |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.AddProviderAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**providerShortName** | **string**|  | 
- **optional** | ***AddProviderAccountsOpts** | optional parameters | nil if no parameters
+**providerShortName** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a AddProviderAccountsOpts struct
+Other parameters are passed through a pointer to a apiAddProviderAccountsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **account** | [**optional.Interface of []AddProviderAccount**](AddProviderAccount.md)|  | 
+ **account** | [**[]AddProviderAccount**](AddProviderAccount.md) |  | 
 
 ### Return type
 
@@ -59,30 +86,55 @@ Name | Type | Description  | Notes
 
 ## EnableGoldImages
 
-> EnableGoldImages(ctx, providerShortName, optional)
+> EnableGoldImages(ctx, providerShortName).GoldImages(goldImages).Execute()
 
 Enable Gold image access
 
-Requests access to Red Hat Gold Images, where available, for currently-enabled products and provider accounts. Customers can request Red Hat Gold Images for account IDs and product image groups listed in the `/v1/cloud_access_providers/enabled` endpoint using the provider short name listed in the same response. After the request has been accepted for processing, gold image status for accounts can be checked in the `/v1/cloud_access_providers/enabled` endpoint response. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    providerShortName := "providerShortName_example" // string | 
+    goldImages := *openapiclient.NewInlineObject5([]string{"Accounts_example"}, []string{"Images_example"}) // InlineObject5 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.EnableGoldImages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**providerShortName** | **string**|  | 
- **optional** | ***EnableGoldImagesOpts** | optional parameters | nil if no parameters
+**providerShortName** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EnableGoldImagesOpts struct
+Other parameters are passed through a pointer to a apiEnableGoldImagesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **goldImages** | [**optional.Interface of InlineObject2**](InlineObject2.md)|  | 
+ **goldImages** | [**InlineObject5**](InlineObject5.md) |  | 
 
 ### Return type
 
@@ -104,19 +156,50 @@ Name | Type | Description  | Notes
 
 ## ListEnabledCloudAccessProviders
 
-> InlineResponse2004 ListEnabledCloudAccessProviders(ctx, )
+> InlineResponse2006 ListEnabledCloudAccessProviders(ctx).Execute()
 
 List all enabled cloud access providers for a user
 
-Returns the full list of all enabled Red Hat products and Cloud Access provider accounts/subscriptions associated with the user’s Red Hat account. - For Products that are expired `nextRenewal` field would be omitted and `totalQuantity` would be `0`. - Product objects can have `totalQuantity` field as `-1` indicating `Unlimited` quantity available. - The `nextRenewalDate` field of a Product has the format `YYYY-MM-DD`. - The `goldImageStatus` field is available for an account when the Provider is a certified Gold Image Provider and the account has been requested for gold image access. It's value could be `\"Requested\"`, `\"Granted\"` or `\"Failed\"`. - The `imageGroups` field is available for a product when the Provider is a certified Gold Image Provider, and the product has a gold image group available for it. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.ListEnabledCloudAccessProviders(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.ListEnabledCloudAccessProviders``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListEnabledCloudAccessProviders`: InlineResponse2006
+    fmt.Fprintf(os.Stdout, "Response from `CloudaccessApi.ListEnabledCloudAccessProviders`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
 
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListEnabledCloudAccessProvidersRequest struct via the builder pattern
+
+
 ### Return type
 
-[**InlineResponse2004**](inline_response_200_4.md)
+[**InlineResponse2006**](InlineResponse2006.md)
 
 ### Authorization
 
@@ -134,30 +217,55 @@ This endpoint does not need any parameter.
 
 ## RemoveProviderAccount
 
-> RemoveProviderAccount(ctx, providerShortName, optional)
+> RemoveProviderAccount(ctx, providerShortName).Account(account).Execute()
 
 Remove a provider account
 
-Removes a currently-enabled provider account, including removing access to Gold Images, where applicable. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    providerShortName := "providerShortName_example" // string | 
+    account := *openapiclient.NewInlineObject2("Id_example") // InlineObject2 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.RemoveProviderAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**providerShortName** | **string**|  | 
- **optional** | ***RemoveProviderAccountOpts** | optional parameters | nil if no parameters
+**providerShortName** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a RemoveProviderAccountOpts struct
+Other parameters are passed through a pointer to a apiRemoveProviderAccountRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **account** | [**optional.Interface of InlineObject1**](InlineObject1.md)|  | 
+ **account** | [**InlineObject2**](InlineObject2.md) |  | 
 
 ### Return type
 
@@ -179,30 +287,201 @@ Name | Type | Description  | Notes
 
 ## UpdateProviderAccount
 
-> UpdateProviderAccount(ctx, providerShortName, optional)
+> UpdateProviderAccount(ctx, providerShortName, accountID).Account(account).Execute()
 
 Update provider account
 
-Updates the account ID and/or nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint. 
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    providerShortName := "providerShortName_example" // string | 
+    accountID := "accountID_example" // string | 
+    account := *openapiclient.NewInlineObject3("Nickname_example") // InlineObject3 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**providerShortName** | **string**|  | 
- **optional** | ***UpdateProviderAccountOpts** | optional parameters | nil if no parameters
+**providerShortName** | **string** |  | 
+**accountID** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a UpdateProviderAccountOpts struct
+Other parameters are passed through a pointer to a apiUpdateProviderAccountRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **account** | [**optional.Interface of InlineObject**](InlineObject.md)|  | 
+
+ **account** | [**InlineObject3**](InlineObject3.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateProviderAccountDeprecated
+
+> UpdateProviderAccountDeprecated(ctx, providerShortName).Account(account).Execute()
+
+Update provider account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    providerShortName := "providerShortName_example" // string | 
+    account := *openapiclient.NewInlineObject1("Id_example") // InlineObject1 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.UpdateProviderAccountDeprecated(context.Background(), providerShortName).Account(account).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccountDeprecated``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**providerShortName** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateProviderAccountDeprecatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **account** | [**InlineObject1**](InlineObject1.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## VerifyProviderAccount
+
+> VerifyProviderAccount(ctx, providerShortName, accountID).Account(account).Execute()
+
+Verify a provider account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    providerShortName := "providerShortName_example" // string | 
+    accountID := "accountID_example" // string | 
+    account := *openapiclient.NewInlineObject4("Identity_example", "Signature_example") // InlineObject4 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.VerifyProviderAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**providerShortName** | **string** |  | 
+**accountID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiVerifyProviderAccountRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **account** | [**InlineObject4**](InlineObject4.md) |  | 
 
 ### Return type
 
