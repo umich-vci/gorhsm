@@ -1264,7 +1264,7 @@
                     {
                         "description": "must be less than 100 characters and use only numbers, letters, underscores, hyphens, and periods",
                         "in": "query",
-                        "name": "Name",
+                        "name": "name",
                         "required": true,
                         "type": "string"
                     },
