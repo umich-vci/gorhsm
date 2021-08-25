@@ -4,7 +4,7 @@ info:
     url: https://access.redhat.com/support/cases/
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.182.0
+  version: 1.196.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
@@ -1665,6 +1665,50 @@ paths:
       summary: Download an image by its SHA256 checksum
       tags:
       - images
+  /organization:
+    get:
+      description: Show Simple Content Access details of user's organization
+      operationId: checkOrgSCACapability
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_9'
+          description: Organization details
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: InternalServerError error
+      summary: Get details of the user's organization
+      tags:
+      - organization
   /packages/cset/{ContentSet}/arch/{Arch}:
     get:
       description: The default and max results in a response are 50 and 100 respectively.
@@ -1706,7 +1750,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/inline_response_200_10'
           description: ListPackagesByContentSetArch200 is the success response
         "400":
           content:
@@ -1756,7 +1800,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
+                $ref: '#/components/schemas/inline_response_200_11'
           description: ShowPackage200 is the success response
         "400":
           content:
@@ -1868,7 +1912,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_200_12'
           description: ListSubscriptions200 is the success response
         "400":
           content:
@@ -1928,7 +1972,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/inline_response_200_13'
           description: ListSubContentSets200 is the success response
         "400":
           content:
@@ -1988,7 +2032,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
           description: ListSubSystems200 is the success response
         "400":
           content:
@@ -2054,7 +2098,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
+                $ref: '#/components/schemas/inline_response_200_15'
           description: ListSystems200 is the success response
         "400":
           content:
@@ -2171,7 +2215,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
+                $ref: '#/components/schemas/inline_response_200_16'
           description: ShowSystem200 is the success response
         "400":
           content:
@@ -2234,7 +2278,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_16'
+                $ref: '#/components/schemas/inline_response_200_17'
           description: AttachedEntitlement200 is the success response
         "400":
           content:
@@ -2294,7 +2338,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_17'
+                $ref: '#/components/schemas/inline_response_200_18'
           description: list of advisories
         "400":
           content:
@@ -2376,7 +2420,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_18'
+                $ref: '#/components/schemas/inline_response_200_19'
           description: list of packages
         "400":
           content:
@@ -3428,6 +3472,20 @@ components:
         type:
           type: string
       type: object
+    OrgSimpleContentAccess:
+      example:
+        simpleContentAccess: simpleContentAccess
+        id: id
+        simpleContentAccessCapable: true
+      properties:
+        id:
+          type: string
+        simpleContentAccess:
+          type: string
+        simpleContentAccessCapable:
+          type: boolean
+      title: Organization Simple Content Access details.
+      type: object
     PackageDetail:
       description: PackageDetail wraps an errata package and adds a RefURL
       example:
@@ -4410,6 +4468,16 @@ components:
       type: object
     inline_response_200_9:
       example:
+        body:
+          simpleContentAccess: simpleContentAccess
+          id: id
+          simpleContentAccessCapable: true
+      properties:
+        body:
+          $ref: '#/components/schemas/OrgSimpleContentAccess'
+      type: object
+    inline_response_200_10:
+      example:
         pagination:
           offset: 5
           count: 6
@@ -4459,7 +4527,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_10:
+    inline_response_200_11:
       example:
         body:
           summary: summary
@@ -4483,7 +4551,7 @@ components:
         body:
           $ref: '#/components/schemas/pkgDetails'
       type: object
-    inline_response_200_11:
+    inline_response_200_12:
       example:
         pagination:
           offset: 5
@@ -4535,7 +4603,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_12:
+    inline_response_200_13:
       example:
         pagination:
           offset: 5
@@ -4560,7 +4628,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_13:
+    inline_response_200_14:
       example:
         pagination:
           offset: 5
@@ -4591,7 +4659,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_14:
+    inline_response_200_15:
       example:
         pagination:
           offset: 5
@@ -4633,7 +4701,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_15:
+    inline_response_200_16:
       example:
         body:
           autoAttachSetting: true
@@ -4688,7 +4756,7 @@ components:
         body:
           $ref: '#/components/schemas/ShowSystem'
       type: object
-    inline_response_200_16:
+    inline_response_200_17:
       example:
         body:
           autoAttachSetting: true
@@ -4734,7 +4802,7 @@ components:
         body:
           $ref: '#/components/schemas/AttachEntitlement'
       type: object
-    inline_response_200_17:
+    inline_response_200_18:
       example:
         pagination:
           offset: 5
@@ -4761,7 +4829,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_18:
+    inline_response_200_19:
       example:
         pagination:
           offset: 5
