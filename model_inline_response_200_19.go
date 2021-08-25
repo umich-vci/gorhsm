@@ -14,33 +14,33 @@ import (
 	"encoding/json"
 )
 
-// InlineResponse20010 struct for InlineResponse20010
-type InlineResponse20010 struct {
-	Body       *[]PkgContentSetArch `json:"body,omitempty"`
-	Pagination *APIPageParam        `json:"pagination,omitempty"`
+// InlineResponse20019 struct for InlineResponse20019
+type InlineResponse20019 struct {
+	Body       *[]PackageForSystem `json:"body,omitempty"`
+	Pagination *APIPageParam       `json:"pagination,omitempty"`
 }
 
-// NewInlineResponse20010 instantiates a new InlineResponse20010 object
+// NewInlineResponse20019 instantiates a new InlineResponse20019 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInlineResponse20010() *InlineResponse20010 {
-	this := InlineResponse20010{}
+func NewInlineResponse20019() *InlineResponse20019 {
+	this := InlineResponse20019{}
 	return &this
 }
 
-// NewInlineResponse20010WithDefaults instantiates a new InlineResponse20010 object
+// NewInlineResponse20019WithDefaults instantiates a new InlineResponse20019 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewInlineResponse20010WithDefaults() *InlineResponse20010 {
-	this := InlineResponse20010{}
+func NewInlineResponse20019WithDefaults() *InlineResponse20019 {
+	this := InlineResponse20019{}
 	return &this
 }
 
 // GetBody returns the Body field value if set, zero value otherwise.
-func (o *InlineResponse20010) GetBody() []PkgContentSetArch {
+func (o *InlineResponse20019) GetBody() []PackageForSystem {
 	if o == nil || o.Body == nil {
-		var ret []PkgContentSetArch
+		var ret []PackageForSystem
 		return ret
 	}
 	return *o.Body
@@ -48,7 +48,7 @@ func (o *InlineResponse20010) GetBody() []PkgContentSetArch {
 
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse20010) GetBodyOk() (*[]PkgContentSetArch, bool) {
+func (o *InlineResponse20019) GetBodyOk() (*[]PackageForSystem, bool) {
 	if o == nil || o.Body == nil {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *InlineResponse20010) GetBodyOk() (*[]PkgContentSetArch, bool) {
 }
 
 // HasBody returns a boolean if a field has been set.
-func (o *InlineResponse20010) HasBody() bool {
+func (o *InlineResponse20019) HasBody() bool {
 	if o != nil && o.Body != nil {
 		return true
 	}
@@ -64,13 +64,13 @@ func (o *InlineResponse20010) HasBody() bool {
 	return false
 }
 
-// SetBody gets a reference to the given []PkgContentSetArch and assigns it to the Body field.
-func (o *InlineResponse20010) SetBody(v []PkgContentSetArch) {
+// SetBody gets a reference to the given []PackageForSystem and assigns it to the Body field.
+func (o *InlineResponse20019) SetBody(v []PackageForSystem) {
 	o.Body = &v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *InlineResponse20010) GetPagination() APIPageParam {
+func (o *InlineResponse20019) GetPagination() APIPageParam {
 	if o == nil || o.Pagination == nil {
 		var ret APIPageParam
 		return ret
@@ -80,7 +80,7 @@ func (o *InlineResponse20010) GetPagination() APIPageParam {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse20010) GetPaginationOk() (*APIPageParam, bool) {
+func (o *InlineResponse20019) GetPaginationOk() (*APIPageParam, bool) {
 	if o == nil || o.Pagination == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *InlineResponse20010) GetPaginationOk() (*APIPageParam, bool) {
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *InlineResponse20010) HasPagination() bool {
+func (o *InlineResponse20019) HasPagination() bool {
 	if o != nil && o.Pagination != nil {
 		return true
 	}
@@ -97,11 +97,11 @@ func (o *InlineResponse20010) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given APIPageParam and assigns it to the Pagination field.
-func (o *InlineResponse20010) SetPagination(v APIPageParam) {
+func (o *InlineResponse20019) SetPagination(v APIPageParam) {
 	o.Pagination = &v
 }
 
-func (o InlineResponse20010) MarshalJSON() ([]byte, error) {
+func (o InlineResponse20019) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Body != nil {
 		toSerialize["body"] = o.Body
@@ -112,38 +112,38 @@ func (o InlineResponse20010) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableInlineResponse20010 struct {
-	value *InlineResponse20010
+type NullableInlineResponse20019 struct {
+	value *InlineResponse20019
 	isSet bool
 }
 
-func (v NullableInlineResponse20010) Get() *InlineResponse20010 {
+func (v NullableInlineResponse20019) Get() *InlineResponse20019 {
 	return v.value
 }
 
-func (v *NullableInlineResponse20010) Set(val *InlineResponse20010) {
+func (v *NullableInlineResponse20019) Set(val *InlineResponse20019) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInlineResponse20010) IsSet() bool {
+func (v NullableInlineResponse20019) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInlineResponse20010) Unset() {
+func (v *NullableInlineResponse20019) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInlineResponse20010(val *InlineResponse20010) *NullableInlineResponse20010 {
-	return &NullableInlineResponse20010{value: val, isSet: true}
+func NewNullableInlineResponse20019(val *InlineResponse20019) *NullableInlineResponse20019 {
+	return &NullableInlineResponse20019{value: val, isSet: true}
 }
 
-func (v NullableInlineResponse20010) MarshalJSON() ([]byte, error) {
+func (v NullableInlineResponse20019) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInlineResponse20010) UnmarshalJSON(src []byte) error {
+func (v *NullableInlineResponse20019) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -6,6 +6,7 @@ api_allocation.go
 api_cloudaccess.go
 api_errata.go
 api_images.go
+api_organization.go
 api_packages.go
 api_subscription.go
 api_system.go
@@ -59,6 +60,7 @@ docs/InlineResponse20015.md
 docs/InlineResponse20016.md
 docs/InlineResponse20017.md
 docs/InlineResponse20018.md
+docs/InlineResponse20019.md
 docs/InlineResponse2002.md
 docs/InlineResponse2003.md
 docs/InlineResponse2004.md
@@ -74,6 +76,8 @@ docs/InstalledProducts.md
 docs/MyErrataListMock.md
 docs/MyErratum.md
 docs/OngoingExportJobResponse.md
+docs/OrgSimpleContentAccess.md
+docs/OrganizationApi.md
 docs/PackageDetail.md
 docs/PackageForSystem.md
 docs/PackageForSystemAdvisories.md
@@ -138,6 +142,7 @@ model_inline_response_200_15.go
 model_inline_response_200_16.go
 model_inline_response_200_17.go
 model_inline_response_200_18.go
+model_inline_response_200_19.go
 model_inline_response_200_2.go
 model_inline_response_200_3.go
 model_inline_response_200_4.go
@@ -153,6 +158,7 @@ model_installed_products.go
 model_my_errata_list_mock.go
 model_my_erratum.go
 model_ongoing_export_job_response.go
+model_org_simple_content_access.go
 model_package_detail.go
 model_package_for_system.go
 model_package_for_system_advisories.go

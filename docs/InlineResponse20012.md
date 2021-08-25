@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Body** | Pointer to [**[]ContentSet**](ContentSet.md) |  | [optional] 
+**Body** | Pointer to [**[]DetailResponse**](DetailResponse.md) | ListResponse is the actual collection of subscription details that gets rendered | [optional] 
 **Pagination** | Pointer to [**APIPageParam**](APIPageParam.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetBody
 
-`func (o *InlineResponse20012) GetBody() []ContentSet`
+`func (o *InlineResponse20012) GetBody() []DetailResponse`
 
 GetBody returns the Body field if non-nil, zero value otherwise.
 
 ### GetBodyOk
 
-`func (o *InlineResponse20012) GetBodyOk() (*[]ContentSet, bool)`
+`func (o *InlineResponse20012) GetBodyOk() (*[]DetailResponse, bool)`
 
 GetBodyOk returns a tuple with the Body field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBody
 
-`func (o *InlineResponse20012) SetBody(v []ContentSet)`
+`func (o *InlineResponse20012) SetBody(v []DetailResponse)`
 
 SetBody sets Body field to given value.
 
