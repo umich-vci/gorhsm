@@ -2859,7 +2859,6 @@
                 "parameters": [
                     {
                         "description": "Request for system purpose attributes in response",
-                        "example": "system_purpose_attributes",
                         "in": "query",
                         "name": "include",
                         "type": "string"
