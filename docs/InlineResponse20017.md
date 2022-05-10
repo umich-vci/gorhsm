@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Body** | Pointer to [**AttachEntitlement**](AttachEntitlement.md) |  | [optional] 
+**Body** | Pointer to [**ShowSystem**](ShowSystem.md) |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetBody
 
-`func (o *InlineResponse20017) GetBody() AttachEntitlement`
+`func (o *InlineResponse20017) GetBody() ShowSystem`
 
 GetBody returns the Body field if non-nil, zero value otherwise.
 
 ### GetBodyOk
 
-`func (o *InlineResponse20017) GetBodyOk() (*AttachEntitlement, bool)`
+`func (o *InlineResponse20017) GetBodyOk() (*ShowSystem, bool)`
 
 GetBodyOk returns a tuple with the Body field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBody
 
-`func (o *InlineResponse20017) SetBody(v AttachEntitlement)`
+`func (o *InlineResponse20017) SetBody(v ShowSystem)`
 
 SetBody sets Body field to given value.
 

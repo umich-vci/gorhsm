@@ -41,6 +41,7 @@ docs/ExportJobResponse.md
 docs/ExportResponse.md
 docs/Facts.md
 docs/GoldImageStatus.md
+docs/ImageForVersionArch.md
 docs/ImageInContentSet.md
 docs/ImagesApi.md
 docs/InlineObject.md
@@ -62,6 +63,7 @@ docs/InlineResponse20017.md
 docs/InlineResponse20018.md
 docs/InlineResponse20019.md
 docs/InlineResponse2002.md
+docs/InlineResponse20020.md
 docs/InlineResponse2003.md
 docs/InlineResponse2004.md
 docs/InlineResponse2005.md
@@ -95,6 +97,7 @@ docs/System.md
 docs/SystemApi.md
 docs/SystemList.md
 docs/SystemListMock.md
+docs/SystemPurposeAttributes.md
 git_push.sh
 go.mod
 go.sum
@@ -124,6 +127,7 @@ model_export_job_response.go
 model_export_response.go
 model_facts.go
 model_gold_image_status.go
+model_image_for_version_arch.go
 model_image_in_content_set.go
 model_inline_object.go
 model_inline_object_1.go
@@ -144,6 +148,7 @@ model_inline_response_200_17.go
 model_inline_response_200_18.go
 model_inline_response_200_19.go
 model_inline_response_200_2.go
+model_inline_response_200_20.go
 model_inline_response_200_3.go
 model_inline_response_200_4.go
 model_inline_response_200_5.go
@@ -173,5 +178,6 @@ model_show_system.go
 model_system.go
 model_system_list.go
 model_system_list_mock.go
+model_system_purpose_attributes.go
 response.go
 utils.go

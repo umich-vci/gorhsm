@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## CheckOrgSCACapability
 
-> InlineResponse2009 CheckOrgSCACapability(ctx).Execute()
+> InlineResponse20010 CheckOrgSCACapability(ctx).Include(include).Execute()
 
 Get details of the user's organization
 
@@ -29,31 +29,36 @@ import (
 )
 
 func main() {
+    include := "include_example" // string | Request for system purpose attributes in response (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.OrganizationApi.CheckOrgSCACapability(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationApi.CheckOrgSCACapability(context.Background()).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrganizationApi.CheckOrgSCACapability``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CheckOrgSCACapability`: InlineResponse2009
+    // response from `CheckOrgSCACapability`: InlineResponse20010
     fmt.Fprintf(os.Stdout, "Response from `OrganizationApi.CheckOrgSCACapability`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCheckOrgSCACapabilityRequest struct via the builder pattern
 
 
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **include** | **string** | Request for system purpose attributes in response | 
+
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 

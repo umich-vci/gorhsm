@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Identity** | **string** | base64-encoded cloud instance metadata | 
-**Signature** | **string** | base64-encoded cloud instance metadata signature | 
+**Identity** | **string** | base64-encoded cloud instance metadata. For GCE, please use the instance identity token (JWT) as it is. | 
+**Signature** | **string** | base64-encoded cloud instance metadata signature. For GCE, please omit this field. | 
 
 ## Methods
 

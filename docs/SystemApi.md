@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## AttachEntitlement
 
-> InlineResponse20017 AttachEntitlement(ctx, systemUUID).Pool(pool).Quantity(quantity).Execute()
+> InlineResponse20018 AttachEntitlement(ctx, systemUUID).Pool(pool).Quantity(quantity).Execute()
 
 Attach entitlement to system
 
@@ -41,13 +41,13 @@ func main() {
     quantity := int32(56) // int32 | quantity you want to attach (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.AttachEntitlement(context.Background(), systemUUID).Pool(pool).Quantity(quantity).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.AttachEntitlement(context.Background(), systemUUID).Pool(pool).Quantity(quantity).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.AttachEntitlement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AttachEntitlement`: InlineResponse20017
+    // response from `AttachEntitlement`: InlineResponse20018
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.AttachEntitlement`: %v\n", resp)
 }
 ```
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**InlineResponse20018**](InlineResponse20018.md)
 
 ### Authorization
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemErrata
 
-> InlineResponse20018 ListSystemErrata(ctx, systemUUID).Limit(limit).Offset(offset).Execute()
+> InlineResponse20019 ListSystemErrata(ctx, systemUUID).Limit(limit).Offset(offset).Execute()
 
 List all applicable errata for a system
 
@@ -115,13 +115,13 @@ func main() {
     offset := int32(56) // int32 | index from which you want next items (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.ListSystemErrata(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.ListSystemErrata(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemErrata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSystemErrata`: InlineResponse20018
+    // response from `ListSystemErrata`: InlineResponse20019
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemErrata`: %v\n", resp)
 }
 ```
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**InlineResponse20019**](InlineResponse20019.md)
 
 ### Authorization
 
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemPackages
 
-> InlineResponse20019 ListSystemPackages(ctx, systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
+> InlineResponse20020 ListSystemPackages(ctx, systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
 
 List all packages for a system
 
@@ -192,13 +192,13 @@ func main() {
     filter := "filter_example" // string | Filter packages (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.ListSystemPackages(context.Background(), systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.ListSystemPackages(context.Background(), systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPackages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSystemPackages`: InlineResponse20019
+    // response from `ListSystemPackages`: InlineResponse20020
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemPackages`: %v\n", resp)
 }
 ```
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**InlineResponse20020**](InlineResponse20020.md)
 
 ### Authorization
 
@@ -269,8 +269,8 @@ func main() {
     offset := int32(56) // int32 | index from which you want next items (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.ListSystemPools(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.ListSystemPools(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPools``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -319,7 +319,7 @@ Name | Type | Description  | Notes
 
 ## ListSystems
 
-> InlineResponse20015 ListSystems(ctx).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
+> InlineResponse20016 ListSystems(ctx).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
 
 List all systems for a user
 
@@ -344,13 +344,13 @@ func main() {
     username := "username_example" // string | Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.ListSystems(context.Background()).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.ListSystems(context.Background()).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystems``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSystems`: InlineResponse20015
+    // response from `ListSystems`: InlineResponse20016
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystems`: %v\n", resp)
 }
 ```
@@ -373,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**InlineResponse20016**](InlineResponse20016.md)
 
 ### Authorization
 
@@ -413,8 +413,8 @@ func main() {
     systemUUID := "systemUUID_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystem``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -482,8 +482,8 @@ func main() {
     entitlementID := "entitlementID_example" // string | Remove an entitlement from a system
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystemEntitlement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -530,7 +530,7 @@ Name | Type | Description  | Notes
 
 ## ShowSystem
 
-> InlineResponse20016 ShowSystem(ctx, systemUUID).Include(include).Execute()
+> InlineResponse20017 ShowSystem(ctx, systemUUID).Include(include).Execute()
 
 Get a system specified by UUID.
 
@@ -553,13 +553,13 @@ func main() {
     include := []string{"Include_example"} // []string | Show more details about a system (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SystemApi.ShowSystem(context.Background(), systemUUID).Include(include).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SystemApi.ShowSystem(context.Background(), systemUUID).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ShowSystem``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShowSystem`: InlineResponse20016
+    // response from `ShowSystem`: InlineResponse20017
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ShowSystem`: %v\n", resp)
 }
 ```
@@ -584,7 +584,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**InlineResponse20017**](InlineResponse20017.md)
 
 ### Authorization
 
