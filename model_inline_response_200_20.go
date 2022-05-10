@@ -14,33 +14,33 @@ import (
 	"encoding/json"
 )
 
-// InlineResponse20015 struct for InlineResponse20015
-type InlineResponse20015 struct {
-	Body       []SystemList  `json:"body,omitempty"`
-	Pagination *APIPageParam `json:"pagination,omitempty"`
+// InlineResponse20020 struct for InlineResponse20020
+type InlineResponse20020 struct {
+	Body       []PackageForSystem `json:"body,omitempty"`
+	Pagination *APIPageParam      `json:"pagination,omitempty"`
 }
 
-// NewInlineResponse20015 instantiates a new InlineResponse20015 object
+// NewInlineResponse20020 instantiates a new InlineResponse20020 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInlineResponse20015() *InlineResponse20015 {
-	this := InlineResponse20015{}
+func NewInlineResponse20020() *InlineResponse20020 {
+	this := InlineResponse20020{}
 	return &this
 }
 
-// NewInlineResponse20015WithDefaults instantiates a new InlineResponse20015 object
+// NewInlineResponse20020WithDefaults instantiates a new InlineResponse20020 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewInlineResponse20015WithDefaults() *InlineResponse20015 {
-	this := InlineResponse20015{}
+func NewInlineResponse20020WithDefaults() *InlineResponse20020 {
+	this := InlineResponse20020{}
 	return &this
 }
 
 // GetBody returns the Body field value if set, zero value otherwise.
-func (o *InlineResponse20015) GetBody() []SystemList {
+func (o *InlineResponse20020) GetBody() []PackageForSystem {
 	if o == nil || o.Body == nil {
-		var ret []SystemList
+		var ret []PackageForSystem
 		return ret
 	}
 	return o.Body
@@ -48,7 +48,7 @@ func (o *InlineResponse20015) GetBody() []SystemList {
 
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse20015) GetBodyOk() ([]SystemList, bool) {
+func (o *InlineResponse20020) GetBodyOk() ([]PackageForSystem, bool) {
 	if o == nil || o.Body == nil {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *InlineResponse20015) GetBodyOk() ([]SystemList, bool) {
 }
 
 // HasBody returns a boolean if a field has been set.
-func (o *InlineResponse20015) HasBody() bool {
+func (o *InlineResponse20020) HasBody() bool {
 	if o != nil && o.Body != nil {
 		return true
 	}
@@ -64,13 +64,13 @@ func (o *InlineResponse20015) HasBody() bool {
 	return false
 }
 
-// SetBody gets a reference to the given []SystemList and assigns it to the Body field.
-func (o *InlineResponse20015) SetBody(v []SystemList) {
+// SetBody gets a reference to the given []PackageForSystem and assigns it to the Body field.
+func (o *InlineResponse20020) SetBody(v []PackageForSystem) {
 	o.Body = v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *InlineResponse20015) GetPagination() APIPageParam {
+func (o *InlineResponse20020) GetPagination() APIPageParam {
 	if o == nil || o.Pagination == nil {
 		var ret APIPageParam
 		return ret
@@ -80,7 +80,7 @@ func (o *InlineResponse20015) GetPagination() APIPageParam {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InlineResponse20015) GetPaginationOk() (*APIPageParam, bool) {
+func (o *InlineResponse20020) GetPaginationOk() (*APIPageParam, bool) {
 	if o == nil || o.Pagination == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *InlineResponse20015) GetPaginationOk() (*APIPageParam, bool) {
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *InlineResponse20015) HasPagination() bool {
+func (o *InlineResponse20020) HasPagination() bool {
 	if o != nil && o.Pagination != nil {
 		return true
 	}
@@ -97,11 +97,11 @@ func (o *InlineResponse20015) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given APIPageParam and assigns it to the Pagination field.
-func (o *InlineResponse20015) SetPagination(v APIPageParam) {
+func (o *InlineResponse20020) SetPagination(v APIPageParam) {
 	o.Pagination = &v
 }
 
-func (o InlineResponse20015) MarshalJSON() ([]byte, error) {
+func (o InlineResponse20020) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Body != nil {
 		toSerialize["body"] = o.Body
@@ -112,38 +112,38 @@ func (o InlineResponse20015) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableInlineResponse20015 struct {
-	value *InlineResponse20015
+type NullableInlineResponse20020 struct {
+	value *InlineResponse20020
 	isSet bool
 }
 
-func (v NullableInlineResponse20015) Get() *InlineResponse20015 {
+func (v NullableInlineResponse20020) Get() *InlineResponse20020 {
 	return v.value
 }
 
-func (v *NullableInlineResponse20015) Set(val *InlineResponse20015) {
+func (v *NullableInlineResponse20020) Set(val *InlineResponse20020) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInlineResponse20015) IsSet() bool {
+func (v NullableInlineResponse20020) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInlineResponse20015) Unset() {
+func (v *NullableInlineResponse20020) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInlineResponse20015(val *InlineResponse20015) *NullableInlineResponse20015 {
-	return &NullableInlineResponse20015{value: val, isSet: true}
+func NewNullableInlineResponse20020(val *InlineResponse20020) *NullableInlineResponse20020 {
+	return &NullableInlineResponse20020{value: val, isSet: true}
 }
 
-func (v NullableInlineResponse20015) MarshalJSON() ([]byte, error) {
+func (v NullableInlineResponse20020) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInlineResponse20015) UnmarshalJSON(src []byte) error {
+func (v *NullableInlineResponse20020) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

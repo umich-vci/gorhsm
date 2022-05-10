@@ -39,8 +39,8 @@ func main() {
     account := []openapiclient.AddProviderAccount{*openapiclient.NewAddProviderAccount()} // []AddProviderAccount |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.AddProviderAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -109,8 +109,8 @@ func main() {
     goldImages := *openapiclient.NewInlineObject5([]string{"Accounts_example"}, []string{"Images_example"}) // InlineObject5 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.EnableGoldImages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -177,8 +177,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.ListEnabledCloudAccessProviders(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.ListEnabledCloudAccessProviders(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.ListEnabledCloudAccessProviders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -240,8 +240,8 @@ func main() {
     account := *openapiclient.NewInlineObject2("Id_example") // InlineObject2 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.RemoveProviderAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -311,8 +311,8 @@ func main() {
     account := *openapiclient.NewInlineObject3("Nickname_example") // InlineObject3 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -383,8 +383,8 @@ func main() {
     account := *openapiclient.NewInlineObject1("Id_example") // InlineObject1 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.UpdateProviderAccountDeprecated(context.Background(), providerShortName).Account(account).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.UpdateProviderAccountDeprecated(context.Background(), providerShortName).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccountDeprecated``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -454,8 +454,8 @@ func main() {
     account := *openapiclient.NewInlineObject4("Identity_example", "Signature_example") // InlineObject4 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.VerifyProviderAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

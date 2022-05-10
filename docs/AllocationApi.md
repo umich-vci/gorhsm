@@ -4,25 +4,26 @@ All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AttachEntitlementAllocation**](AllocationApi.md#AttachEntitlementAllocation) | **Post** /allocations/{AllocationUUID}/entitlements | Attach entitlement to allocation
+[**AttachEntitlementAllocation**](AllocationApi.md#AttachEntitlementAllocation) | **Post** /allocations/{uuid}/entitlements | Attach entitlement to allocation
 [**CreateSatellite**](AllocationApi.md#CreateSatellite) | **Post** /allocations | Create Satellite
-[**ExportAllocation**](AllocationApi.md#ExportAllocation) | **Get** /allocations/{AllocationUUID}/export | Trigger allocation manifest export
-[**ExportJobAllocation**](AllocationApi.md#ExportJobAllocation) | **Get** /allocations/{AllocationUUID}/exportJob/{ExportJobID} | Check status of allocation manifest export
-[**GetExportAllocation**](AllocationApi.md#GetExportAllocation) | **Get** /allocations/{AllocationUUID}/export/{ExportID} | Download allocation manifest
-[**ListAllocationPools**](AllocationApi.md#ListAllocationPools) | **Get** /allocations/{AllocationUUID}/pools | List all pools for an allocation
+[**ExportAllocation**](AllocationApi.md#ExportAllocation) | **Get** /allocations/{uuid}/export | Trigger allocation manifest export
+[**ExportJobAllocation**](AllocationApi.md#ExportJobAllocation) | **Get** /allocations/{uuid}/exportJob/{ExportJobID} | Check status of allocation manifest export
+[**GetExportAllocation**](AllocationApi.md#GetExportAllocation) | **Get** /allocations/{uuid}/export/{ExportID} | Download allocation manifest
+[**ListAllocationPools**](AllocationApi.md#ListAllocationPools) | **Get** /allocations/{uuid}/pools | List all pools for an allocation
 [**ListAllocations**](AllocationApi.md#ListAllocations) | **Get** /allocations | List all allocations for a user
 [**ListVersionsAllocation**](AllocationApi.md#ListVersionsAllocation) | **Get** /allocations/versions | List Satellite versions
-[**RemoveAllocation**](AllocationApi.md#RemoveAllocation) | **Delete** /allocations/{AllocationUUID} | Remove allocation profile
-[**RemoveAllocationEntitlement**](AllocationApi.md#RemoveAllocationEntitlement) | **Delete** /allocations/{AllocationUUID}/{EntitlementID} | Remove entitlement from the allocation
-[**ShowAllocation**](AllocationApi.md#ShowAllocation) | **Get** /allocations/{AllocationUUID} | Get an allocation by UUID
-[**UpdateAllocation**](AllocationApi.md#UpdateAllocation) | **Put** /allocations/{AllocationUUID} | Update an allocation
-[**UpdateEntitlementAllocation**](AllocationApi.md#UpdateEntitlementAllocation) | **Put** /allocations/{AllocationUUID}/entitlements/{EntitlementUUID} | Update attached entitlement to allocation
+[**RemoveAllocation**](AllocationApi.md#RemoveAllocation) | **Delete** /allocations/{uuid} | Remove allocation profile
+[**RemoveAllocationEntitlement**](AllocationApi.md#RemoveAllocationEntitlement) | **Delete** /allocations/{uuid}/entitlements/{EntitlementID} | Remove entitlement from the allocation
+[**RemoveAllocationEntitlementDeprecated**](AllocationApi.md#RemoveAllocationEntitlementDeprecated) | **Delete** /allocations/{uuid}/{EntitlementID} | Remove entitlement from the allocation
+[**ShowAllocation**](AllocationApi.md#ShowAllocation) | **Get** /allocations/{uuid} | Get an allocation by UUID
+[**UpdateAllocation**](AllocationApi.md#UpdateAllocation) | **Put** /allocations/{uuid} | Update an allocation
+[**UpdateEntitlementAllocation**](AllocationApi.md#UpdateEntitlementAllocation) | **Put** /allocations/{uuid}/entitlements/{EntitlementID} | Update attached entitlement to allocation
 
 
 
 ## AttachEntitlementAllocation
 
-> InlineResponse2003 AttachEntitlementAllocation(ctx, allocationUUID).Pool(pool).Quantity(quantity).Execute()
+> InlineResponse2003 AttachEntitlementAllocation(ctx, uuid).Pool(pool).Quantity(quantity).Execute()
 
 Attach entitlement to allocation
 
@@ -42,12 +43,12 @@ import (
 
 func main() {
     pool := "pool_example" // string | 
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     quantity := int32(56) // int32 | quantity you want to attach (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.AttachEntitlementAllocation(context.Background(), allocationUUID).Pool(pool).Quantity(quantity).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.AttachEntitlementAllocation(context.Background(), uuid).Pool(pool).Quantity(quantity).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.AttachEntitlementAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +64,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 
 ### Other Parameters
 
@@ -119,8 +120,8 @@ func main() {
     version := "version_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.CreateSatellite(context.Background()).Name(name).Version(version).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.CreateSatellite(context.Background()).Name(name).Version(version).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.CreateSatellite``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -164,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## ExportAllocation
 
-> InlineResponse2004 ExportAllocation(ctx, allocationUUID).Execute()
+> InlineResponse2004 ExportAllocation(ctx, uuid).Execute()
 
 Trigger allocation manifest export
 
@@ -183,11 +184,11 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.ExportAllocation(context.Background(), allocationUUID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.ExportAllocation(context.Background(), uuid).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ExportAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -203,7 +204,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 
 ### Other Parameters
 
@@ -234,7 +235,7 @@ Name | Type | Description  | Notes
 
 ## ExportJobAllocation
 
-> InlineResponse2005 ExportJobAllocation(ctx, allocationUUID, exportJobID).Execute()
+> InlineResponse2005 ExportJobAllocation(ctx, uuid, exportJobID).Execute()
 
 Check status of allocation manifest export
 
@@ -253,12 +254,12 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     exportJobID := "exportJobID_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.ExportJobAllocation(context.Background(), allocationUUID, exportJobID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.ExportJobAllocation(context.Background(), uuid, exportJobID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ExportJobAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,7 +275,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 **exportJobID** | **string** |  | 
 
 ### Other Parameters
@@ -307,7 +308,7 @@ Name | Type | Description  | Notes
 
 ## GetExportAllocation
 
-> []int32 GetExportAllocation(ctx, allocationUUID, exportID).Execute()
+> []int32 GetExportAllocation(ctx, uuid, exportID).Execute()
 
 Download allocation manifest
 
@@ -326,12 +327,12 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     exportID := "exportID_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.GetExportAllocation(context.Background(), allocationUUID, exportID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.GetExportAllocation(context.Background(), uuid, exportID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.GetExportAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -347,7 +348,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 **exportID** | **string** |  | 
 
 ### Other Parameters
@@ -380,7 +381,7 @@ Name | Type | Description  | Notes
 
 ## ListAllocationPools
 
-> PoolsListMock ListAllocationPools(ctx, allocationUUID).Limit(limit).Offset(offset).Future(future).Execute()
+> PoolsListMock ListAllocationPools(ctx, uuid).Limit(limit).Offset(offset).Future(future).Execute()
 
 List all pools for an allocation
 
@@ -399,14 +400,14 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     limit := int32(56) // int32 | max number of results you want (optional)
     offset := int32(56) // int32 | index from which you want next items (optional)
     future := true // bool | include future dated pools for satellite 6.3 or higher (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.ListAllocationPools(context.Background(), allocationUUID).Limit(limit).Offset(offset).Future(future).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.ListAllocationPools(context.Background(), uuid).Limit(limit).Offset(offset).Future(future).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListAllocationPools``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -422,7 +423,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 
 ### Other Parameters
 
@@ -480,8 +481,8 @@ func main() {
     type_ := "type__example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.ListAllocations(context.Background()).Limit(limit).Offset(offset).Type_(type_).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.ListAllocations(context.Background()).Limit(limit).Offset(offset).Type_(type_).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListAllocations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -547,8 +548,8 @@ import (
 func main() {
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.ListVersionsAllocation(context.Background()).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.ListVersionsAllocation(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListVersionsAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -587,7 +588,7 @@ Other parameters are passed through a pointer to a apiListVersionsAllocationRequ
 
 ## RemoveAllocation
 
-> RemoveAllocation(ctx, allocationUUID).Force(force).Execute()
+> RemoveAllocation(ctx, uuid).Force(force).Execute()
 
 Remove allocation profile
 
@@ -606,12 +607,12 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     force := true // bool | Deleting a subscription allocation can have significant impacts on your hosts and activation keys. We require a force parameter to make sure the delete operation is intentional.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.RemoveAllocation(context.Background(), allocationUUID).Force(force).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.RemoveAllocation(context.Background(), uuid).Force(force).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -625,7 +626,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 
 ### Other Parameters
 
@@ -657,7 +658,7 @@ Name | Type | Description  | Notes
 
 ## RemoveAllocationEntitlement
 
-> RemoveAllocationEntitlement(ctx, allocationUUID, entitlementID).Execute()
+> RemoveAllocationEntitlement(ctx, uuid, entitlementID).Execute()
 
 Remove entitlement from the allocation
 
@@ -676,12 +677,12 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     entitlementID := "entitlementID_example" // string | Remove an entitlement from an allocation
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.RemoveAllocationEntitlement(context.Background(), allocationUUID, entitlementID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.RemoveAllocationEntitlement(context.Background(), uuid, entitlementID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocationEntitlement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -695,7 +696,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 **entitlementID** | **string** | Remove an entitlement from an allocation | 
 
 ### Other Parameters
@@ -726,9 +727,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RemoveAllocationEntitlementDeprecated
+
+> RemoveAllocationEntitlementDeprecated(ctx, uuid, entitlementID).Execute()
+
+Remove entitlement from the allocation
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    uuid := "uuid_example" // string | 
+    entitlementID := "entitlementID_example" // string | Remove an entitlement from an allocation
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.RemoveAllocationEntitlementDeprecated(context.Background(), uuid, entitlementID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocationEntitlementDeprecated``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uuid** | **string** |  | 
+**entitlementID** | **string** | Remove an entitlement from an allocation | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveAllocationEntitlementDeprecatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ShowAllocation
 
-> InlineResponse2003 ShowAllocation(ctx, allocationUUID).Include(include).Execute()
+> InlineResponse2003 ShowAllocation(ctx, uuid).Include(include).Execute()
 
 Get an allocation by UUID
 
@@ -747,12 +819,12 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     include := "include_example" // string | Show more details about a allocation (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.ShowAllocation(context.Background(), allocationUUID).Include(include).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.ShowAllocation(context.Background(), uuid).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ShowAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -768,7 +840,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 
 ### Other Parameters
 
@@ -800,7 +872,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAllocation
 
-> UpdateAllocation(ctx, allocationUUID).Allocation(allocation).Execute()
+> UpdateAllocation(ctx, uuid).Allocation(allocation).Execute()
 
 Update an allocation
 
@@ -819,12 +891,12 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
+    uuid := "uuid_example" // string | 
     allocation := *openapiclient.NewInlineObject("SimpleContentAccess_example") // InlineObject |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.UpdateAllocation(context.Background(), allocationUUID).Allocation(allocation).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.UpdateAllocation(context.Background(), uuid).Allocation(allocation).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.UpdateAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -838,7 +910,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
+**uuid** | **string** |  | 
 
 ### Other Parameters
 
@@ -870,7 +942,7 @@ Name | Type | Description  | Notes
 
 ## UpdateEntitlementAllocation
 
-> InlineResponse2003 UpdateEntitlementAllocation(ctx, allocationUUID, entitlementUUID).Quantity(quantity).Execute()
+> InlineResponse2003 UpdateEntitlementAllocation(ctx, uuid, entitlementID).Quantity(quantity).Execute()
 
 Update attached entitlement to allocation
 
@@ -889,13 +961,13 @@ import (
 )
 
 func main() {
-    allocationUUID := "allocationUUID_example" // string | 
-    entitlementUUID := "entitlementUUID_example" // string | 
+    uuid := "uuid_example" // string | 
+    entitlementID := "entitlementID_example" // string | 
     quantity := int32(56) // int32 | maxItem: quantity must be less than or equal to the maximum number of allowed entitlements in the entitlement pool minItem: 1 (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AllocationApi.UpdateEntitlementAllocation(context.Background(), allocationUUID, entitlementUUID).Quantity(quantity).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AllocationApi.UpdateEntitlementAllocation(context.Background(), uuid, entitlementID).Quantity(quantity).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.UpdateEntitlementAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -911,8 +983,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**allocationUUID** | **string** |  | 
-**entitlementUUID** | **string** |  | 
+**uuid** | **string** |  | 
+**entitlementID** | **string** |  | 
 
 ### Other Parameters
 

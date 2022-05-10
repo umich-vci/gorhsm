@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Body** | Pointer to [**[]SystemList**](SystemList.md) |  | [optional] 
+**Body** | Pointer to [**[]ContentSet**](ContentSet.md) |  | [optional] 
 **Pagination** | Pointer to [**APIPageParam**](APIPageParam.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetBody
 
-`func (o *InlineResponse20014) GetBody() []SystemList`
+`func (o *InlineResponse20014) GetBody() []ContentSet`
 
 GetBody returns the Body field if non-nil, zero value otherwise.
 
 ### GetBodyOk
 
-`func (o *InlineResponse20014) GetBodyOk() (*[]SystemList, bool)`
+`func (o *InlineResponse20014) GetBodyOk() (*[]ContentSet, bool)`
 
 GetBodyOk returns a tuple with the Body field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBody
 
-`func (o *InlineResponse20014) SetBody(v []SystemList)`
+`func (o *InlineResponse20014) SetBody(v []ContentSet)`
 
 SetBody sets Body field to given value.
 

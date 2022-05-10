@@ -37,8 +37,8 @@ func main() {
     offset := int32(56) // int32 | index from which you want next items (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ErrataApi.ListErrata(context.Background()).Limit(limit).Offset(offset).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ErrataApi.ListErrata(context.Background()).Limit(limit).Offset(offset).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErrata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -107,8 +107,8 @@ func main() {
     offset := int32(56) // int32 | index from which you want next items (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ErrataApi.ListErrataByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ErrataApi.ListErrataByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErrataByContentSetArch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -183,8 +183,8 @@ func main() {
     offset := int32(56) // int32 | index from which you want next items (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ErrataApi.ListErratumPackages(context.Background(), advisoryID).Limit(limit).Offset(offset).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ErrataApi.ListErratumPackages(context.Background(), advisoryID).Limit(limit).Offset(offset).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErratumPackages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -257,8 +257,8 @@ func main() {
     offset := int32(56) // int32 | index from which you want next items (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ErrataApi.ListErratumSystems(context.Background(), advisoryID).Limit(limit).Offset(offset).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ErrataApi.ListErratumSystems(context.Background(), advisoryID).Limit(limit).Offset(offset).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ListErratumSystems``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -329,8 +329,8 @@ func main() {
     advisoryID := "advisoryID_example" // string | unique identifier for a Red Hat advisory
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ErrataApi.ShowErratum(context.Background(), advisoryID).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ErrataApi.ShowErratum(context.Background(), advisoryID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ShowErratum``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

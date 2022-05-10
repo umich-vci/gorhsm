@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Body** | Pointer to [**OrgSimpleContentAccess**](OrgSimpleContentAccess.md) |  | [optional] 
+**Body** | Pointer to [**[]ImageInContentSet**](ImageInContentSet.md) |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetBody
 
-`func (o *InlineResponse2009) GetBody() OrgSimpleContentAccess`
+`func (o *InlineResponse2009) GetBody() []ImageInContentSet`
 
 GetBody returns the Body field if non-nil, zero value otherwise.
 
 ### GetBodyOk
 
-`func (o *InlineResponse2009) GetBodyOk() (*OrgSimpleContentAccess, bool)`
+`func (o *InlineResponse2009) GetBodyOk() (*[]ImageInContentSet, bool)`
 
 GetBodyOk returns a tuple with the Body field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBody
 
-`func (o *InlineResponse2009) SetBody(v OrgSimpleContentAccess)`
+`func (o *InlineResponse2009) SetBody(v []ImageInContentSet)`
 
 SetBody sets Body field to given value.
 

@@ -4,8 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Body** | Pointer to [**[]PkgContentSetArch**](PkgContentSetArch.md) |  | [optional] 
-**Pagination** | Pointer to [**APIPageParam**](APIPageParam.md) |  | [optional] 
+**Body** | Pointer to [**OrgSimpleContentAccess**](OrgSimpleContentAccess.md) |  | [optional] 
 
 ## Methods
 
@@ -28,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetBody
 
-`func (o *InlineResponse20010) GetBody() []PkgContentSetArch`
+`func (o *InlineResponse20010) GetBody() OrgSimpleContentAccess`
 
 GetBody returns the Body field if non-nil, zero value otherwise.
 
 ### GetBodyOk
 
-`func (o *InlineResponse20010) GetBodyOk() (*[]PkgContentSetArch, bool)`
+`func (o *InlineResponse20010) GetBodyOk() (*OrgSimpleContentAccess, bool)`
 
 GetBodyOk returns a tuple with the Body field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBody
 
-`func (o *InlineResponse20010) SetBody(v []PkgContentSetArch)`
+`func (o *InlineResponse20010) SetBody(v OrgSimpleContentAccess)`
 
 SetBody sets Body field to given value.
 
@@ -50,31 +49,6 @@ SetBody sets Body field to given value.
 `func (o *InlineResponse20010) HasBody() bool`
 
 HasBody returns a boolean if a field has been set.
-
-### GetPagination
-
-`func (o *InlineResponse20010) GetPagination() APIPageParam`
-
-GetPagination returns the Pagination field if non-nil, zero value otherwise.
-
-### GetPaginationOk
-
-`func (o *InlineResponse20010) GetPaginationOk() (*APIPageParam, bool)`
-
-GetPaginationOk returns a tuple with the Pagination field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPagination
-
-`func (o *InlineResponse20010) SetPagination(v APIPageParam)`
-
-SetPagination sets Pagination field to given value.
-
-### HasPagination
-
-`func (o *InlineResponse20010) HasPagination() bool`
-
-HasPagination returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

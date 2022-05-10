@@ -34,8 +34,8 @@ func main() {
     checksum := "checksum_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PackagesApi.DownloadPackage(context.Background(), checksum).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.DownloadPackage(context.Background(), checksum).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.DownloadPackage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## ListPackagesByContentSetArch
 
-> InlineResponse20010 ListPackagesByContentSetArch(ctx, contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
+> InlineResponse20011 ListPackagesByContentSetArch(ctx, contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
 
 Get all the packages for the specified content set and arch.
 
@@ -106,13 +106,13 @@ func main() {
     filter := []string{"Filter_example"} // []string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PackagesApi.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ListPackagesByContentSetArch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListPackagesByContentSetArch`: InlineResponse20010
+    // response from `ListPackagesByContentSetArch`: InlineResponse20011
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ListPackagesByContentSetArch`: %v\n", resp)
 }
 ```
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**InlineResponse20011**](InlineResponse20011.md)
 
 ### Authorization
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## ShowPackage
 
-> InlineResponse20011 ShowPackage(ctx, checksum).Execute()
+> InlineResponse20012 ShowPackage(ctx, checksum).Execute()
 
 Get the details of a package
 
@@ -181,13 +181,13 @@ func main() {
     checksum := "checksum_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PackagesApi.ShowPackage(context.Background(), checksum).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.ShowPackage(context.Background(), checksum).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ShowPackage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShowPackage`: InlineResponse20011
+    // response from `ShowPackage`: InlineResponse20012
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ShowPackage`: %v\n", resp)
 }
 ```
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**InlineResponse20012**](InlineResponse20012.md)
 
 ### Authorization
 

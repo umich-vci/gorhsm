@@ -14,8 +14,8 @@ import (
 	"encoding/json"
 )
 
-// ImageInContentSet Image Details in a content set image listing.
-type ImageInContentSet struct {
+// ImageForVersionArch Image Details for provided version and architecture.
+type ImageForVersionArch struct {
 	Arch     *string `json:"arch,omitempty"`
 	Checksum *string `json:"checksum,omitempty"`
 	// Date represents the date format used for API returns
@@ -25,25 +25,25 @@ type ImageInContentSet struct {
 	ImageName     *string `json:"imageName,omitempty"`
 }
 
-// NewImageInContentSet instantiates a new ImageInContentSet object
+// NewImageForVersionArch instantiates a new ImageForVersionArch object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageInContentSet() *ImageInContentSet {
-	this := ImageInContentSet{}
+func NewImageForVersionArch() *ImageForVersionArch {
+	this := ImageForVersionArch{}
 	return &this
 }
 
-// NewImageInContentSetWithDefaults instantiates a new ImageInContentSet object
+// NewImageForVersionArchWithDefaults instantiates a new ImageForVersionArch object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewImageInContentSetWithDefaults() *ImageInContentSet {
-	this := ImageInContentSet{}
+func NewImageForVersionArchWithDefaults() *ImageForVersionArch {
+	this := ImageForVersionArch{}
 	return &this
 }
 
 // GetArch returns the Arch field value if set, zero value otherwise.
-func (o *ImageInContentSet) GetArch() string {
+func (o *ImageForVersionArch) GetArch() string {
 	if o == nil || o.Arch == nil {
 		var ret string
 		return ret
@@ -53,7 +53,7 @@ func (o *ImageInContentSet) GetArch() string {
 
 // GetArchOk returns a tuple with the Arch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageInContentSet) GetArchOk() (*string, bool) {
+func (o *ImageForVersionArch) GetArchOk() (*string, bool) {
 	if o == nil || o.Arch == nil {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *ImageInContentSet) GetArchOk() (*string, bool) {
 }
 
 // HasArch returns a boolean if a field has been set.
-func (o *ImageInContentSet) HasArch() bool {
+func (o *ImageForVersionArch) HasArch() bool {
 	if o != nil && o.Arch != nil {
 		return true
 	}
@@ -70,12 +70,12 @@ func (o *ImageInContentSet) HasArch() bool {
 }
 
 // SetArch gets a reference to the given string and assigns it to the Arch field.
-func (o *ImageInContentSet) SetArch(v string) {
+func (o *ImageForVersionArch) SetArch(v string) {
 	o.Arch = &v
 }
 
 // GetChecksum returns the Checksum field value if set, zero value otherwise.
-func (o *ImageInContentSet) GetChecksum() string {
+func (o *ImageForVersionArch) GetChecksum() string {
 	if o == nil || o.Checksum == nil {
 		var ret string
 		return ret
@@ -85,7 +85,7 @@ func (o *ImageInContentSet) GetChecksum() string {
 
 // GetChecksumOk returns a tuple with the Checksum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageInContentSet) GetChecksumOk() (*string, bool) {
+func (o *ImageForVersionArch) GetChecksumOk() (*string, bool) {
 	if o == nil || o.Checksum == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *ImageInContentSet) GetChecksumOk() (*string, bool) {
 }
 
 // HasChecksum returns a boolean if a field has been set.
-func (o *ImageInContentSet) HasChecksum() bool {
+func (o *ImageForVersionArch) HasChecksum() bool {
 	if o != nil && o.Checksum != nil {
 		return true
 	}
@@ -102,12 +102,12 @@ func (o *ImageInContentSet) HasChecksum() bool {
 }
 
 // SetChecksum gets a reference to the given string and assigns it to the Checksum field.
-func (o *ImageInContentSet) SetChecksum(v string) {
+func (o *ImageForVersionArch) SetChecksum(v string) {
 	o.Checksum = &v
 }
 
 // GetDatePublished returns the DatePublished field value if set, zero value otherwise.
-func (o *ImageInContentSet) GetDatePublished() string {
+func (o *ImageForVersionArch) GetDatePublished() string {
 	if o == nil || o.DatePublished == nil {
 		var ret string
 		return ret
@@ -117,7 +117,7 @@ func (o *ImageInContentSet) GetDatePublished() string {
 
 // GetDatePublishedOk returns a tuple with the DatePublished field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageInContentSet) GetDatePublishedOk() (*string, bool) {
+func (o *ImageForVersionArch) GetDatePublishedOk() (*string, bool) {
 	if o == nil || o.DatePublished == nil {
 		return nil, false
 	}
@@ -125,7 +125,7 @@ func (o *ImageInContentSet) GetDatePublishedOk() (*string, bool) {
 }
 
 // HasDatePublished returns a boolean if a field has been set.
-func (o *ImageInContentSet) HasDatePublished() bool {
+func (o *ImageForVersionArch) HasDatePublished() bool {
 	if o != nil && o.DatePublished != nil {
 		return true
 	}
@@ -134,12 +134,12 @@ func (o *ImageInContentSet) HasDatePublished() bool {
 }
 
 // SetDatePublished gets a reference to the given string and assigns it to the DatePublished field.
-func (o *ImageInContentSet) SetDatePublished(v string) {
+func (o *ImageForVersionArch) SetDatePublished(v string) {
 	o.DatePublished = &v
 }
 
 // GetDownloadHref returns the DownloadHref field value if set, zero value otherwise.
-func (o *ImageInContentSet) GetDownloadHref() string {
+func (o *ImageForVersionArch) GetDownloadHref() string {
 	if o == nil || o.DownloadHref == nil {
 		var ret string
 		return ret
@@ -149,7 +149,7 @@ func (o *ImageInContentSet) GetDownloadHref() string {
 
 // GetDownloadHrefOk returns a tuple with the DownloadHref field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageInContentSet) GetDownloadHrefOk() (*string, bool) {
+func (o *ImageForVersionArch) GetDownloadHrefOk() (*string, bool) {
 	if o == nil || o.DownloadHref == nil {
 		return nil, false
 	}
@@ -157,7 +157,7 @@ func (o *ImageInContentSet) GetDownloadHrefOk() (*string, bool) {
 }
 
 // HasDownloadHref returns a boolean if a field has been set.
-func (o *ImageInContentSet) HasDownloadHref() bool {
+func (o *ImageForVersionArch) HasDownloadHref() bool {
 	if o != nil && o.DownloadHref != nil {
 		return true
 	}
@@ -166,12 +166,12 @@ func (o *ImageInContentSet) HasDownloadHref() bool {
 }
 
 // SetDownloadHref gets a reference to the given string and assigns it to the DownloadHref field.
-func (o *ImageInContentSet) SetDownloadHref(v string) {
+func (o *ImageForVersionArch) SetDownloadHref(v string) {
 	o.DownloadHref = &v
 }
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
-func (o *ImageInContentSet) GetFilename() string {
+func (o *ImageForVersionArch) GetFilename() string {
 	if o == nil || o.Filename == nil {
 		var ret string
 		return ret
@@ -181,7 +181,7 @@ func (o *ImageInContentSet) GetFilename() string {
 
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageInContentSet) GetFilenameOk() (*string, bool) {
+func (o *ImageForVersionArch) GetFilenameOk() (*string, bool) {
 	if o == nil || o.Filename == nil {
 		return nil, false
 	}
@@ -189,7 +189,7 @@ func (o *ImageInContentSet) GetFilenameOk() (*string, bool) {
 }
 
 // HasFilename returns a boolean if a field has been set.
-func (o *ImageInContentSet) HasFilename() bool {
+func (o *ImageForVersionArch) HasFilename() bool {
 	if o != nil && o.Filename != nil {
 		return true
 	}
@@ -198,12 +198,12 @@ func (o *ImageInContentSet) HasFilename() bool {
 }
 
 // SetFilename gets a reference to the given string and assigns it to the Filename field.
-func (o *ImageInContentSet) SetFilename(v string) {
+func (o *ImageForVersionArch) SetFilename(v string) {
 	o.Filename = &v
 }
 
 // GetImageName returns the ImageName field value if set, zero value otherwise.
-func (o *ImageInContentSet) GetImageName() string {
+func (o *ImageForVersionArch) GetImageName() string {
 	if o == nil || o.ImageName == nil {
 		var ret string
 		return ret
@@ -213,7 +213,7 @@ func (o *ImageInContentSet) GetImageName() string {
 
 // GetImageNameOk returns a tuple with the ImageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ImageInContentSet) GetImageNameOk() (*string, bool) {
+func (o *ImageForVersionArch) GetImageNameOk() (*string, bool) {
 	if o == nil || o.ImageName == nil {
 		return nil, false
 	}
@@ -221,7 +221,7 @@ func (o *ImageInContentSet) GetImageNameOk() (*string, bool) {
 }
 
 // HasImageName returns a boolean if a field has been set.
-func (o *ImageInContentSet) HasImageName() bool {
+func (o *ImageForVersionArch) HasImageName() bool {
 	if o != nil && o.ImageName != nil {
 		return true
 	}
@@ -230,11 +230,11 @@ func (o *ImageInContentSet) HasImageName() bool {
 }
 
 // SetImageName gets a reference to the given string and assigns it to the ImageName field.
-func (o *ImageInContentSet) SetImageName(v string) {
+func (o *ImageForVersionArch) SetImageName(v string) {
 	o.ImageName = &v
 }
 
-func (o ImageInContentSet) MarshalJSON() ([]byte, error) {
+func (o ImageForVersionArch) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Arch != nil {
 		toSerialize["arch"] = o.Arch
@@ -257,38 +257,38 @@ func (o ImageInContentSet) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableImageInContentSet struct {
-	value *ImageInContentSet
+type NullableImageForVersionArch struct {
+	value *ImageForVersionArch
 	isSet bool
 }
 
-func (v NullableImageInContentSet) Get() *ImageInContentSet {
+func (v NullableImageForVersionArch) Get() *ImageForVersionArch {
 	return v.value
 }
 
-func (v *NullableImageInContentSet) Set(val *ImageInContentSet) {
+func (v *NullableImageForVersionArch) Set(val *ImageForVersionArch) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableImageInContentSet) IsSet() bool {
+func (v NullableImageForVersionArch) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableImageInContentSet) Unset() {
+func (v *NullableImageForVersionArch) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableImageInContentSet(val *ImageInContentSet) *NullableImageInContentSet {
-	return &NullableImageInContentSet{value: val, isSet: true}
+func NewNullableImageForVersionArch(val *ImageForVersionArch) *NullableImageForVersionArch {
+	return &NullableImageForVersionArch{value: val, isSet: true}
 }
 
-func (v NullableImageInContentSet) MarshalJSON() ([]byte, error) {
+func (v NullableImageForVersionArch) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableImageInContentSet) UnmarshalJSON(src []byte) error {
+func (v *NullableImageForVersionArch) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** |  | [optional] 
 **SimpleContentAccess** | Pointer to **string** |  | [optional] 
 **SimpleContentAccessCapable** | Pointer to **bool** |  | [optional] 
+**SystemPurposeAttributes** | Pointer to [**SystemPurposeAttributes**](SystemPurposeAttributes.md) |  | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetSimpleContentAccessCapable sets SimpleContentAccessCapable field to given val
 `func (o *OrgSimpleContentAccess) HasSimpleContentAccessCapable() bool`
 
 HasSimpleContentAccessCapable returns a boolean if a field has been set.
+
+### GetSystemPurposeAttributes
+
+`func (o *OrgSimpleContentAccess) GetSystemPurposeAttributes() SystemPurposeAttributes`
+
+GetSystemPurposeAttributes returns the SystemPurposeAttributes field if non-nil, zero value otherwise.
+
+### GetSystemPurposeAttributesOk
+
+`func (o *OrgSimpleContentAccess) GetSystemPurposeAttributesOk() (*SystemPurposeAttributes, bool)`
+
+GetSystemPurposeAttributesOk returns a tuple with the SystemPurposeAttributes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemPurposeAttributes
+
+`func (o *OrgSimpleContentAccess) SetSystemPurposeAttributes(v SystemPurposeAttributes)`
+
+SetSystemPurposeAttributes sets SystemPurposeAttributes field to given value.
+
+### HasSystemPurposeAttributes
+
+`func (o *OrgSimpleContentAccess) HasSystemPurposeAttributes() bool`
+
+HasSystemPurposeAttributes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
