@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ## ShowErratum
 
-> InlineResponse2007 ShowErratum(ctx, advisoryID).Execute()
+> ShowErratum200Response ShowErratum(ctx, advisoryID).Execute()
 
 Get the details of an advisory
 
@@ -335,7 +335,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ErrataApi.ShowErratum``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShowErratum`: InlineResponse2007
+    // response from `ShowErratum`: ShowErratum200Response
     fmt.Fprintf(os.Stdout, "Response from `ErrataApi.ShowErratum`: %v\n", resp)
 }
 ```
@@ -359,7 +359,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**ShowErratum200Response**](ShowErratum200Response.md)
 
 ### Authorization
 

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## CheckOrgSCACapability
 
-> InlineResponse20010 CheckOrgSCACapability(ctx).Include(include).Execute()
+> CheckOrgSCACapability200Response CheckOrgSCACapability(ctx).Include(include).Execute()
 
 Get details of the user's organization
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrganizationApi.CheckOrgSCACapability``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CheckOrgSCACapability`: InlineResponse20010
+    // response from `CheckOrgSCACapability`: CheckOrgSCACapability200Response
     fmt.Fprintf(os.Stdout, "Response from `OrganizationApi.CheckOrgSCACapability`: %v\n", resp)
 }
 ```
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**CheckOrgSCACapability200Response**](CheckOrgSCACapability200Response.md)
 
 ### Authorization
 

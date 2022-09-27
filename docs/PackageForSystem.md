@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Advisories** | Pointer to [**[]PackageForSystemAdvisories**](PackageForSystemAdvisories.md) |  | [optional] 
+**Advisories** | Pointer to [**[]PackageForSystemAdvisoriesInner**](PackageForSystemAdvisoriesInner.md) |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
 **Epoch** | Pointer to **int32** |  | [optional] 
 **ErrataCount** | Pointer to **int32** |  | [optional] 
@@ -33,20 +33,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAdvisories
 
-`func (o *PackageForSystem) GetAdvisories() []PackageForSystemAdvisories`
+`func (o *PackageForSystem) GetAdvisories() []PackageForSystemAdvisoriesInner`
 
 GetAdvisories returns the Advisories field if non-nil, zero value otherwise.
 
 ### GetAdvisoriesOk
 
-`func (o *PackageForSystem) GetAdvisoriesOk() (*[]PackageForSystemAdvisories, bool)`
+`func (o *PackageForSystem) GetAdvisoriesOk() (*[]PackageForSystemAdvisoriesInner, bool)`
 
 GetAdvisoriesOk returns a tuple with the Advisories field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdvisories
 
-`func (o *PackageForSystem) SetAdvisories(v []PackageForSystemAdvisories)`
+`func (o *PackageForSystem) SetAdvisories(v []PackageForSystemAdvisoriesInner)`
 
 SetAdvisories sets Advisories field to given value.
 

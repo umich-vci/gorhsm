@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## ListSubContentSets
 
-> InlineResponse20014 ListSubContentSets(ctx, subscriptionNumber).Limit(limit).Offset(offset).Execute()
+> ListSubContentSets200Response ListSubContentSets(ctx, subscriptionNumber).Limit(limit).Offset(offset).Execute()
 
 List all content sets for a subscription
 
@@ -42,7 +42,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubContentSets``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSubContentSets`: InlineResponse20014
+    // response from `ListSubContentSets`: ListSubContentSets200Response
     fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubContentSets`: %v\n", resp)
 }
 ```
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**ListSubContentSets200Response**](ListSubContentSets200Response.md)
 
 ### Authorization
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## ListSubSystems
 
-> InlineResponse20015 ListSubSystems(ctx, subscriptionNumber).Limit(limit).Offset(offset).Execute()
+> ListSubSystems200Response ListSubSystems(ctx, subscriptionNumber).Limit(limit).Offset(offset).Execute()
 
 List all systems consuming a subscription
 
@@ -116,7 +116,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubSystems``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSubSystems`: InlineResponse20015
+    // response from `ListSubSystems`: ListSubSystems200Response
     fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubSystems`: %v\n", resp)
 }
 ```
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**ListSubSystems200Response**](ListSubSystems200Response.md)
 
 ### Authorization
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## ListSubscriptions
 
-> InlineResponse20013 ListSubscriptions(ctx).Limit(limit).Offset(offset).Execute()
+> ListSubscriptions200Response ListSubscriptions(ctx).Limit(limit).Offset(offset).Execute()
 
 List all subscriptions for a user
 
@@ -189,7 +189,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubscriptions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSubscriptions`: InlineResponse20013
+    // response from `ListSubscriptions`: ListSubscriptions200Response
     fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubscriptions`: %v\n", resp)
 }
 ```
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**ListSubscriptions200Response**](ListSubscriptions200Response.md)
 
 ### Authorization
 
