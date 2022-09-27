@@ -1,12 +1,12 @@
 module github.com/umich-vci/gorhsm
 
-go 1.17
+go 1.18
 
-require golang.org/x/oauth2 v0.0.0-20210323180902-22b0adad7558
+require golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
 
 require (
-	github.com/golang/protobuf v1.4.2 // indirect
-	golang.org/x/net v0.0.0-20200822124328-c89045814202 // indirect
-	google.golang.org/appengine v1.6.6 // indirect
-	google.golang.org/protobuf v1.25.0 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
+	golang.org/x/net v0.0.0-20220926192436-02166a98028e // indirect
+	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 )
