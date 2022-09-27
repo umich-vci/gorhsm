@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## AttachEntitlement
 
-> InlineResponse20018 AttachEntitlement(ctx, systemUUID).Pool(pool).Quantity(quantity).Execute()
+> AttachEntitlement200Response AttachEntitlement(ctx, systemUUID).Pool(pool).Quantity(quantity).Execute()
 
 Attach entitlement to system
 
@@ -47,7 +47,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.AttachEntitlement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AttachEntitlement`: InlineResponse20018
+    // response from `AttachEntitlement`: AttachEntitlement200Response
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.AttachEntitlement`: %v\n", resp)
 }
 ```
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**AttachEntitlement200Response**](AttachEntitlement200Response.md)
 
 ### Authorization
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemErrata
 
-> InlineResponse20019 ListSystemErrata(ctx, systemUUID).Limit(limit).Offset(offset).Execute()
+> ListSystemErrata200Response ListSystemErrata(ctx, systemUUID).Limit(limit).Offset(offset).Execute()
 
 List all applicable errata for a system
 
@@ -121,7 +121,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemErrata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSystemErrata`: InlineResponse20019
+    // response from `ListSystemErrata`: ListSystemErrata200Response
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemErrata`: %v\n", resp)
 }
 ```
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**ListSystemErrata200Response**](ListSystemErrata200Response.md)
 
 ### Authorization
 
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## ListSystemPackages
 
-> InlineResponse20020 ListSystemPackages(ctx, systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
+> ListSystemPackages200Response ListSystemPackages(ctx, systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
 
 List all packages for a system
 
@@ -198,7 +198,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPackages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSystemPackages`: InlineResponse20020
+    // response from `ListSystemPackages`: ListSystemPackages200Response
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemPackages`: %v\n", resp)
 }
 ```
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20020**](InlineResponse20020.md)
+[**ListSystemPackages200Response**](ListSystemPackages200Response.md)
 
 ### Authorization
 
@@ -319,7 +319,7 @@ Name | Type | Description  | Notes
 
 ## ListSystems
 
-> InlineResponse20016 ListSystems(ctx).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
+> ListSystems200Response ListSystems(ctx).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
 
 List all systems for a user
 
@@ -350,7 +350,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystems``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListSystems`: InlineResponse20016
+    // response from `ListSystems`: ListSystems200Response
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystems`: %v\n", resp)
 }
 ```
@@ -373,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**ListSystems200Response**](ListSystems200Response.md)
 
 ### Authorization
 
@@ -530,7 +530,7 @@ Name | Type | Description  | Notes
 
 ## ShowSystem
 
-> InlineResponse20017 ShowSystem(ctx, systemUUID).Include(include).Execute()
+> ShowSystem200Response ShowSystem(ctx, systemUUID).Include(include).Execute()
 
 Get a system specified by UUID.
 
@@ -559,7 +559,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ShowSystem``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShowSystem`: InlineResponse20017
+    // response from `ShowSystem`: ShowSystem200Response
     fmt.Fprintf(os.Stdout, "Response from `SystemApi.ShowSystem`: %v\n", resp)
 }
 ```
@@ -584,7 +584,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**ShowSystem200Response**](ShowSystem200Response.md)
 
 ### Authorization
 

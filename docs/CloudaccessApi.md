@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**ListEnabledCloudAccessProviders**](CloudaccessApi.md#ListEnabledCloudAccessProviders) | **Get** /cloud_access_providers/enabled | List all enabled cloud access providers for a user
 [**RemoveProviderAccount**](CloudaccessApi.md#RemoveProviderAccount) | **Delete** /cloud_access_providers/{ProviderShortName}/accounts | Remove a provider account
 [**UpdateProviderAccount**](CloudaccessApi.md#UpdateProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID} | Update provider account
-[**UpdateProviderAccountDeprecated**](CloudaccessApi.md#UpdateProviderAccountDeprecated) | **Put** /cloud_access_providers/{ProviderShortName}/account | Update provider account
 [**VerifyProviderAccount**](CloudaccessApi.md#VerifyProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification | Verify a provider account
 
 
@@ -106,7 +105,7 @@ import (
 
 func main() {
     providerShortName := "providerShortName_example" // string | 
-    goldImages := *openapiclient.NewInlineObject5([]string{"Accounts_example"}, []string{"Images_example"}) // InlineObject5 |  (optional)
+    goldImages := *openapiclient.NewEnableGoldImagesRequest([]string{"Accounts_example"}, []string{"Images_example"}) // EnableGoldImagesRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -134,7 +133,7 @@ Other parameters are passed through a pointer to a apiEnableGoldImagesRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **goldImages** | [**InlineObject5**](InlineObject5.md) |  | 
+ **goldImages** | [**EnableGoldImagesRequest**](EnableGoldImagesRequest.md) |  | 
 
 ### Return type
 
@@ -156,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## ListEnabledCloudAccessProviders
 
-> InlineResponse2006 ListEnabledCloudAccessProviders(ctx).Execute()
+> ListEnabledCloudAccessProviders200Response ListEnabledCloudAccessProviders(ctx).Execute()
 
 List all enabled cloud access providers for a user
 
@@ -183,7 +182,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.ListEnabledCloudAccessProviders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListEnabledCloudAccessProviders`: InlineResponse2006
+    // response from `ListEnabledCloudAccessProviders`: ListEnabledCloudAccessProviders200Response
     fmt.Fprintf(os.Stdout, "Response from `CloudaccessApi.ListEnabledCloudAccessProviders`: %v\n", resp)
 }
 ```
@@ -199,7 +198,7 @@ Other parameters are passed through a pointer to a apiListEnabledCloudAccessProv
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**ListEnabledCloudAccessProviders200Response**](ListEnabledCloudAccessProviders200Response.md)
 
 ### Authorization
 
@@ -237,7 +236,7 @@ import (
 
 func main() {
     providerShortName := "providerShortName_example" // string | 
-    account := *openapiclient.NewInlineObject2("Id_example") // InlineObject2 |  (optional)
+    account := *openapiclient.NewRemoveProviderAccountRequest("Id_example") // RemoveProviderAccountRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -265,7 +264,7 @@ Other parameters are passed through a pointer to a apiRemoveProviderAccountReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **account** | [**InlineObject2**](InlineObject2.md) |  | 
+ **account** | [**RemoveProviderAccountRequest**](RemoveProviderAccountRequest.md) |  | 
 
 ### Return type
 
@@ -308,7 +307,7 @@ import (
 func main() {
     providerShortName := "providerShortName_example" // string | 
     accountID := "accountID_example" // string | 
-    account := *openapiclient.NewInlineObject3("Nickname_example") // InlineObject3 |  (optional)
+    account := *openapiclient.NewUpdateProviderAccountRequest("Nickname_example") // UpdateProviderAccountRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -338,77 +337,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **account** | [**InlineObject3**](InlineObject3.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateProviderAccountDeprecated
-
-> UpdateProviderAccountDeprecated(ctx, providerShortName).Account(account).Execute()
-
-Update provider account
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    providerShortName := "providerShortName_example" // string | 
-    account := *openapiclient.NewInlineObject1("Id_example") // InlineObject1 |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.UpdateProviderAccountDeprecated(context.Background(), providerShortName).Account(account).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccountDeprecated``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**providerShortName** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateProviderAccountDeprecatedRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **account** | [**InlineObject1**](InlineObject1.md) |  | 
+ **account** | [**UpdateProviderAccountRequest**](UpdateProviderAccountRequest.md) |  | 
 
 ### Return type
 
@@ -451,7 +380,7 @@ import (
 func main() {
     providerShortName := "providerShortName_example" // string | 
     accountID := "accountID_example" // string | 
-    account := *openapiclient.NewInlineObject4("Identity_example", "Signature_example") // InlineObject4 |  (optional)
+    account := *openapiclient.NewVerifyProviderAccountRequest("Identity_example", "Signature_example") // VerifyProviderAccountRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -481,7 +410,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **account** | [**InlineObject4**](InlineObject4.md) |  | 
+ **account** | [**VerifyProviderAccountRequest**](VerifyProviderAccountRequest.md) |  | 
 
 ### Return type
 

@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## ListImageDownloadsByVersionArch
 
-> InlineResponse2009 ListImageDownloadsByVersionArch(ctx, version, arch).Execute()
+> ListImageDownloadsByVersionArch200Response ListImageDownloadsByVersionArch(ctx, version, arch).Execute()
 
 List RHEL image downloads by version and architecture.
 
@@ -109,7 +109,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesApi.ListImageDownloadsByVersionArch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListImageDownloadsByVersionArch`: InlineResponse2009
+    // response from `ListImageDownloadsByVersionArch`: ListImageDownloadsByVersionArch200Response
     fmt.Fprintf(os.Stdout, "Response from `ImagesApi.ListImageDownloadsByVersionArch`: %v\n", resp)
 }
 ```
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**ListImageDownloadsByVersionArch200Response**](ListImageDownloadsByVersionArch200Response.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## ListImagesByContentSet
 
-> InlineResponse2008 ListImagesByContentSet(ctx, contentSet).Limit(limit).Offset(offset).Execute()
+> ListImagesByContentSet200Response ListImagesByContentSet(ctx, contentSet).Limit(limit).Offset(offset).Execute()
 
 List available images in a content set
 
@@ -183,7 +183,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ImagesApi.ListImagesByContentSet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListImagesByContentSet`: InlineResponse2008
+    // response from `ListImagesByContentSet`: ListImagesByContentSet200Response
     fmt.Fprintf(os.Stdout, "Response from `ImagesApi.ListImagesByContentSet`: %v\n", resp)
 }
 ```
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**ListImagesByContentSet200Response**](ListImagesByContentSet200Response.md)
 
 ### Authorization
 

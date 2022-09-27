@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## AttachEntitlementAllocation
 
-> InlineResponse2003 AttachEntitlementAllocation(ctx, uuid).Pool(pool).Quantity(quantity).Execute()
+> ShowAllocation200Response AttachEntitlementAllocation(ctx, uuid).Pool(pool).Quantity(quantity).Execute()
 
 Attach entitlement to allocation
 
@@ -53,7 +53,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.AttachEntitlementAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AttachEntitlementAllocation`: InlineResponse2003
+    // response from `AttachEntitlementAllocation`: ShowAllocation200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.AttachEntitlementAllocation`: %v\n", resp)
 }
 ```
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**ShowAllocation200Response**](ShowAllocation200Response.md)
 
 ### Authorization
 
@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## CreateSatellite
 
-> InlineResponse2001 CreateSatellite(ctx).Name(name).Version(version).Execute()
+> CreateSatellite200Response CreateSatellite(ctx).Name(name).Version(version).Execute()
 
 Create Satellite
 
@@ -126,7 +126,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.CreateSatellite``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateSatellite`: InlineResponse2001
+    // response from `CreateSatellite`: CreateSatellite200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.CreateSatellite`: %v\n", resp)
 }
 ```
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**CreateSatellite200Response**](CreateSatellite200Response.md)
 
 ### Authorization
 
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## ExportAllocation
 
-> InlineResponse2004 ExportAllocation(ctx, uuid).Execute()
+> ExportAllocation200Response ExportAllocation(ctx, uuid).Execute()
 
 Trigger allocation manifest export
 
@@ -193,7 +193,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ExportAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ExportAllocation`: InlineResponse2004
+    // response from `ExportAllocation`: ExportAllocation200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ExportAllocation`: %v\n", resp)
 }
 ```
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**ExportAllocation200Response**](ExportAllocation200Response.md)
 
 ### Authorization
 
@@ -235,7 +235,7 @@ Name | Type | Description  | Notes
 
 ## ExportJobAllocation
 
-> InlineResponse2005 ExportJobAllocation(ctx, uuid, exportJobID).Execute()
+> ExportJobAllocation200Response ExportJobAllocation(ctx, uuid, exportJobID).Execute()
 
 Check status of allocation manifest export
 
@@ -264,7 +264,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ExportJobAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ExportJobAllocation`: InlineResponse2005
+    // response from `ExportJobAllocation`: ExportJobAllocation200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ExportJobAllocation`: %v\n", resp)
 }
 ```
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**ExportJobAllocation200Response**](ExportJobAllocation200Response.md)
 
 ### Authorization
 
@@ -457,7 +457,7 @@ Name | Type | Description  | Notes
 
 ## ListAllocations
 
-> InlineResponse200 ListAllocations(ctx).Limit(limit).Offset(offset).Type_(type_).Execute()
+> ListAllocations200Response ListAllocations(ctx).Limit(limit).Offset(offset).Type_(type_).Execute()
 
 List all allocations for a user
 
@@ -487,7 +487,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListAllocations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListAllocations`: InlineResponse200
+    // response from `ListAllocations`: ListAllocations200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ListAllocations`: %v\n", resp)
 }
 ```
@@ -509,7 +509,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**ListAllocations200Response**](ListAllocations200Response.md)
 
 ### Authorization
 
@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 
 ## ListVersionsAllocation
 
-> InlineResponse2002 ListVersionsAllocation(ctx).Execute()
+> ListVersionsAllocation200Response ListVersionsAllocation(ctx).Execute()
 
 List Satellite versions
 
@@ -554,7 +554,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ListVersionsAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListVersionsAllocation`: InlineResponse2002
+    // response from `ListVersionsAllocation`: ListVersionsAllocation200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ListVersionsAllocation`: %v\n", resp)
 }
 ```
@@ -570,7 +570,7 @@ Other parameters are passed through a pointer to a apiListVersionsAllocationRequ
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**ListVersionsAllocation200Response**](ListVersionsAllocation200Response.md)
 
 ### Authorization
 
@@ -800,7 +800,7 @@ Name | Type | Description  | Notes
 
 ## ShowAllocation
 
-> InlineResponse2003 ShowAllocation(ctx, uuid).Include(include).Execute()
+> ShowAllocation200Response ShowAllocation(ctx, uuid).Include(include).Execute()
 
 Get an allocation by UUID
 
@@ -829,7 +829,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.ShowAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShowAllocation`: InlineResponse2003
+    // response from `ShowAllocation`: ShowAllocation200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.ShowAllocation`: %v\n", resp)
 }
 ```
@@ -854,7 +854,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**ShowAllocation200Response**](ShowAllocation200Response.md)
 
 ### Authorization
 
@@ -892,7 +892,7 @@ import (
 
 func main() {
     uuid := "uuid_example" // string | 
-    allocation := *openapiclient.NewInlineObject("SimpleContentAccess_example") // InlineObject |  (optional)
+    allocation := *openapiclient.NewUpdateAllocationRequest("SimpleContentAccess_example") // UpdateAllocationRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -920,7 +920,7 @@ Other parameters are passed through a pointer to a apiUpdateAllocationRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **allocation** | [**InlineObject**](InlineObject.md) |  | 
+ **allocation** | [**UpdateAllocationRequest**](UpdateAllocationRequest.md) |  | 
 
 ### Return type
 
@@ -942,7 +942,7 @@ Name | Type | Description  | Notes
 
 ## UpdateEntitlementAllocation
 
-> InlineResponse2003 UpdateEntitlementAllocation(ctx, uuid, entitlementID).Quantity(quantity).Execute()
+> ShowAllocation200Response UpdateEntitlementAllocation(ctx, uuid, entitlementID).Quantity(quantity).Execute()
 
 Update attached entitlement to allocation
 
@@ -972,7 +972,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.UpdateEntitlementAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateEntitlementAllocation`: InlineResponse2003
+    // response from `UpdateEntitlementAllocation`: ShowAllocation200Response
     fmt.Fprintf(os.Stdout, "Response from `AllocationApi.UpdateEntitlementAllocation`: %v\n", resp)
 }
 ```
@@ -999,7 +999,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**ShowAllocation200Response**](ShowAllocation200Response.md)
 
 ### Authorization
 

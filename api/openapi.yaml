@@ -4,7 +4,7 @@ info:
     url: https://access.redhat.com/support/cases/
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.264.0
+  version: 1.300.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
@@ -45,37 +45,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/listAllocations_200_response'
           description: list of allocations
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all allocations for a user
       tags:
@@ -87,8 +87,8 @@ paths:
         If no version is specified, it will take the latest available version for Satellite.
       operationId: createSatellite
       parameters:
-      - description: must be less than 100 characters and use only numbers, letters,
-          underscores, hyphens, and periods
+      - description: "must be less than 100 characters and use only numbers, letters,\
+          \ underscores, hyphens, and periods"
         in: query
         name: name
         required: true
@@ -103,37 +103,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/createSatellite_200_response'
           description: Success
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Create Satellite
       tags:
@@ -147,37 +147,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/listVersionsAllocation_200_response'
           description: list of Satellite version
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List Satellite versions
       tags:
@@ -213,43 +213,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
         "504":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: GatewayTimeout error
       summary: Remove allocation profile
       tags:
       - allocation
     get:
-      description: System, RHUI, Hypervisor are unsupported allocation types
+      description: "System, RHUI, Hypervisor are unsupported allocation types"
       operationId: showAllocation
       parameters:
       - in: path
@@ -269,37 +269,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/showAllocation_200_response'
           description: ShowAllocation200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get an allocation by UUID
       tags:
@@ -319,16 +319,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object'
         content:
           application/json:
             schema:
-              properties:
-                simpleContentAccess:
-                  type: string
-              required:
-              - simpleContentAccess
-              type: object
+              $ref: '#/components/schemas/updateAllocation_request'
         required: false
       responses:
         "204":
@@ -338,31 +332,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Update an allocation
       tags:
@@ -397,37 +391,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/showAllocation_200_response'
           description: AttachEntitlement200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Attach entitlement to allocation
       tags:
@@ -456,31 +450,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Remove entitlement from the allocation
       tags:
@@ -513,37 +507,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/showAllocation_200_response'
           description: Success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Update attached entitlement to allocation
       tags:
@@ -566,37 +560,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/exportAllocation_200_response'
           description: ExportAllocation200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Trigger allocation manifest export
       tags:
@@ -632,31 +626,31 @@ paths:
           content:
             application/zip:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/zip:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/zip:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/zip:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/zip:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Download allocation manifest
       tags:
@@ -681,58 +675,58 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_5'
+                $ref: '#/components/schemas/exportJobAllocation_200_response'
           description: ExportJobAllocation200 is the success response
         "202":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_202'
+                $ref: '#/components/schemas/exportJobAllocation_202_response'
           description: AcceptedExportJob202 is a response for accepted and in progress
             job
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "406":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotAcceptable error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Check status of allocation manifest export
       tags:
       - allocation
   /allocations/{uuid}/pools:
     get:
-      description: System, RHUI, Hypervisor are unsupported allocation types. SAM
-        1.3 or higher, and Satellite 5.6 versions are supported.
+      description: "System, RHUI, Hypervisor are unsupported allocation types. SAM\
+        \ 1.3 or higher, and Satellite 5.6 versions are supported."
       operationId: listAllocationPools
       parameters:
       - description: max number of results you want
@@ -768,31 +762,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all pools for an allocation
       tags:
@@ -822,31 +816,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Remove entitlement from the allocation
       tags:
@@ -866,106 +860,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_6'
+                $ref: '#/components/schemas/listEnabledCloudAccessProviders_200_response'
           description: A JSON response object listing cloud access providers and their
             accounts and products.
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all enabled cloud access providers for a user
       tags:
       - cloudaccess
-  /cloud_access_providers/{ProviderShortName}/account:
-    put:
-      deprecated: true
-      description: |
-        Updates the account nickname for a currently-enabled provider account. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
-      operationId: UpdateProviderAccountDeprecated
-      parameters:
-      - in: path
-        name: ProviderShortName
-        required: true
-        schema:
-          type: string
-      requestBody:
-        $ref: '#/components/requestBodies/inline_object_1'
-        content:
-          application/json:
-            schema:
-              properties:
-                id:
-                  type: string
-                newNickname:
-                  type: string
-              required:
-              - id
-              type: object
-        required: false
-      responses:
-        "204":
-          content: {}
-          description: No Content
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: BadRequest error
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: Unauthorized error
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: Forbidden error
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: NotFound error
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: InternalServerError error
-      summary: Update provider account
-      tags:
-      - cloudaccess
-      x-codegen-request-body-name: account
   /cloud_access_providers/{ProviderShortName}/accounts:
     delete:
       description: |
@@ -978,16 +908,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_2'
         content:
           application/json:
             schema:
-              properties:
-                id:
-                  type: string
-              required:
-              - id
-              type: object
+              $ref: '#/components/schemas/RemoveProviderAccount_request'
         required: false
       responses:
         "204":
@@ -997,31 +921,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Remove a provider account
       tags:
@@ -1053,31 +977,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Add accounts for a provider
       tags:
@@ -1100,16 +1024,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_3'
         content:
           application/json:
             schema:
-              properties:
-                nickname:
-                  type: string
-              required:
-              - nickname
-              type: object
+              $ref: '#/components/schemas/UpdateProviderAccount_request'
         required: false
       responses:
         "204":
@@ -1119,31 +1037,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Update provider account
       tags:
@@ -1190,23 +1108,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_4'
         content:
           application/json:
             schema:
-              properties:
-                identity:
-                  description: base64-encoded cloud instance metadata. For GCE, please
-                    use the instance identity token (JWT) as it is.
-                  type: string
-                signature:
-                  description: base64-encoded cloud instance metadata signature. For
-                    GCE, please omit this field.
-                  type: string
-              required:
-              - identity
-              - signature
-              type: object
+              $ref: '#/components/schemas/VerifyProviderAccount_request'
         required: false
       responses:
         "204":
@@ -1216,31 +1121,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Verify a provider account
       tags:
@@ -1258,58 +1163,45 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_5'
         content:
           application/json:
             schema:
-              properties:
-                accounts:
-                  items:
-                    type: string
-                  type: array
-                images:
-                  items:
-                    type: string
-                  type: array
-              required:
-              - accounts
-              - images
-              type: object
+              $ref: '#/components/schemas/EnableGoldImages_request'
         required: false
       responses:
         "202":
           content: {}
-          description: 'Accepted: The request has been accepted for processing, but
-            the processing has not been completed.'
+          description: "Accepted: The request has been accepted for processing, but\
+            \ the processing has not been completed."
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Enable Gold image access
       tags:
@@ -1341,31 +1233,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all errata for a user's systems
       tags:
@@ -1407,31 +1299,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get all the errata for the specified content set and arch
       tags:
@@ -1452,37 +1344,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_7'
+                $ref: '#/components/schemas/showErratum_200_response'
           description: ShowErratum200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get the details of an advisory
       tags:
@@ -1519,31 +1411,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all packages for an advisory
       tags:
@@ -1580,31 +1472,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all systems for an advisory
       tags:
@@ -1637,37 +1529,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_8'
+                $ref: '#/components/schemas/listImagesByContentSet_200_response'
           description: A JSON response object containing image listing.
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List available images in a content set
       tags:
@@ -1696,37 +1588,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/listImageDownloadsByVersionArch_200_response'
           description: A JSON response object containing image downloads list.
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List RHEL image downloads by version and architecture.
       tags:
@@ -1741,14 +1633,14 @@ paths:
         name: checksum
         required: true
         schema:
-          pattern: ^[a-f0-9]{64}$
+          pattern: "^[a-f0-9]{64}$"
           type: string
       responses:
         "307":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_307'
+                $ref: '#/components/schemas/downloadImage_307_response'
           description: redirect to download image on the Red Hat CDN
           headers:
             Location:
@@ -1759,31 +1651,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Download an image by its SHA256 checksum
       tags:
@@ -1803,37 +1695,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
+                $ref: '#/components/schemas/checkOrgSCACapability_200_response'
           description: Organization details
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get details of the user's organization
       tags:
@@ -1879,37 +1771,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/listPackagesByContentSetArch_200_response'
           description: ListPackagesByContentSetArch200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get all the packages for the specified content set and arch.
       tags:
@@ -1929,37 +1821,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/showPackage_200_response'
           description: ShowPackage200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get the details of a package
       tags:
@@ -1974,14 +1866,14 @@ paths:
         name: checksum
         required: true
         schema:
-          pattern: ^[a-f0-9]{64}$
+          pattern: "^[a-f0-9]{64}$"
           type: string
       responses:
         "307":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_307'
+                $ref: '#/components/schemas/downloadImage_307_response'
           description: redirect to download package on the Red Hat CDN
           headers:
             Location:
@@ -1992,31 +1884,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Download a package by its SHA256 checksum
       tags:
@@ -2041,37 +1933,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/listSubscriptions_200_response'
           description: ListSubscriptions200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all subscriptions for a user
       tags:
@@ -2101,37 +1993,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
+                $ref: '#/components/schemas/listSubContentSets_200_response'
           description: ListSubContentSets200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all content sets for a subscription
       tags:
@@ -2161,37 +2053,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
+                $ref: '#/components/schemas/listSubSystems_200_response'
           description: ListSubSystems200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all systems consuming a subscription
       tags:
@@ -2216,8 +2108,8 @@ paths:
         name: filter
         schema:
           type: string
-      - description: Filter Systems by a valid User Name, where User Name is the system
-          owner and wildcard characters are not allowed
+      - description: "Filter Systems by a valid User Name, where User Name is the\
+          \ system owner and wildcard characters are not allowed"
         in: query
         name: username
         schema:
@@ -2227,37 +2119,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_16'
+                $ref: '#/components/schemas/listSystems_200_response'
           description: ListSystems200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all systems for a user
       tags:
@@ -2280,37 +2172,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
         "504":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: GatewayTimeout error
       summary: Remove system profile
       tags:
@@ -2344,37 +2236,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_17'
+                $ref: '#/components/schemas/showSystem_200_response'
           description: ShowSystem200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get a system specified by UUID.
       tags:
@@ -2407,37 +2299,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_18'
+                $ref: '#/components/schemas/attachEntitlement_200_response'
           description: AttachedEntitlement200 is the success response
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Attach entitlement to system
       tags:
@@ -2467,37 +2359,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_19'
+                $ref: '#/components/schemas/listSystemErrata_200_response'
           description: list of advisories
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all applicable errata for a system
       tags:
@@ -2549,37 +2441,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_20'
+                $ref: '#/components/schemas/listSystemPackages_200_response'
           description: list of packages
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all packages for a system
       tags:
@@ -2615,31 +2507,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: List all pools for a system
       tags:
@@ -2668,78 +2560,41 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: BadRequest error
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Unauthorized error
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: Forbidden error
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: NotFound error
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Remove entitlement from the system
       tags:
       - system
 components:
-  requestBodies:
-    inline_object_1:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_1'
-      required: false
-    inline_object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object'
-      required: false
-    inline_object_5:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_5'
-      required: false
-    inline_object_4:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_4'
-      required: false
-    inline_object_3:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_3'
-      required: false
-    inline_object_2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_2'
-      required: false
   responses:
     Accepted:
       content: {}
-      description: 'Accepted: The request has been accepted for processing, but the
-        processing has not been completed.'
+      description: "Accepted: The request has been accepted for processing, but the\
+        \ processing has not been completed."
     BadRequest:
       content:
         application/json:
@@ -3708,7 +3563,7 @@ components:
       properties:
         advisories:
           items:
-            $ref: '#/components/schemas/PackageForSystem_advisories'
+            $ref: '#/components/schemas/PackageForSystem_advisories_inner'
           type: array
         arch:
           type: string
@@ -4306,7 +4161,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200:
+    listAllocations_200_response:
       example:
         pagination:
           offset: 5
@@ -4335,12 +4190,12 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_400:
+    listAllocations_400_response:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
       type: object
-    inline_response_200_1:
+    createSatellite_200_response:
       example:
         body:
           createdDate: 2006-01-02T15:04:05.000Z
@@ -4356,7 +4211,7 @@ components:
         body:
           $ref: '#/components/schemas/AllocationSummary'
       type: object
-    inline_response_200_2:
+    listVersionsAllocation_200_response:
       example:
         body:
         - description: description
@@ -4369,7 +4224,7 @@ components:
             $ref: '#/components/schemas/AllocationVersion'
           type: array
       type: object
-    inline_response_200_3:
+    showAllocation_200_response:
       example:
         body:
           createdDate: 2006-01-02T15:04:05.000Z
@@ -4403,14 +4258,14 @@ components:
         body:
           $ref: '#/components/schemas/AllocationDetails'
       type: object
-    inline_object:
+    updateAllocation_request:
       properties:
         simpleContentAccess:
           type: string
       required:
       - simpleContentAccess
       type: object
-    inline_response_200_4:
+    exportAllocation_200_response:
       example:
         body:
           href: href
@@ -4419,7 +4274,7 @@ components:
         body:
           $ref: '#/components/schemas/exportResponse'
       type: object
-    inline_response_200_5:
+    exportJobAllocation_200_response:
       example:
         body:
           href: href
@@ -4428,12 +4283,12 @@ components:
         body:
           $ref: '#/components/schemas/exportJobResponse'
       type: object
-    inline_response_202:
+    exportJobAllocation_202_response:
       properties:
         body:
           $ref: '#/components/schemas/ongoingExportJobResponse'
       type: object
-    inline_response_200_6:
+    listEnabledCloudAccessProviders_200_response:
       example:
         body:
         - name: name
@@ -4530,44 +4385,35 @@ components:
             $ref: '#/components/schemas/EnabledCloudAccessProvider'
           type: array
       type: object
-    inline_object_1:
-      properties:
-        id:
-          type: string
-        newNickname:
-          type: string
-      required:
-      - id
-      type: object
-    inline_object_2:
+    RemoveProviderAccount_request:
       properties:
         id:
           type: string
       required:
       - id
       type: object
-    inline_object_3:
+    UpdateProviderAccount_request:
       properties:
         nickname:
           type: string
       required:
       - nickname
       type: object
-    inline_object_4:
+    VerifyProviderAccount_request:
       properties:
         identity:
-          description: base64-encoded cloud instance metadata. For GCE, please use
-            the instance identity token (JWT) as it is.
+          description: "base64-encoded cloud instance metadata. For GCE, please use\
+            \ the instance identity token (JWT) as it is."
           type: string
         signature:
-          description: base64-encoded cloud instance metadata signature. For GCE,
-            please omit this field.
+          description: "base64-encoded cloud instance metadata signature. For GCE,\
+            \ please omit this field."
           type: string
       required:
       - identity
       - signature
       type: object
-    inline_object_5:
+    EnableGoldImages_request:
       properties:
         accounts:
           items:
@@ -4581,7 +4427,7 @@ components:
       - accounts
       - images
       type: object
-    inline_response_200_7:
+    showErratum_200_response:
       example:
         body:
           severity: severity
@@ -4621,7 +4467,7 @@ components:
         body:
           $ref: '#/components/schemas/ErratumDetails'
       type: object
-    inline_response_200_8:
+    listImagesByContentSet_200_response:
       example:
         pagination:
           offset: 5
@@ -4648,7 +4494,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_9:
+    listImageDownloadsByVersionArch_200_response:
       example:
         body:
         - datePublished: 2006-01-02T15:04:05.000Z
@@ -4669,12 +4515,12 @@ components:
             $ref: '#/components/schemas/ImageInContentSet'
           type: array
       type: object
-    inline_response_307:
+    downloadImage_307_response:
       properties:
         body:
           $ref: '#/components/schemas/DownloadLink'
       type: object
-    inline_response_200_10:
+    checkOrgSCACapability_200_response:
       example:
         body:
           systemPurposeAttributes:
@@ -4694,7 +4540,7 @@ components:
         body:
           $ref: '#/components/schemas/OrgSimpleContentAccess'
       type: object
-    inline_response_200_11:
+    listPackagesByContentSetArch_200_response:
       example:
         pagination:
           offset: 5
@@ -4745,7 +4591,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_12:
+    showPackage_200_response:
       example:
         body:
           summary: summary
@@ -4769,7 +4615,7 @@ components:
         body:
           $ref: '#/components/schemas/pkgDetails'
       type: object
-    inline_response_200_13:
+    listSubscriptions_200_response:
       example:
         pagination:
           offset: 5
@@ -4821,7 +4667,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_14:
+    listSubContentSets_200_response:
       example:
         pagination:
           offset: 5
@@ -4846,7 +4692,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_15:
+    listSubSystems_200_response:
       example:
         pagination:
           offset: 5
@@ -4877,7 +4723,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_16:
+    listSystems_200_response:
       example:
         pagination:
           offset: 5
@@ -4919,7 +4765,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_17:
+    showSystem_200_response:
       example:
         body:
           autoAttachSetting: true
@@ -4974,7 +4820,7 @@ components:
         body:
           $ref: '#/components/schemas/ShowSystem'
       type: object
-    inline_response_200_18:
+    attachEntitlement_200_response:
       example:
         body:
           autoAttachSetting: true
@@ -5020,7 +4866,7 @@ components:
         body:
           $ref: '#/components/schemas/AttachEntitlement'
       type: object
-    inline_response_200_19:
+    listSystemErrata_200_response:
       example:
         pagination:
           offset: 5
@@ -5047,7 +4893,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    inline_response_200_20:
+    listSystemPackages_200_response:
       example:
         pagination:
           offset: 5
@@ -5084,7 +4930,7 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
-    PackageForSystem_advisories:
+    PackageForSystem_advisories_inner:
       example:
         advisory: advisory
         url: url

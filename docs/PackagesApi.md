@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## ListPackagesByContentSetArch
 
-> InlineResponse20011 ListPackagesByContentSetArch(ctx, contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
+> ListPackagesByContentSetArch200Response ListPackagesByContentSetArch(ctx, contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
 
 Get all the packages for the specified content set and arch.
 
@@ -112,7 +112,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ListPackagesByContentSetArch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListPackagesByContentSetArch`: InlineResponse20011
+    // response from `ListPackagesByContentSetArch`: ListPackagesByContentSetArch200Response
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ListPackagesByContentSetArch`: %v\n", resp)
 }
 ```
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**ListPackagesByContentSetArch200Response**](ListPackagesByContentSetArch200Response.md)
 
 ### Authorization
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## ShowPackage
 
-> InlineResponse20012 ShowPackage(ctx, checksum).Execute()
+> ShowPackage200Response ShowPackage(ctx, checksum).Execute()
 
 Get the details of a package
 
@@ -187,7 +187,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ShowPackage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ShowPackage`: InlineResponse20012
+    // response from `ShowPackage`: ShowPackage200Response
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ShowPackage`: %v\n", resp)
 }
 ```
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**ShowPackage200Response**](ShowPackage200Response.md)
 
 ### Authorization
 
