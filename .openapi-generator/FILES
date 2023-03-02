@@ -178,4 +178,12 @@ model_update_allocation_request.go
 model_update_provider_account_request.go
 model_verify_provider_account_request.go
 response.go
+test/api_allocation_test.go
+test/api_cloudaccess_test.go
+test/api_errata_test.go
+test/api_images_test.go
+test/api_organization_test.go
+test/api_packages_test.go
+test/api_subscription_test.go
+test/api_system_test.go
 utils.go

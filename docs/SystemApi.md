@@ -32,7 +32,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -106,7 +106,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -180,7 +180,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -260,7 +260,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -334,7 +334,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -406,7 +406,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -414,7 +414,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
+    r, err := apiClient.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystem``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -474,7 +474,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -483,7 +483,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
+    r, err := apiClient.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystemEntitlement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -545,7 +545,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {

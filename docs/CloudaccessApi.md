@@ -30,7 +30,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -39,7 +39,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
+    r, err := apiClient.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.AddProviderAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -100,7 +100,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -109,7 +109,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
+    r, err := apiClient.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.EnableGoldImages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -170,7 +170,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -231,7 +231,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -240,7 +240,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
+    r, err := apiClient.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.RemoveProviderAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -301,7 +301,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -311,7 +311,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+    r, err := apiClient.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -374,7 +374,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -384,7 +384,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+    r, err := apiClient.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.VerifyProviderAccount``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

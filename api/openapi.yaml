@@ -4,7 +4,7 @@ info:
     url: https://access.redhat.com/support/cases/
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.300.0
+  version: 1.313.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
@@ -90,7 +90,7 @@ paths:
       - description: "must be less than 100 characters and use only numbers, letters,\
           \ underscores, hyphens, and periods"
         in: query
-        name: name
+        name: Name
         required: true
         schema:
           type: string
