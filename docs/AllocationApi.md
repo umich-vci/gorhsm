@@ -38,7 +38,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -112,7 +112,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -180,7 +180,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -250,7 +250,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -323,7 +323,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -396,7 +396,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -472,7 +472,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -542,7 +542,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -603,7 +603,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -612,7 +612,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AllocationApi.RemoveAllocation(context.Background(), uuid).Force(force).Execute()
+    r, err := apiClient.AllocationApi.RemoveAllocation(context.Background(), uuid).Force(force).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -673,7 +673,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -682,7 +682,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AllocationApi.RemoveAllocationEntitlement(context.Background(), uuid, entitlementID).Execute()
+    r, err := apiClient.AllocationApi.RemoveAllocationEntitlement(context.Background(), uuid, entitlementID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocationEntitlement``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -744,7 +744,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -753,7 +753,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AllocationApi.RemoveAllocationEntitlementDeprecated(context.Background(), uuid, entitlementID).Execute()
+    r, err := apiClient.AllocationApi.RemoveAllocationEntitlementDeprecated(context.Background(), uuid, entitlementID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.RemoveAllocationEntitlementDeprecated``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -815,7 +815,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -887,7 +887,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
@@ -896,7 +896,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AllocationApi.UpdateAllocation(context.Background(), uuid).Allocation(allocation).Execute()
+    r, err := apiClient.AllocationApi.UpdateAllocation(context.Background(), uuid).Allocation(allocation).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AllocationApi.UpdateAllocation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -957,7 +957,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {

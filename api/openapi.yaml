@@ -4,7 +4,7 @@ info:
     url: https://access.redhat.com/support/cases/
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.300.0
+  version: 1.313.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
