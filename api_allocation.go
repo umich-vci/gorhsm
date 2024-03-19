@@ -280,7 +280,7 @@ func (a *AllocationAPIService) CreateSatelliteExecute(r ApiCreateSatelliteReques
 		return localVarReturnValue, nil, reportError("name is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "Name", r.name, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
 	if r.version != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "")
 	}
