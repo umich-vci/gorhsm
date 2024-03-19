@@ -1,17 +1,17 @@
-# \SystemApi
+# \SystemAPI
 
 All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AttachEntitlement**](SystemApi.md#AttachEntitlement) | **Post** /systems/{SystemUUID}/entitlements | Attach entitlement to system
-[**ListSystemErrata**](SystemApi.md#ListSystemErrata) | **Get** /systems/{SystemUUID}/errata | List all applicable errata for a system
-[**ListSystemPackages**](SystemApi.md#ListSystemPackages) | **Get** /systems/{SystemUUID}/packages | List all packages for a system
-[**ListSystemPools**](SystemApi.md#ListSystemPools) | **Get** /systems/{SystemUUID}/pools | List all pools for a system
-[**ListSystems**](SystemApi.md#ListSystems) | **Get** /systems | List all systems for a user
-[**RemoveSystem**](SystemApi.md#RemoveSystem) | **Delete** /systems/{SystemUUID} | Remove system profile
-[**RemoveSystemEntitlement**](SystemApi.md#RemoveSystemEntitlement) | **Delete** /systems/{SystemUUID}/{EntitlementID} | Remove entitlement from the system
-[**ShowSystem**](SystemApi.md#ShowSystem) | **Get** /systems/{SystemUUID} | Get a system specified by UUID.
+[**AttachEntitlement**](SystemAPI.md#AttachEntitlement) | **Post** /systems/{SystemUUID}/entitlements | Attach entitlement to system
+[**ListSystemErrata**](SystemAPI.md#ListSystemErrata) | **Get** /systems/{SystemUUID}/errata | List all applicable errata for a system
+[**ListSystemPackages**](SystemAPI.md#ListSystemPackages) | **Get** /systems/{SystemUUID}/packages | List all packages for a system
+[**ListSystemPools**](SystemAPI.md#ListSystemPools) | **Get** /systems/{SystemUUID}/pools | List all pools for a system
+[**ListSystems**](SystemAPI.md#ListSystems) | **Get** /systems | List all systems for a user
+[**RemoveSystem**](SystemAPI.md#RemoveSystem) | **Delete** /systems/{SystemUUID} | Remove system profile
+[**RemoveSystemEntitlement**](SystemAPI.md#RemoveSystemEntitlement) | **Delete** /systems/{SystemUUID}/{EntitlementID} | Remove entitlement from the system
+[**ShowSystem**](SystemAPI.md#ShowSystem) | **Get** /systems/{SystemUUID} | Get a system specified by UUID.
 
 
 
@@ -29,26 +29,26 @@ Attach entitlement to system
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
-    pool := "pool_example" // string | 
-    quantity := int32(56) // int32 | quantity you want to attach (optional)
+	systemUUID := "systemUUID_example" // string | 
+	pool := "pool_example" // string | 
+	quantity := int32(56) // int32 | quantity you want to attach (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.AttachEntitlement(context.Background(), systemUUID).Pool(pool).Quantity(quantity).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.AttachEntitlement``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AttachEntitlement`: AttachEntitlement200Response
-    fmt.Fprintf(os.Stdout, "Response from `SystemApi.AttachEntitlement`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SystemAPI.AttachEntitlement(context.Background(), systemUUID).Pool(pool).Quantity(quantity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.AttachEntitlement``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AttachEntitlement`: AttachEntitlement200Response
+	fmt.Fprintf(os.Stdout, "Response from `SystemAPI.AttachEntitlement`: %v\n", resp)
 }
 ```
 
@@ -103,26 +103,26 @@ List all applicable errata for a system
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
+	systemUUID := "systemUUID_example" // string | 
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.ListSystemErrata(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemErrata``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSystemErrata`: ListSystemErrata200Response
-    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemErrata`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SystemAPI.ListSystemErrata(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.ListSystemErrata``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSystemErrata`: ListSystemErrata200Response
+	fmt.Fprintf(os.Stdout, "Response from `SystemAPI.ListSystemErrata`: %v\n", resp)
 }
 ```
 
@@ -177,29 +177,29 @@ List all packages for a system
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
-    errataDetail := true // bool | Show errata details for packages (optional)
-    upgradeable := true // bool | Show upgradable packages only. Also accepts 'upgradable' as valid query. (optional)
-    filter := "filter_example" // string | Filter packages (optional)
+	systemUUID := "systemUUID_example" // string | 
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
+	errataDetail := true // bool | Show errata details for packages (optional)
+	upgradeable := true // bool | Show upgradable packages only. Also accepts 'upgradable' as valid query. (optional)
+	filter := "filter_example" // string | Filter packages (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.ListSystemPackages(context.Background(), systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPackages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSystemPackages`: ListSystemPackages200Response
-    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemPackages`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SystemAPI.ListSystemPackages(context.Background(), systemUUID).Limit(limit).Offset(offset).ErrataDetail(errataDetail).Upgradeable(upgradeable).Filter(filter).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.ListSystemPackages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSystemPackages`: ListSystemPackages200Response
+	fmt.Fprintf(os.Stdout, "Response from `SystemAPI.ListSystemPackages`: %v\n", resp)
 }
 ```
 
@@ -257,26 +257,26 @@ List all pools for a system
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
+	systemUUID := "systemUUID_example" // string | 
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.ListSystemPools(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystemPools``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSystemPools`: PoolsListMock
-    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystemPools`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SystemAPI.ListSystemPools(context.Background(), systemUUID).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.ListSystemPools``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSystemPools`: PoolsListMock
+	fmt.Fprintf(os.Stdout, "Response from `SystemAPI.ListSystemPools`: %v\n", resp)
 }
 ```
 
@@ -331,27 +331,27 @@ List all systems for a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
-    filter := "filter_example" // string | Filter Systems by System Name (optional)
-    username := "username_example" // string | Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed (optional)
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
+	filter := "filter_example" // string | Filter Systems by System Name (optional)
+	username := "username_example" // string | Filter Systems by a valid User Name, where User Name is the system owner and wildcard characters are not allowed (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.ListSystems(context.Background()).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ListSystems``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSystems`: ListSystems200Response
-    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ListSystems`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SystemAPI.ListSystems(context.Background()).Limit(limit).Offset(offset).Filter(filter).Username(username).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.ListSystems``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSystems`: ListSystems200Response
+	fmt.Fprintf(os.Stdout, "Response from `SystemAPI.ListSystems`: %v\n", resp)
 }
 ```
 
@@ -403,22 +403,22 @@ Remove system profile
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
+	systemUUID := "systemUUID_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.SystemAPI.RemoveSystem(context.Background(), systemUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.RemoveSystem``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -471,23 +471,23 @@ Remove entitlement from the system
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
-    entitlementID := "entitlementID_example" // string | Remove an entitlement from a system
+	systemUUID := "systemUUID_example" // string | 
+	entitlementID := "entitlementID_example" // string | Remove an entitlement from a system
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.RemoveSystemEntitlement``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.SystemAPI.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.RemoveSystemEntitlement``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -542,25 +542,25 @@ Get a system specified by UUID.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    systemUUID := "systemUUID_example" // string | 
-    include := []string{"Include_example"} // []string | Show more details about a system (optional)
+	systemUUID := "systemUUID_example" // string | 
+	include := []string{"Include_example"} // []string | Show more details about a system (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SystemApi.ShowSystem(context.Background(), systemUUID).Include(include).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SystemApi.ShowSystem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ShowSystem`: ShowSystem200Response
-    fmt.Fprintf(os.Stdout, "Response from `SystemApi.ShowSystem`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SystemAPI.ShowSystem(context.Background(), systemUUID).Include(include).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SystemAPI.ShowSystem``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ShowSystem`: ShowSystem200Response
+	fmt.Fprintf(os.Stdout, "Response from `SystemAPI.ShowSystem`: %v\n", resp)
 }
 ```
 

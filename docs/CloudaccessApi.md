@@ -1,15 +1,16 @@
-# \CloudaccessApi
+# \CloudaccessAPI
 
 All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddProviderAccounts**](CloudaccessApi.md#AddProviderAccounts) | **Post** /cloud_access_providers/{ProviderShortName}/accounts | Add accounts for a provider
-[**EnableGoldImages**](CloudaccessApi.md#EnableGoldImages) | **Post** /cloud_access_providers/{ProviderShortName}/goldimage | Enable Gold image access
-[**ListEnabledCloudAccessProviders**](CloudaccessApi.md#ListEnabledCloudAccessProviders) | **Get** /cloud_access_providers/enabled | List all enabled cloud access providers for a user
-[**RemoveProviderAccount**](CloudaccessApi.md#RemoveProviderAccount) | **Delete** /cloud_access_providers/{ProviderShortName}/accounts | Remove a provider account
-[**UpdateProviderAccount**](CloudaccessApi.md#UpdateProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID} | Update provider account
-[**VerifyProviderAccount**](CloudaccessApi.md#VerifyProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification | Verify a provider account
+[**AddProviderAccounts**](CloudaccessAPI.md#AddProviderAccounts) | **Post** /cloud_access_providers/{ProviderShortName}/accounts | Add accounts for a provider
+[**EnableGoldImages**](CloudaccessAPI.md#EnableGoldImages) | **Post** /cloud_access_providers/{ProviderShortName}/goldimage | Enable Gold image access
+[**ListEnabledCloudAccessProviders**](CloudaccessAPI.md#ListEnabledCloudAccessProviders) | **Get** /cloud_access_providers/enabled | List all enabled cloud access providers for a user
+[**RemoveProviderAccount**](CloudaccessAPI.md#RemoveProviderAccount) | **Delete** /cloud_access_providers/{ProviderShortName}/accounts | Remove a provider account
+[**RemoveProviderAccountBySourceID**](CloudaccessAPI.md#RemoveProviderAccountBySourceID) | **Delete** /cloud_access_providers/accounts | Remove a provider account by source id
+[**UpdateProviderAccount**](CloudaccessAPI.md#UpdateProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID} | Update provider account
+[**VerifyProviderAccount**](CloudaccessAPI.md#VerifyProviderAccount) | **Put** /cloud_access_providers/{ProviderShortName}/accounts/{AccountID}/verification | Verify a provider account
 
 
 
@@ -27,23 +28,23 @@ Add accounts for a provider
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    providerShortName := "providerShortName_example" // string | 
-    account := []openapiclient.AddProviderAccount{*openapiclient.NewAddProviderAccount()} // []AddProviderAccount |  (optional)
+	providerShortName := "providerShortName_example" // string | 
+	account := []openapiclient.AddProviderAccount{*openapiclient.NewAddProviderAccount()} // []AddProviderAccount |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.AddProviderAccounts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CloudaccessAPI.AddProviderAccounts(context.Background(), providerShortName).Account(account).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.AddProviderAccounts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -97,23 +98,23 @@ Enable Gold image access
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    providerShortName := "providerShortName_example" // string | 
-    goldImages := *openapiclient.NewEnableGoldImagesRequest([]string{"Accounts_example"}, []string{"Images_example"}) // EnableGoldImagesRequest |  (optional)
+	providerShortName := "providerShortName_example" // string | 
+	goldImages := *openapiclient.NewEnableGoldImagesRequest([]string{"Accounts_example"}, []string{"Images_example"}) // EnableGoldImagesRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.EnableGoldImages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CloudaccessAPI.EnableGoldImages(context.Background(), providerShortName).GoldImages(goldImages).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.EnableGoldImages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -167,23 +168,23 @@ List all enabled cloud access providers for a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CloudaccessApi.ListEnabledCloudAccessProviders(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.ListEnabledCloudAccessProviders``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListEnabledCloudAccessProviders`: ListEnabledCloudAccessProviders200Response
-    fmt.Fprintf(os.Stdout, "Response from `CloudaccessApi.ListEnabledCloudAccessProviders`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudaccessAPI.ListEnabledCloudAccessProviders(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.ListEnabledCloudAccessProviders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListEnabledCloudAccessProviders`: ListEnabledCloudAccessProviders200Response
+	fmt.Fprintf(os.Stdout, "Response from `CloudaccessAPI.ListEnabledCloudAccessProviders`: %v\n", resp)
 }
 ```
 
@@ -228,23 +229,23 @@ Remove a provider account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    providerShortName := "providerShortName_example" // string | 
-    account := *openapiclient.NewRemoveProviderAccountRequest("Id_example") // RemoveProviderAccountRequest |  (optional)
+	providerShortName := "providerShortName_example" // string | 
+	account := *openapiclient.NewRemoveProviderAccountRequest("Id_example") // RemoveProviderAccountRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.RemoveProviderAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CloudaccessAPI.RemoveProviderAccount(context.Background(), providerShortName).Account(account).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.RemoveProviderAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -284,6 +285,70 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RemoveProviderAccountBySourceID
+
+> RemoveProviderAccountBySourceID(ctx).SourceID(sourceID).Execute()
+
+Remove a provider account by source id
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
+)
+
+func main() {
+	sourceID := "sourceID_example" // string | source id with which we have to delete the provider account (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CloudaccessAPI.RemoveProviderAccountBySourceID(context.Background()).SourceID(sourceID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.RemoveProviderAccountBySourceID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveProviderAccountBySourceIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sourceID** | **string** | source id with which we have to delete the provider account | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateProviderAccount
 
 > UpdateProviderAccount(ctx, providerShortName, accountID).Account(account).Execute()
@@ -298,24 +363,24 @@ Update provider account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    providerShortName := "providerShortName_example" // string | 
-    accountID := "accountID_example" // string | 
-    account := *openapiclient.NewUpdateProviderAccountRequest("Nickname_example") // UpdateProviderAccountRequest |  (optional)
+	providerShortName := "providerShortName_example" // string | 
+	accountID := "accountID_example" // string | 
+	account := *openapiclient.NewUpdateProviderAccountRequest("Nickname_example") // UpdateProviderAccountRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.UpdateProviderAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CloudaccessAPI.UpdateProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.UpdateProviderAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -371,24 +436,24 @@ Verify a provider account
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    providerShortName := "providerShortName_example" // string | 
-    accountID := "accountID_example" // string | 
-    account := *openapiclient.NewVerifyProviderAccountRequest("Identity_example", "Signature_example") // VerifyProviderAccountRequest |  (optional)
+	providerShortName := "providerShortName_example" // string | 
+	accountID := "accountID_example" // string | 
+	account := *openapiclient.NewVerifyProviderAccountRequest("Identity_example", "Signature_example") // VerifyProviderAccountRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessApi.VerifyProviderAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CloudaccessAPI.VerifyProviderAccount(context.Background(), providerShortName, accountID).Account(account).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudaccessAPI.VerifyProviderAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

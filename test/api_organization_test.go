@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing OrganizationApiService
+Testing OrganizationAPIService
 
 */
 
@@ -17,16 +17,16 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_OrganizationApiService(t *testing.T) {
+func Test_gorhsm_OrganizationAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test OrganizationApiService CheckOrgSCACapability", func(t *testing.T) {
+	t.Run("Test OrganizationAPIService CheckOrgSCACapability", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.OrganizationApi.CheckOrgSCACapability(context.Background()).Execute()
+		resp, httpRes, err := apiClient.OrganizationAPI.CheckOrgSCACapability(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

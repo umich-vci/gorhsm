@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing SystemApiService
+Testing SystemAPIService
 
 */
 
@@ -17,18 +17,18 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_SystemApiService(t *testing.T) {
+func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SystemApiService AttachEntitlement", func(t *testing.T) {
+	t.Run("Test SystemAPIService AttachEntitlement", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 
-		resp, httpRes, err := apiClient.SystemApi.AttachEntitlement(context.Background(), systemUUID).Execute()
+		resp, httpRes, err := apiClient.SystemAPI.AttachEntitlement(context.Background(), systemUUID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,13 +36,13 @@ func Test_gorhsm_SystemApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SystemApiService ListSystemErrata", func(t *testing.T) {
+	t.Run("Test SystemAPIService ListSystemErrata", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 
-		resp, httpRes, err := apiClient.SystemApi.ListSystemErrata(context.Background(), systemUUID).Execute()
+		resp, httpRes, err := apiClient.SystemAPI.ListSystemErrata(context.Background(), systemUUID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,13 +50,13 @@ func Test_gorhsm_SystemApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SystemApiService ListSystemPackages", func(t *testing.T) {
+	t.Run("Test SystemAPIService ListSystemPackages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 
-		resp, httpRes, err := apiClient.SystemApi.ListSystemPackages(context.Background(), systemUUID).Execute()
+		resp, httpRes, err := apiClient.SystemAPI.ListSystemPackages(context.Background(), systemUUID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -64,13 +64,13 @@ func Test_gorhsm_SystemApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SystemApiService ListSystemPools", func(t *testing.T) {
+	t.Run("Test SystemAPIService ListSystemPools", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 
-		resp, httpRes, err := apiClient.SystemApi.ListSystemPools(context.Background(), systemUUID).Execute()
+		resp, httpRes, err := apiClient.SystemAPI.ListSystemPools(context.Background(), systemUUID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -78,11 +78,11 @@ func Test_gorhsm_SystemApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SystemApiService ListSystems", func(t *testing.T) {
+	t.Run("Test SystemAPIService ListSystems", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.SystemApi.ListSystems(context.Background()).Execute()
+		resp, httpRes, err := apiClient.SystemAPI.ListSystems(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -90,40 +90,40 @@ func Test_gorhsm_SystemApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SystemApiService RemoveSystem", func(t *testing.T) {
+	t.Run("Test SystemAPIService RemoveSystem", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 
-		httpRes, err := apiClient.SystemApi.RemoveSystem(context.Background(), systemUUID).Execute()
+		httpRes, err := apiClient.SystemAPI.RemoveSystem(context.Background(), systemUUID).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SystemApiService RemoveSystemEntitlement", func(t *testing.T) {
+	t.Run("Test SystemAPIService RemoveSystemEntitlement", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 		var entitlementID string
 
-		httpRes, err := apiClient.SystemApi.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
+		httpRes, err := apiClient.SystemAPI.RemoveSystemEntitlement(context.Background(), systemUUID, entitlementID).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SystemApiService ShowSystem", func(t *testing.T) {
+	t.Run("Test SystemAPIService ShowSystem", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var systemUUID string
 
-		resp, httpRes, err := apiClient.SystemApi.ShowSystem(context.Background(), systemUUID).Execute()
+		resp, httpRes, err := apiClient.SystemAPI.ShowSystem(context.Background(), systemUUID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

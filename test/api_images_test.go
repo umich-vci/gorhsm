@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing ImagesApiService
+Testing ImagesAPIService
 
 */
 
@@ -17,32 +17,32 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_ImagesApiService(t *testing.T) {
+func Test_gorhsm_ImagesAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ImagesApiService DownloadImage", func(t *testing.T) {
+	t.Run("Test ImagesAPIService DownloadImage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var checksum string
 
-		httpRes, err := apiClient.ImagesApi.DownloadImage(context.Background(), checksum).Execute()
+		httpRes, err := apiClient.ImagesAPI.DownloadImage(context.Background(), checksum).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ImagesApiService ListImageDownloadsByVersionArch", func(t *testing.T) {
+	t.Run("Test ImagesAPIService ListImageDownloadsByVersionArch", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var version string
 		var arch string
 
-		resp, httpRes, err := apiClient.ImagesApi.ListImageDownloadsByVersionArch(context.Background(), version, arch).Execute()
+		resp, httpRes, err := apiClient.ImagesAPI.ListImageDownloadsByVersionArch(context.Background(), version, arch).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,13 +50,13 @@ func Test_gorhsm_ImagesApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ImagesApiService ListImagesByContentSet", func(t *testing.T) {
+	t.Run("Test ImagesAPIService ListImagesByContentSet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var contentSet string
 
-		resp, httpRes, err := apiClient.ImagesApi.ListImagesByContentSet(context.Background(), contentSet).Execute()
+		resp, httpRes, err := apiClient.ImagesAPI.ListImagesByContentSet(context.Background(), contentSet).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
