@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing PackagesApiService
+Testing PackagesAPIService
 
 */
 
@@ -17,32 +17,32 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_PackagesApiService(t *testing.T) {
+func Test_gorhsm_PackagesAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test PackagesApiService DownloadPackage", func(t *testing.T) {
+	t.Run("Test PackagesAPIService DownloadPackage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var checksum string
 
-		httpRes, err := apiClient.PackagesApi.DownloadPackage(context.Background(), checksum).Execute()
+		httpRes, err := apiClient.PackagesAPI.DownloadPackage(context.Background(), checksum).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test PackagesApiService ListPackagesByContentSetArch", func(t *testing.T) {
+	t.Run("Test PackagesAPIService ListPackagesByContentSetArch", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var contentSet string
 		var arch string
 
-		resp, httpRes, err := apiClient.PackagesApi.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Execute()
+		resp, httpRes, err := apiClient.PackagesAPI.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,13 +50,13 @@ func Test_gorhsm_PackagesApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test PackagesApiService ShowPackage", func(t *testing.T) {
+	t.Run("Test PackagesAPIService ShowPackage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var checksum string
 
-		resp, httpRes, err := apiClient.PackagesApi.ShowPackage(context.Background(), checksum).Execute()
+		resp, httpRes, err := apiClient.PackagesAPI.ShowPackage(context.Background(), checksum).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

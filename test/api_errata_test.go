@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing ErrataApiService
+Testing ErrataAPIService
 
 */
 
@@ -17,16 +17,16 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_ErrataApiService(t *testing.T) {
+func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ErrataApiService ListErrata", func(t *testing.T) {
+	t.Run("Test ErrataAPIService ListErrata", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ErrataApi.ListErrata(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ErrataAPI.ListErrata(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,14 +34,14 @@ func Test_gorhsm_ErrataApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ErrataApiService ListErrataByContentSetArch", func(t *testing.T) {
+	t.Run("Test ErrataAPIService ListErrataByContentSetArch", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var contentSet string
 		var arch string
 
-		resp, httpRes, err := apiClient.ErrataApi.ListErrataByContentSetArch(context.Background(), contentSet, arch).Execute()
+		resp, httpRes, err := apiClient.ErrataAPI.ListErrataByContentSetArch(context.Background(), contentSet, arch).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -49,13 +49,13 @@ func Test_gorhsm_ErrataApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ErrataApiService ListErratumPackages", func(t *testing.T) {
+	t.Run("Test ErrataAPIService ListErratumImages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var advisoryID string
 
-		resp, httpRes, err := apiClient.ErrataApi.ListErratumPackages(context.Background(), advisoryID).Execute()
+		resp, httpRes, err := apiClient.ErrataAPI.ListErratumImages(context.Background(), advisoryID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -63,13 +63,13 @@ func Test_gorhsm_ErrataApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ErrataApiService ListErratumSystems", func(t *testing.T) {
+	t.Run("Test ErrataAPIService ListErratumPackages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var advisoryID string
 
-		resp, httpRes, err := apiClient.ErrataApi.ListErratumSystems(context.Background(), advisoryID).Execute()
+		resp, httpRes, err := apiClient.ErrataAPI.ListErratumPackages(context.Background(), advisoryID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +77,27 @@ func Test_gorhsm_ErrataApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ErrataApiService ShowErratum", func(t *testing.T) {
+	t.Run("Test ErrataAPIService ListErratumSystems", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var advisoryID string
 
-		resp, httpRes, err := apiClient.ErrataApi.ShowErratum(context.Background(), advisoryID).Execute()
+		resp, httpRes, err := apiClient.ErrataAPI.ListErratumSystems(context.Background(), advisoryID).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ErrataAPIService ShowErratum", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var advisoryID string
+
+		resp, httpRes, err := apiClient.ErrataAPI.ShowErratum(context.Background(), advisoryID).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

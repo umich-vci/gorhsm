@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing CloudaccessApiService
+Testing CloudaccessAPIService
 
 */
 
@@ -17,42 +17,42 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_CloudaccessApiService(t *testing.T) {
+func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CloudaccessApiService AddProviderAccounts", func(t *testing.T) {
+	t.Run("Test CloudaccessAPIService AddProviderAccounts", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var providerShortName string
 
-		httpRes, err := apiClient.CloudaccessApi.AddProviderAccounts(context.Background(), providerShortName).Execute()
+		httpRes, err := apiClient.CloudaccessAPI.AddProviderAccounts(context.Background(), providerShortName).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test CloudaccessApiService EnableGoldImages", func(t *testing.T) {
+	t.Run("Test CloudaccessAPIService EnableGoldImages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var providerShortName string
 
-		httpRes, err := apiClient.CloudaccessApi.EnableGoldImages(context.Background(), providerShortName).Execute()
+		httpRes, err := apiClient.CloudaccessAPI.EnableGoldImages(context.Background(), providerShortName).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test CloudaccessApiService ListEnabledCloudAccessProviders", func(t *testing.T) {
+	t.Run("Test CloudaccessAPIService ListEnabledCloudAccessProviders", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.CloudaccessApi.ListEnabledCloudAccessProviders(context.Background()).Execute()
+		resp, httpRes, err := apiClient.CloudaccessAPI.ListEnabledCloudAccessProviders(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -60,41 +60,52 @@ func Test_gorhsm_CloudaccessApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test CloudaccessApiService RemoveProviderAccount", func(t *testing.T) {
+	t.Run("Test CloudaccessAPIService RemoveProviderAccount", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var providerShortName string
 
-		httpRes, err := apiClient.CloudaccessApi.RemoveProviderAccount(context.Background(), providerShortName).Execute()
+		httpRes, err := apiClient.CloudaccessAPI.RemoveProviderAccount(context.Background(), providerShortName).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test CloudaccessApiService UpdateProviderAccount", func(t *testing.T) {
+	t.Run("Test CloudaccessAPIService RemoveProviderAccountBySourceID", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var providerShortName string
-		var accountID string
-
-		httpRes, err := apiClient.CloudaccessApi.UpdateProviderAccount(context.Background(), providerShortName, accountID).Execute()
+		httpRes, err := apiClient.CloudaccessAPI.RemoveProviderAccountBySourceID(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test CloudaccessApiService VerifyProviderAccount", func(t *testing.T) {
+	t.Run("Test CloudaccessAPIService UpdateProviderAccount", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var providerShortName string
 		var accountID string
 
-		httpRes, err := apiClient.CloudaccessApi.VerifyProviderAccount(context.Background(), providerShortName, accountID).Execute()
+		httpRes, err := apiClient.CloudaccessAPI.UpdateProviderAccount(context.Background(), providerShortName, accountID).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudaccessAPIService VerifyProviderAccount", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var providerShortName string
+		var accountID string
+
+		httpRes, err := apiClient.CloudaccessAPI.VerifyProviderAccount(context.Background(), providerShortName, accountID).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

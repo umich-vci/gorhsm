@@ -1,12 +1,12 @@
-# \SubscriptionApi
+# \SubscriptionAPI
 
 All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListSubContentSets**](SubscriptionApi.md#ListSubContentSets) | **Get** /subscriptions/{SubscriptionNumber}/contentSets | List all content sets for a subscription
-[**ListSubSystems**](SubscriptionApi.md#ListSubSystems) | **Get** /subscriptions/{SubscriptionNumber}/systems | List all systems consuming a subscription
-[**ListSubscriptions**](SubscriptionApi.md#ListSubscriptions) | **Get** /subscriptions | List all subscriptions for a user
+[**ListSubContentSets**](SubscriptionAPI.md#ListSubContentSets) | **Get** /subscriptions/{SubscriptionNumber}/contentSets | List all content sets for a subscription
+[**ListSubSystems**](SubscriptionAPI.md#ListSubSystems) | **Get** /subscriptions/{SubscriptionNumber}/systems | List all systems consuming a subscription
+[**ListSubscriptions**](SubscriptionAPI.md#ListSubscriptions) | **Get** /subscriptions | List all subscriptions for a user
 
 
 
@@ -24,26 +24,26 @@ List all content sets for a subscription
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    subscriptionNumber := "subscriptionNumber_example" // string | 
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
+	subscriptionNumber := "subscriptionNumber_example" // string | 
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SubscriptionApi.ListSubContentSets(context.Background(), subscriptionNumber).Limit(limit).Offset(offset).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubContentSets``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSubContentSets`: ListSubContentSets200Response
-    fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubContentSets`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SubscriptionAPI.ListSubContentSets(context.Background(), subscriptionNumber).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionAPI.ListSubContentSets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSubContentSets`: ListSubContentSets200Response
+	fmt.Fprintf(os.Stdout, "Response from `SubscriptionAPI.ListSubContentSets`: %v\n", resp)
 }
 ```
 
@@ -98,26 +98,26 @@ List all systems consuming a subscription
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    subscriptionNumber := "subscriptionNumber_example" // string | 
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
+	subscriptionNumber := "subscriptionNumber_example" // string | 
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SubscriptionApi.ListSubSystems(context.Background(), subscriptionNumber).Limit(limit).Offset(offset).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubSystems``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSubSystems`: ListSubSystems200Response
-    fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubSystems`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SubscriptionAPI.ListSubSystems(context.Background(), subscriptionNumber).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionAPI.ListSubSystems``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSubSystems`: ListSubSystems200Response
+	fmt.Fprintf(os.Stdout, "Response from `SubscriptionAPI.ListSubSystems`: %v\n", resp)
 }
 ```
 
@@ -172,25 +172,25 @@ List all subscriptions for a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SubscriptionApi.ListSubscriptions(context.Background()).Limit(limit).Offset(offset).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionApi.ListSubscriptions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSubscriptions`: ListSubscriptions200Response
-    fmt.Fprintf(os.Stdout, "Response from `SubscriptionApi.ListSubscriptions`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SubscriptionAPI.ListSubscriptions(context.Background()).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SubscriptionAPI.ListSubscriptions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSubscriptions`: ListSubscriptions200Response
+	fmt.Fprintf(os.Stdout, "Response from `SubscriptionAPI.ListSubscriptions`: %v\n", resp)
 }
 ```
 

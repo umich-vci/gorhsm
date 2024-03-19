@@ -1,7 +1,7 @@
 /*
 RHSM-API
 
-Testing SubscriptionApiService
+Testing SubscriptionAPIService
 
 */
 
@@ -17,18 +17,18 @@ import (
 	openapiclient "github.com/umich-vci/gorhsm"
 )
 
-func Test_gorhsm_SubscriptionApiService(t *testing.T) {
+func Test_gorhsm_SubscriptionAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SubscriptionApiService ListSubContentSets", func(t *testing.T) {
+	t.Run("Test SubscriptionAPIService ListSubContentSets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var subscriptionNumber string
 
-		resp, httpRes, err := apiClient.SubscriptionApi.ListSubContentSets(context.Background(), subscriptionNumber).Execute()
+		resp, httpRes, err := apiClient.SubscriptionAPI.ListSubContentSets(context.Background(), subscriptionNumber).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,13 +36,13 @@ func Test_gorhsm_SubscriptionApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SubscriptionApiService ListSubSystems", func(t *testing.T) {
+	t.Run("Test SubscriptionAPIService ListSubSystems", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var subscriptionNumber string
 
-		resp, httpRes, err := apiClient.SubscriptionApi.ListSubSystems(context.Background(), subscriptionNumber).Execute()
+		resp, httpRes, err := apiClient.SubscriptionAPI.ListSubSystems(context.Background(), subscriptionNumber).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,11 +50,11 @@ func Test_gorhsm_SubscriptionApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SubscriptionApiService ListSubscriptions", func(t *testing.T) {
+	t.Run("Test SubscriptionAPIService ListSubscriptions", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.SubscriptionApi.ListSubscriptions(context.Background()).Execute()
+		resp, httpRes, err := apiClient.SubscriptionAPI.ListSubscriptions(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

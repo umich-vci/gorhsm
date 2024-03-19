@@ -1,12 +1,12 @@
-# \PackagesApi
+# \PackagesAPI
 
 All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownloadPackage**](PackagesApi.md#DownloadPackage) | **Get** /packages/{checksum}/download | Download a package by its SHA256 checksum
-[**ListPackagesByContentSetArch**](PackagesApi.md#ListPackagesByContentSetArch) | **Get** /packages/cset/{ContentSet}/arch/{Arch} | Get all the packages for the specified content set and arch.
-[**ShowPackage**](PackagesApi.md#ShowPackage) | **Get** /packages/{Checksum} | Get the details of a package
+[**DownloadPackage**](PackagesAPI.md#DownloadPackage) | **Get** /packages/{checksum}/download | Download a package by its SHA256 checksum
+[**ListPackagesByContentSetArch**](PackagesAPI.md#ListPackagesByContentSetArch) | **Get** /packages/cset/{ContentSet}/arch/{Arch} | Get all the packages for the specified content set and arch.
+[**ShowPackage**](PackagesAPI.md#ShowPackage) | **Get** /packages/{Checksum} | Get the details of a package
 
 
 
@@ -24,22 +24,22 @@ Download a package by its SHA256 checksum
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    checksum := "checksum_example" // string | 
+	checksum := "checksum_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.PackagesApi.DownloadPackage(context.Background(), checksum).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.DownloadPackage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PackagesAPI.DownloadPackage(context.Background(), checksum).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesAPI.DownloadPackage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -92,28 +92,28 @@ Get all the packages for the specified content set and arch.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    contentSet := "contentSet_example" // string | 
-    arch := "arch_example" // string | 
-    limit := int32(56) // int32 | max number of results you want (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
-    filter := []string{"Filter_example"} // []string |  (optional)
+	contentSet := "contentSet_example" // string | 
+	arch := "arch_example" // string | 
+	limit := int32(56) // int32 | max number of results you want (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
+	filter := []string{"Filter_example"} // []string |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ListPackagesByContentSetArch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListPackagesByContentSetArch`: ListPackagesByContentSetArch200Response
-    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ListPackagesByContentSetArch`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesAPI.ListPackagesByContentSetArch(context.Background(), contentSet, arch).Limit(limit).Offset(offset).Filter(filter).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesAPI.ListPackagesByContentSetArch``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListPackagesByContentSetArch`: ListPackagesByContentSetArch200Response
+	fmt.Fprintf(os.Stdout, "Response from `PackagesAPI.ListPackagesByContentSetArch`: %v\n", resp)
 }
 ```
 
@@ -171,24 +171,24 @@ Get the details of a package
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    checksum := "checksum_example" // string | 
+	checksum := "checksum_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.ShowPackage(context.Background(), checksum).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.ShowPackage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ShowPackage`: ShowPackage200Response
-    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.ShowPackage`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesAPI.ShowPackage(context.Background(), checksum).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesAPI.ShowPackage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ShowPackage`: ShowPackage200Response
+	fmt.Fprintf(os.Stdout, "Response from `PackagesAPI.ShowPackage`: %v\n", resp)
 }
 ```
 

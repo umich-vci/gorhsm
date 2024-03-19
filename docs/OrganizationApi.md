@@ -1,10 +1,10 @@
-# \OrganizationApi
+# \OrganizationAPI
 
 All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CheckOrgSCACapability**](OrganizationApi.md#CheckOrgSCACapability) | **Get** /organization | Get details of the user&#39;s organization
+[**CheckOrgSCACapability**](OrganizationAPI.md#CheckOrgSCACapability) | **Get** /organization | Get details of the user&#39;s organization
 
 
 
@@ -22,24 +22,24 @@ Get details of the user's organization
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    include := "include_example" // string | Request for system purpose attributes in response (optional)
+	include := "include_example" // string | Request for system purpose attributes in response (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrganizationApi.CheckOrgSCACapability(context.Background()).Include(include).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationApi.CheckOrgSCACapability``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CheckOrgSCACapability`: CheckOrgSCACapability200Response
-    fmt.Fprintf(os.Stdout, "Response from `OrganizationApi.CheckOrgSCACapability`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationAPI.CheckOrgSCACapability(context.Background()).Include(include).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationAPI.CheckOrgSCACapability``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CheckOrgSCACapability`: CheckOrgSCACapability200Response
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationAPI.CheckOrgSCACapability`: %v\n", resp)
 }
 ```
 

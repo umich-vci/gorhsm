@@ -4,7 +4,7 @@ info:
     url: https://access.redhat.com/support/cases/
   description: API for Red Hat Subscription Management
   title: RHSM-API
-  version: 1.313.0
+  version: 1.366.0
 servers:
 - url: https://api.access.redhat.com/management/v1
 security:
@@ -90,7 +90,7 @@ paths:
       - description: "must be less than 100 characters and use only numbers, letters,\
           \ underscores, hyphens, and periods"
         in: query
-        name: name
+        name: Name
         required: true
         schema:
           type: string
@@ -202,8 +202,6 @@ paths:
         name: force
         required: true
         schema:
-          enum:
-          - true
           type: boolean
       responses:
         "204":
@@ -743,8 +741,6 @@ paths:
         in: query
         name: future
         schema:
-          enum:
-          - true
           type: boolean
       - in: path
         name: uuid
@@ -845,6 +841,54 @@ paths:
       summary: Remove entitlement from the allocation
       tags:
       - allocation
+  /cloud_access_providers/accounts:
+    delete:
+      description: |
+        Removes a currently-enabled provider account, including removing access to Gold Images, where applicable using the sourceID provided. You can find a list of currently-enabled provider accounts and provider short names from the `/v1/cloud_access_providers/enabled` endpoint.
+      operationId: RemoveProviderAccountBySourceID
+      parameters:
+      - description: source id with which we have to delete the provider account
+        in: query
+        name: sourceID
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: InternalServerError error
+      summary: Remove a provider account by source id
+      tags:
+      - cloudaccess
   /cloud_access_providers/enabled:
     get:
       description: |
@@ -1377,6 +1421,58 @@ paths:
                 $ref: '#/components/schemas/listAllocations_400_response'
           description: InternalServerError error
       summary: Get the details of an advisory
+      tags:
+      - errata
+  /errata/{AdvisoryID}/images:
+    get:
+      description: This will list all updated container images that address the advisory
+        specified
+      operationId: listErratumImages
+      parameters:
+      - description: unique identifier for a Red Hat advisory
+        in: path
+        name: AdvisoryID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updatedImagesList'
+          description: ListErratumImages200 is the success response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: BadRequest error
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: Unauthorized error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: Forbidden error
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: NotFound error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllocations_400_response'
+          description: InternalServerError error
+      summary: List all updated container images for an advisory
       tags:
       - errata
   /errata/{AdvisoryID}/packages:
@@ -2418,18 +2514,12 @@ paths:
         in: query
         name: errata_detail
         schema:
-          enum:
-          - true
-          - false
           type: boolean
       - description: Show upgradable packages only. Also accepts 'upgradable' as valid
           query.
         in: query
         name: upgradeable
         schema:
-          enum:
-          - true
-          - false
           type: boolean
       - description: Filter packages
         in: query
@@ -2968,6 +3058,10 @@ components:
       title: DetailResponse is the user-friendly response from the service.
       type: object
     DownloadLink:
+      example:
+        filename: filename-1.2.3-1.x86_64.rpm
+        expiration: 2006-01-02T15:04:05.000Z
+        href: https://access.cdn.redhat.com/content/origin/files/sha256/64/643e706cf7db9e93e706637af92d80eb58377dd0c64ac1e9ce6a72700aa04c2a/rhel-8.1-x86_64-boot.iso?_auth_=1582920605_7e8153e1bdc2f46636653e2efb17bc65
       properties:
         expiration:
           description: time at which the download link expires (in UTC)
@@ -3337,6 +3431,9 @@ components:
       type: object
     ErrorDetails:
       description: ErrorDetails details the Error in ErrorResponse
+      example:
+        code: 5
+        message: message
       properties:
         code:
           type: integer
@@ -3920,6 +4017,8 @@ components:
           $ref: '#/components/schemas/APIPageParam'
       type: object
     ongoingExportJobResponse:
+      example:
+        message: message
       properties:
         message:
           type: string
@@ -4161,6 +4260,39 @@ components:
         pagination:
           $ref: '#/components/schemas/APIPageParam'
       type: object
+    updatedImage:
+      example:
+        digest: digest
+        name: name
+        imagePlusDigest: imagePlusDigest
+        architecture: architecture
+      properties:
+        architecture:
+          type: string
+        digest:
+          type: string
+        imagePlusDigest:
+          type: string
+        name:
+          type: string
+      type: object
+    updatedImagesList:
+      example:
+        body:
+        - digest: digest
+          name: name
+          imagePlusDigest: imagePlusDigest
+          architecture: architecture
+        - digest: digest
+          name: name
+          imagePlusDigest: imagePlusDigest
+          architecture: architecture
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/updatedImage'
+          type: array
+      type: object
     listAllocations_200_response:
       example:
         pagination:
@@ -4191,6 +4323,10 @@ components:
           $ref: '#/components/schemas/APIPageParam'
       type: object
     listAllocations_400_response:
+      example:
+        error:
+          code: 5
+          message: message
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
@@ -4284,6 +4420,9 @@ components:
           $ref: '#/components/schemas/exportJobResponse'
       type: object
     exportJobAllocation_202_response:
+      example:
+        body:
+          message: message
       properties:
         body:
           $ref: '#/components/schemas/ongoingExportJobResponse'
@@ -4516,6 +4655,11 @@ components:
           type: array
       type: object
     downloadImage_307_response:
+      example:
+        body:
+          filename: filename-1.2.3-1.x86_64.rpm
+          expiration: 2006-01-02T15:04:05.000Z
+          href: https://access.cdn.redhat.com/content/origin/files/sha256/64/643e706cf7db9e93e706637af92d80eb58377dd0c64ac1e9ce6a72700aa04c2a/rhel-8.1-x86_64-boot.iso?_auth_=1582920605_7e8153e1bdc2f46636653e2efb17bc65
       properties:
         body:
           $ref: '#/components/schemas/DownloadLink'

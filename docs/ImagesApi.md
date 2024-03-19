@@ -1,12 +1,12 @@
-# \ImagesApi
+# \ImagesAPI
 
 All URIs are relative to *https://api.access.redhat.com/management/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownloadImage**](ImagesApi.md#DownloadImage) | **Get** /images/{checksum}/download | Download an image by its SHA256 checksum
-[**ListImageDownloadsByVersionArch**](ImagesApi.md#ListImageDownloadsByVersionArch) | **Get** /images/rhel/{Version}/{Arch} | List RHEL image downloads by version and architecture.
-[**ListImagesByContentSet**](ImagesApi.md#ListImagesByContentSet) | **Get** /images/cset/{ContentSet} | List available images in a content set
+[**DownloadImage**](ImagesAPI.md#DownloadImage) | **Get** /images/{checksum}/download | Download an image by its SHA256 checksum
+[**ListImageDownloadsByVersionArch**](ImagesAPI.md#ListImageDownloadsByVersionArch) | **Get** /images/rhel/{Version}/{Arch} | List RHEL image downloads by version and architecture.
+[**ListImagesByContentSet**](ImagesAPI.md#ListImagesByContentSet) | **Get** /images/cset/{ContentSet} | List available images in a content set
 
 
 
@@ -24,22 +24,22 @@ Download an image by its SHA256 checksum
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    checksum := "checksum_example" // string | 
+	checksum := "checksum_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ImagesApi.DownloadImage(context.Background(), checksum).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ImagesApi.DownloadImage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ImagesAPI.DownloadImage(context.Background(), checksum).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.DownloadImage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -92,25 +92,25 @@ List RHEL image downloads by version and architecture.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    version := "version_example" // string | 
-    arch := "arch_example" // string | 
+	version := "version_example" // string | 
+	arch := "arch_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ImagesApi.ListImageDownloadsByVersionArch(context.Background(), version, arch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ImagesApi.ListImageDownloadsByVersionArch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListImageDownloadsByVersionArch`: ListImageDownloadsByVersionArch200Response
-    fmt.Fprintf(os.Stdout, "Response from `ImagesApi.ListImageDownloadsByVersionArch`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ImagesAPI.ListImageDownloadsByVersionArch(context.Background(), version, arch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.ListImageDownloadsByVersionArch``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListImageDownloadsByVersionArch`: ListImageDownloadsByVersionArch200Response
+	fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.ListImageDownloadsByVersionArch`: %v\n", resp)
 }
 ```
 
@@ -165,26 +165,26 @@ List available images in a content set
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/umich-vci/gorhsm"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/umich-vci/gorhsm"
 )
 
 func main() {
-    contentSet := "contentSet_example" // string | 
-    limit := int32(56) // int32 | maximum number of list items in a page (optional)
-    offset := int32(56) // int32 | index from which you want next items (optional)
+	contentSet := "contentSet_example" // string | 
+	limit := int32(56) // int32 | maximum number of list items in a page (optional)
+	offset := int32(56) // int32 | index from which you want next items (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ImagesApi.ListImagesByContentSet(context.Background(), contentSet).Limit(limit).Offset(offset).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ImagesApi.ListImagesByContentSet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListImagesByContentSet`: ListImagesByContentSet200Response
-    fmt.Fprintf(os.Stdout, "Response from `ImagesApi.ListImagesByContentSet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ImagesAPI.ListImagesByContentSet(context.Background(), contentSet).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImagesAPI.ListImagesByContentSet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListImagesByContentSet`: ListImagesByContentSet200Response
+	fmt.Fprintf(os.Stdout, "Response from `ImagesAPI.ListImagesByContentSet`: %v\n", resp)
 }
 ```
 
