@@ -1,4 +1,4 @@
-# SystemList
+# SubSystem
 
 ## Properties
 
@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComplianceStatus** | Pointer to **string** |  | [optional] 
 **Details** | Pointer to **string** |  | [optional] 
-**EntitlementQuantity** | Pointer to **int32** |  | [optional] 
 **LastCheckin** | Pointer to **string** | Date represents the date format used for API returns | [optional] 
 **SystemName** | Pointer to **string** |  | [optional] 
 **TotalEntitlementQuantity** | Pointer to **int32** |  | [optional] 
@@ -15,220 +14,195 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewSystemList
+### NewSubSystem
 
-`func NewSystemList() *SystemList`
+`func NewSubSystem() *SubSystem`
 
-NewSystemList instantiates a new SystemList object
+NewSubSystem instantiates a new SubSystem object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewSystemListWithDefaults
+### NewSubSystemWithDefaults
 
-`func NewSystemListWithDefaults() *SystemList`
+`func NewSubSystemWithDefaults() *SubSystem`
 
-NewSystemListWithDefaults instantiates a new SystemList object
+NewSubSystemWithDefaults instantiates a new SubSystem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetComplianceStatus
 
-`func (o *SystemList) GetComplianceStatus() string`
+`func (o *SubSystem) GetComplianceStatus() string`
 
 GetComplianceStatus returns the ComplianceStatus field if non-nil, zero value otherwise.
 
 ### GetComplianceStatusOk
 
-`func (o *SystemList) GetComplianceStatusOk() (*string, bool)`
+`func (o *SubSystem) GetComplianceStatusOk() (*string, bool)`
 
 GetComplianceStatusOk returns a tuple with the ComplianceStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComplianceStatus
 
-`func (o *SystemList) SetComplianceStatus(v string)`
+`func (o *SubSystem) SetComplianceStatus(v string)`
 
 SetComplianceStatus sets ComplianceStatus field to given value.
 
 ### HasComplianceStatus
 
-`func (o *SystemList) HasComplianceStatus() bool`
+`func (o *SubSystem) HasComplianceStatus() bool`
 
 HasComplianceStatus returns a boolean if a field has been set.
 
 ### GetDetails
 
-`func (o *SystemList) GetDetails() string`
+`func (o *SubSystem) GetDetails() string`
 
 GetDetails returns the Details field if non-nil, zero value otherwise.
 
 ### GetDetailsOk
 
-`func (o *SystemList) GetDetailsOk() (*string, bool)`
+`func (o *SubSystem) GetDetailsOk() (*string, bool)`
 
 GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDetails
 
-`func (o *SystemList) SetDetails(v string)`
+`func (o *SubSystem) SetDetails(v string)`
 
 SetDetails sets Details field to given value.
 
 ### HasDetails
 
-`func (o *SystemList) HasDetails() bool`
+`func (o *SubSystem) HasDetails() bool`
 
 HasDetails returns a boolean if a field has been set.
 
-### GetEntitlementQuantity
-
-`func (o *SystemList) GetEntitlementQuantity() int32`
-
-GetEntitlementQuantity returns the EntitlementQuantity field if non-nil, zero value otherwise.
-
-### GetEntitlementQuantityOk
-
-`func (o *SystemList) GetEntitlementQuantityOk() (*int32, bool)`
-
-GetEntitlementQuantityOk returns a tuple with the EntitlementQuantity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEntitlementQuantity
-
-`func (o *SystemList) SetEntitlementQuantity(v int32)`
-
-SetEntitlementQuantity sets EntitlementQuantity field to given value.
-
-### HasEntitlementQuantity
-
-`func (o *SystemList) HasEntitlementQuantity() bool`
-
-HasEntitlementQuantity returns a boolean if a field has been set.
-
 ### GetLastCheckin
 
-`func (o *SystemList) GetLastCheckin() string`
+`func (o *SubSystem) GetLastCheckin() string`
 
 GetLastCheckin returns the LastCheckin field if non-nil, zero value otherwise.
 
 ### GetLastCheckinOk
 
-`func (o *SystemList) GetLastCheckinOk() (*string, bool)`
+`func (o *SubSystem) GetLastCheckinOk() (*string, bool)`
 
 GetLastCheckinOk returns a tuple with the LastCheckin field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastCheckin
 
-`func (o *SystemList) SetLastCheckin(v string)`
+`func (o *SubSystem) SetLastCheckin(v string)`
 
 SetLastCheckin sets LastCheckin field to given value.
 
 ### HasLastCheckin
 
-`func (o *SystemList) HasLastCheckin() bool`
+`func (o *SubSystem) HasLastCheckin() bool`
 
 HasLastCheckin returns a boolean if a field has been set.
 
 ### GetSystemName
 
-`func (o *SystemList) GetSystemName() string`
+`func (o *SubSystem) GetSystemName() string`
 
 GetSystemName returns the SystemName field if non-nil, zero value otherwise.
 
 ### GetSystemNameOk
 
-`func (o *SystemList) GetSystemNameOk() (*string, bool)`
+`func (o *SubSystem) GetSystemNameOk() (*string, bool)`
 
 GetSystemNameOk returns a tuple with the SystemName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSystemName
 
-`func (o *SystemList) SetSystemName(v string)`
+`func (o *SubSystem) SetSystemName(v string)`
 
 SetSystemName sets SystemName field to given value.
 
 ### HasSystemName
 
-`func (o *SystemList) HasSystemName() bool`
+`func (o *SubSystem) HasSystemName() bool`
 
 HasSystemName returns a boolean if a field has been set.
 
 ### GetTotalEntitlementQuantity
 
-`func (o *SystemList) GetTotalEntitlementQuantity() int32`
+`func (o *SubSystem) GetTotalEntitlementQuantity() int32`
 
 GetTotalEntitlementQuantity returns the TotalEntitlementQuantity field if non-nil, zero value otherwise.
 
 ### GetTotalEntitlementQuantityOk
 
-`func (o *SystemList) GetTotalEntitlementQuantityOk() (*int32, bool)`
+`func (o *SubSystem) GetTotalEntitlementQuantityOk() (*int32, bool)`
 
 GetTotalEntitlementQuantityOk returns a tuple with the TotalEntitlementQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalEntitlementQuantity
 
-`func (o *SystemList) SetTotalEntitlementQuantity(v int32)`
+`func (o *SubSystem) SetTotalEntitlementQuantity(v int32)`
 
 SetTotalEntitlementQuantity sets TotalEntitlementQuantity field to given value.
 
 ### HasTotalEntitlementQuantity
 
-`func (o *SystemList) HasTotalEntitlementQuantity() bool`
+`func (o *SubSystem) HasTotalEntitlementQuantity() bool`
 
 HasTotalEntitlementQuantity returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *SystemList) GetType() string`
+`func (o *SubSystem) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *SystemList) GetTypeOk() (*string, bool)`
+`func (o *SubSystem) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *SystemList) SetType(v string)`
+`func (o *SubSystem) SetType(v string)`
 
 SetType sets Type field to given value.
 
 ### HasType
 
-`func (o *SystemList) HasType() bool`
+`func (o *SubSystem) HasType() bool`
 
 HasType returns a boolean if a field has been set.
 
 ### GetUuid
 
-`func (o *SystemList) GetUuid() string`
+`func (o *SubSystem) GetUuid() string`
 
 GetUuid returns the Uuid field if non-nil, zero value otherwise.
 
 ### GetUuidOk
 
-`func (o *SystemList) GetUuidOk() (*string, bool)`
+`func (o *SubSystem) GetUuidOk() (*string, bool)`
 
 GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUuid
 
-`func (o *SystemList) SetUuid(v string)`
+`func (o *SubSystem) SetUuid(v string)`
 
 SetUuid sets Uuid field to given value.
 
 ### HasUuid
 
-`func (o *SystemList) HasUuid() bool`
+`func (o *SubSystem) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
 

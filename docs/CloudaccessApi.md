@@ -306,7 +306,7 @@ import (
 )
 
 func main() {
-	sourceID := "sourceID_example" // string | source id with which we have to delete the provider account (optional)
+	sourceID := "sourceID_example" // string | source id with which we have to delete the provider account
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

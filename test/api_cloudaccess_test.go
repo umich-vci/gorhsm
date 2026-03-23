@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService AddProviderAccounts", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerShortName string
 
@@ -37,7 +37,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService EnableGoldImages", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerShortName string
 
@@ -50,7 +50,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService ListEnabledCloudAccessProviders", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CloudaccessAPI.ListEnabledCloudAccessProviders(context.Background()).Execute()
 
@@ -62,7 +62,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService RemoveProviderAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerShortName string
 
@@ -75,7 +75,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService RemoveProviderAccountBySourceID", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.CloudaccessAPI.RemoveProviderAccountBySourceID(context.Background()).Execute()
 
@@ -86,7 +86,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService UpdateProviderAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerShortName string
 		var accountID string
@@ -100,7 +100,7 @@ func Test_gorhsm_CloudaccessAPIService(t *testing.T) {
 
 	t.Run("Test CloudaccessAPIService VerifyProviderAccount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var providerShortName string
 		var accountID string

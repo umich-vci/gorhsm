@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_PackagesAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_PackagesAPIService(t *testing.T) {
 
 	t.Run("Test PackagesAPIService DownloadPackage", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var checksum string
 
@@ -37,7 +37,7 @@ func Test_gorhsm_PackagesAPIService(t *testing.T) {
 
 	t.Run("Test PackagesAPIService ListPackagesByContentSetArch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var contentSet string
 		var arch string
@@ -52,7 +52,7 @@ func Test_gorhsm_PackagesAPIService(t *testing.T) {
 
 	t.Run("Test PackagesAPIService ShowPackage", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var checksum string
 

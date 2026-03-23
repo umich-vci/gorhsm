@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_ErrataAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	t.Run("Test ErrataAPIService ListErrata", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ErrataAPI.ListErrata(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	t.Run("Test ErrataAPIService ListErrataByContentSetArch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var contentSet string
 		var arch string
@@ -51,7 +51,7 @@ func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	t.Run("Test ErrataAPIService ListErratumImages", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var advisoryID string
 
@@ -65,7 +65,7 @@ func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	t.Run("Test ErrataAPIService ListErratumPackages", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var advisoryID string
 
@@ -79,7 +79,7 @@ func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	t.Run("Test ErrataAPIService ListErratumSystems", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var advisoryID string
 
@@ -93,7 +93,7 @@ func Test_gorhsm_ErrataAPIService(t *testing.T) {
 
 	t.Run("Test ErrataAPIService ShowErratum", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var advisoryID string
 

@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_SystemAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService AttachEntitlement", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 
@@ -38,7 +38,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService ListSystemErrata", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 
@@ -52,7 +52,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService ListSystemPackages", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 
@@ -66,7 +66,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService ListSystemPools", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 
@@ -80,7 +80,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService ListSystems", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SystemAPI.ListSystems(context.Background()).Execute()
 
@@ -92,7 +92,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService RemoveSystem", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 
@@ -105,7 +105,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService RemoveSystemEntitlement", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 		var entitlementID string
@@ -119,7 +119,7 @@ func Test_gorhsm_SystemAPIService(t *testing.T) {
 
 	t.Run("Test SystemAPIService ShowSystem", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var systemUUID string
 
