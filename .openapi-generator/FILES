@@ -1,4 +1,5 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -88,10 +89,10 @@ docs/ShowErratum200Response.md
 docs/ShowPackage200Response.md
 docs/ShowSystem.md
 docs/ShowSystem200Response.md
+docs/SubSystem.md
 docs/SubscriptionAPI.md
 docs/System.md
 docs/SystemAPI.md
-docs/SystemList.md
 docs/SystemListMock.md
 docs/SystemPurposeAttributes.md
 docs/UpdateAllocationRequest.md
@@ -172,8 +173,8 @@ model_show_erratum_200_response.go
 model_show_package_200_response.go
 model_show_system.go
 model_show_system_200_response.go
+model_sub_system.go
 model_system.go
-model_system_list.go
 model_system_list_mock.go
 model_system_purpose_attributes.go
 model_update_allocation_request.go

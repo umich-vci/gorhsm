@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_SubscriptionAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_SubscriptionAPIService(t *testing.T) {
 
 	t.Run("Test SubscriptionAPIService ListSubContentSets", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var subscriptionNumber string
 
@@ -38,7 +38,7 @@ func Test_gorhsm_SubscriptionAPIService(t *testing.T) {
 
 	t.Run("Test SubscriptionAPIService ListSubSystems", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var subscriptionNumber string
 
@@ -52,7 +52,7 @@ func Test_gorhsm_SubscriptionAPIService(t *testing.T) {
 
 	t.Run("Test SubscriptionAPIService ListSubscriptions", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SubscriptionAPI.ListSubscriptions(context.Background()).Execute()
 

@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_AllocationAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService AttachEntitlementAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -38,7 +38,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService CreateSatellite", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AllocationAPI.CreateSatellite(context.Background()).Execute()
 
@@ -50,7 +50,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService ExportAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -64,7 +64,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService ExportJobAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 		var exportJobID string
@@ -79,7 +79,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService GetExportAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 		var exportID string
@@ -94,7 +94,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService ListAllocationPools", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -108,7 +108,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService ListAllocations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AllocationAPI.ListAllocations(context.Background()).Execute()
 
@@ -120,7 +120,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService ListVersionsAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AllocationAPI.ListVersionsAllocation(context.Background()).Execute()
 
@@ -132,7 +132,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService RemoveAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -145,7 +145,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService RemoveAllocationEntitlement", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 		var entitlementID string
@@ -159,7 +159,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService RemoveAllocationEntitlementDeprecated", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 		var entitlementID string
@@ -173,7 +173,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService ShowAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -187,7 +187,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService UpdateAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -200,7 +200,7 @@ func Test_gorhsm_AllocationAPIService(t *testing.T) {
 
 	t.Run("Test AllocationAPIService UpdateEntitlementAllocation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 		var entitlementID string

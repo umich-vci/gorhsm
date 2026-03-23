@@ -13,8 +13,8 @@ import (
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 	openapiclient "github.com/umich-vci/gorhsm"
+	"testing"
 )
 
 func Test_gorhsm_OrganizationAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_gorhsm_OrganizationAPIService(t *testing.T) {
 
 	t.Run("Test OrganizationAPIService CheckOrgSCACapability", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.OrganizationAPI.CheckOrgSCACapability(context.Background()).Execute()
 
